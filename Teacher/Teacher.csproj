@@ -124,6 +124,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Errors\UnderConstruction.xaml.cs">
+      <DependentUpon>UnderConstruction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\Controls\CardButton.xaml.cs">
       <DependentUpon>CardButton.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\MainPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Errors\UnderConstruction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

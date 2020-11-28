@@ -117,37 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AffinisTransformationTextBlock.Text" xml:space="preserve">
+  <data name="AffinisTransformationsNavItem.Content" xml:space="preserve">
     <value>Афінні перетворення</value>
   </data>
-  <data name="AffinisTransformationPageNavItem.Content" xml:space="preserve">
-    <value>Афінні перетворення</value>
+  <data name="AffinisTransformationsNavItem.Tag" xml:space="preserve">
+    <value>Сторінка афінних перетворень</value>
   </data>
-  <data name="BookIsNotImplemented" xml:space="preserve">
-    <value>Книга ще не реалізована</value>
-  </data>
-  <data name="ColorModelTextBlock.Text" xml:space="preserve">
-    <value>Колірні моделі</value>
-  </data>
-  <data name="BookNavButtonTooltip.Content" xml:space="preserve">
-    <value>Навчальний посібник</value>
-  </data>
-  <data name="ColorModelPageNavItem.Content" xml:space="preserve">
+  <data name="ColorModelNavItem.Content" xml:space="preserve">
     <value>Колірна модель</value>
   </data>
-  <data name="ComputerGraphicsLabel.Text" xml:space="preserve">
-    <value>Комп'ютерна графіка</value>
-  </data>
-  <data name="FractalsTextBlock.Text" xml:space="preserve">
-    <value>Фрактали</value>
+  <data name="ColorModelNavItem.Tag" xml:space="preserve">
+    <value>Сторінка з колірними моделями</value>
   </data>
   <data name="FractalsPageNavItem.Content" xml:space="preserve">
     <value>Фрактали</value>
   </data>
+  <data name="FractalsPageNavItem.Tag" xml:space="preserve">
+    <value>Сторінка лдля побудови фракталів</value>
+  </data>
   <data name="MainPageNavItem.Content" xml:space="preserve">
     <value>Головна</value>
   </data>
-  <data name="PageUnderConstructionBlock.Text" xml:space="preserve">
-    <value>Сторінка ще не готова</value>
+  <data name="MainPageNavItem.Tag" xml:space="preserve">
+    <value>Головна сторінка</value>
   </data>
 </root>

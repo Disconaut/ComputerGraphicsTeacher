@@ -23,9 +23,9 @@
                    VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="7">
             <Rectangle.Fill>
                 <LinearGradientBrush>
-                    <GradientStop Color="White" Offset="0.1"></GradientStop>
-                    <GradientStop Color="Black" Offset="0.5"></GradientStop>
-                    <GradientStop Color="White" Offset="0.8"></GradientStop>
+                    <GradientStop Color="Transparent" Offset="0.1"></GradientStop>
+                    <GradientStop Color="{ThemeResource SystemBaseHighColor}" Offset="0.5"></GradientStop>
+                    <GradientStop Color="Transparent" Offset="0.8"></GradientStop>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
@@ -33,9 +33,9 @@
                    VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="7">
             <Rectangle.Fill>
                 <LinearGradientBrush >
-                    <GradientStop Color="White" Offset="0.1"></GradientStop>
-                    <GradientStop Color="Black" Offset="0.5"></GradientStop>
-                    <GradientStop Color="White" Offset="0.9"></GradientStop>
+                    <GradientStop Color="Transparent" Offset="0.1"></GradientStop>
+                    <GradientStop Color="{ThemeResource SystemBaseHighColor}" Offset="0.5"></GradientStop>
+                    <GradientStop Color="Transparent" Offset="0.9"></GradientStop>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
@@ -45,7 +45,8 @@
                    Grid.Row="0"
                    TextWrapping="Wrap"
                    FontFamily="Sugeon UI" 
-                   FontSize="125"
+                   FontSize="115"
+                   FontWeight="Light"
                    TextAlignment="Right"
                    Margin="25"
                    VerticalAlignment="Bottom"/>
@@ -53,8 +54,11 @@
         <controls:CardButton x:Uid="FractalsTextBlock" 
                              Grid.Row="0" 
                              Grid.Column="1" 
-                             Margin="25 225 250 25" 
-                             ImageSource="../../Assets/MainPage/Fractal.jpeg" 
+                             Margin="25 200 250 25" 
+                             ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextColor="{ThemeResource SystemAltHighColor}"
+                             FontSize="42"
+                             FontWeight="Light"
                              TextAlignment="Left" 
                              TextPosition="Bottom" 
                              TextBackground="#CCF3E6"/>
@@ -62,8 +66,11 @@
         <controls:CardButton x:Uid="ColorModelTextBlock" 
                              Grid.Row="1" 
                              Grid.Column="0" 
-                             Margin="250 25 25 225" 
+                             Margin="250 25 25 200" 
                              ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextColor="{ThemeResource SystemAltHighColor}"
+                             FontSize="42"
+                             FontWeight="Light"
                              TextAlignment="Right"
                              TextPosition="Top"
                              TextBackground="#CCF3E6"/>
@@ -71,8 +78,11 @@
         <controls:CardButton x:Uid="AffinisTransformationTextBlock"
                              Grid.Row="1"
                              Grid.Column="1"
-                             Margin="25 25 250 225" 
+                             Margin="25 25 250 200" 
                              ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextColor="{ThemeResource SystemAltHighColor}"
+                             FontSize="42"
+                             FontWeight="Light"
                              TextAlignment="Left"
                              TextPosition="Top"
                              TextBackground="#CCF3E6"/>
