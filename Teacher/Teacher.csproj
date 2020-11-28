@@ -133,6 +133,9 @@
     <Compile Include="Views\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Fractals\FractalsPage.xaml.cs">
+      <DependentUpon>FractalsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -168,6 +171,9 @@
     </Page>
     <Page Include="Views\Errors\UnderConstruction.xaml">
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Fractals\FractalsPage.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -178,9 +184,6 @@
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.4.3</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Fractals\" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\uk-UA\Resources.resw" />
