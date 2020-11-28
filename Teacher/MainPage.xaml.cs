@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Teacher.Views.Fractals;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,6 +26,12 @@ namespace Teacher
         public MainPage()
         {
             this.InitializeComponent();
+            
+            
+        }
+        private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.ParentFrame.Navigate(typeof(FractalsPage));
         }
     }
 }

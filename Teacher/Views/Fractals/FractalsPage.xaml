@@ -1,0 +1,58 @@
+﻿<Page
+    x:Class="Teacher.Views.Fractals.FractalsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Teacher.Views.Fractals"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.4*"/>
+        </Grid.ColumnDefinitions>
+
+        <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"
+                  Header="Colors" PlaceholderText="Pick a color"  Margin="0,25,25,0"></ComboBox>
+
+
+        <Canvas Grid.Row="0" Grid.Column="0" Background="LightGray" Margin="25,25,25,10"></Canvas>
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Button Name="RotateBtn" Click="Ratate_Click" Background="Transparent" Margin="0,0,30,0">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7AD;"  Width="32" Height="32"/>
+            </Button>
+            <Button Name="ZoomInBtn" Click="ZoomIn_Click" Background="Transparent">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A3;" Width="32" Height="32"/>
+            </Button>
+            <Button Name="ZoomOutBtn" Click="ZoomOutBtn_OnClick" Background="Transparent" Margin="0,0,30,0">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE71F;" Width="32" Height="32"/>
+            </Button>
+            <Button Name="MoveLeftBtn" Click="MoveLeftBtn_OnClick" Background="Transparent">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76B;" Width="32" Height="32"/>
+            </Button>
+            <Button Name="MoveUpBtn" Click="MoveUpBtn_OnClick" Background="Transparent">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70E;" Width="32" Height="32"/>
+            </Button>
+            <Button Name="MoveRightBtn" Click="MoveRightBtn_OnClick" Background="Transparent">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76C;" Width="32" Height="32"/>
+            </Button>
+            <Button Name="MoveDownBtn" Click="MoveDownBtn_OnClick" Background="Transparent">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70D;" Width="32" Height="32"/>
+            </Button>
+        </StackPanel>
+
+        <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,25,10" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" Width="32" Height="32"/>
+                <TextBlock VerticalAlignment="Center">Зберегти як</TextBlock>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>
