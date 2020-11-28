@@ -9,6 +9,39 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="7">
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="0.1"></GradientStop>
+                    <GradientStop Color="Black" Offset="0.5"></GradientStop>
+                    <GradientStop Color="White" Offset="0.8"></GradientStop>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" 
+                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="7">
+            <Rectangle.Fill>
+                <LinearGradientBrush >
+                    <GradientStop Color="White" Offset="0.1"></GradientStop>
+                    <GradientStop Color="Black" Offset="0.5"></GradientStop>
+                    <GradientStop Color="White" Offset="0.9"></GradientStop>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" FontFamily="Sugeon UI" 
+                   FontSize="125" TextAlignment="Right" Margin="25" VerticalAlignment="Bottom">
+             Комп'ютерна графіка
+        </TextBlock>
     </Grid>
 </Page>
