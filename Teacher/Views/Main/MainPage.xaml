@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="Teacher.Views.Main.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Teacher.Views.Main"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Teacher.Views.Main.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" 
+                   VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="7">
+            <Rectangle.Fill>
+                <LinearGradientBrush>
+                    <GradientStop Color="Transparent" Offset="0.1"></GradientStop>
+                    <GradientStop Color="{ThemeResource SystemBaseHighColor}" Offset="0.5"></GradientStop>
+                    <GradientStop Color="Transparent" Offset="0.8"></GradientStop>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" 
+                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="7">
+            <Rectangle.Fill>
+                <LinearGradientBrush >
+                    <GradientStop Color="Transparent" Offset="0.1"></GradientStop>
+                    <GradientStop Color="{ThemeResource SystemBaseHighColor}" Offset="0.5"></GradientStop>
+                    <GradientStop Color="Transparent" Offset="0.9"></GradientStop>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <TextBlock x:Uid="ComputerGraphicsLabel"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   TextWrapping="Wrap"
+                   FontFamily="Sugeon UI" 
+                   FontSize="115"
+                   FontWeight="Light"
+                   TextAlignment="Right"
+                   Margin="25"
+                   VerticalAlignment="Bottom"/>
+
+        <controls:CardButton x:Uid="FractalsTextBlock" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Margin="25 200 250 25" 
+                             ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextColor="{ThemeResource SystemAltHighColor}"
+                             FontSize="42"
+                             FontWeight="Light"
+                             TextAlignment="Left" 
+                             TextPosition="Bottom" 
+                             TextBackground="#CCF3E6"/>
+
+        <controls:CardButton x:Uid="ColorModelTextBlock" 
+                             Grid.Row="1" 
+                             Grid.Column="0" 
+                             Margin="250 25 25 200" 
+                             ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextColor="{ThemeResource SystemAltHighColor}"
+                             FontSize="42"
+                             FontWeight="Light"
+                             TextAlignment="Right"
+                             TextPosition="Top"
+                             TextBackground="#CCF3E6"/>
+
+        <controls:CardButton x:Uid="AffinisTransformationTextBlock"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="25 25 250 200" 
+                             ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextColor="{ThemeResource SystemAltHighColor}"
+                             FontSize="42"
+                             FontWeight="Light"
+                             TextAlignment="Left"
+                             TextPosition="Top"
+                             TextBackground="#CCF3E6"/>
+    </Grid>
+</Page>
