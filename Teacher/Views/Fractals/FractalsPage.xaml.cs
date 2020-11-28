@@ -27,39 +27,39 @@ namespace Teacher.Views.Fractals
             this.InitializeComponent();
         }
 
-        private void Ratate_Click(object sender, RoutedEventArgs e)
+        private void Rotate_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void MoveLeftBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void MoveUpBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void MoveRightBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void MoveDownBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -186,12 +186,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{d29d6ae0-6651-4255-bba1-4521894b066e}</Project>
-      <Name>Resources</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PRIResource Include="Strings\uk-UA\Resources.resw" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

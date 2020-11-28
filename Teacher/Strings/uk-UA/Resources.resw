@@ -150,4 +150,13 @@
   <data name="PageUnderConstructionBlock.Text" xml:space="preserve">
     <value>Сторінка ще не готова</value>
   </data>
+  <data name="FractalTypeComboBox.Header" xml:space="preserve">
+    <value>Фрактал</value>
+  </data>
+  <data name="FractalTypeComboBox.PlaceholderText" xml:space="preserve">
+    <value>Виберіть фрактал...</value>
+  </data>
+  <data name="SaveAsButtonLabel.Text" xml:space="preserve">
+    <value>Зберегти як...</value>
+  </data>
 </root>
