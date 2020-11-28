@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AffinisTransformationTextBlock" xml:space="preserve">
+  <data name="AffinisTransformationTextBlock.Text" xml:space="preserve">
+    <value>Афінні перетворення</value>
+  </data>
   <data name="AffinisTransformationPageNavItem.Content" xml:space="preserve">
     <value>Афінні перетворення</value>
   </data>
   <data name="BookIsNotImplemented" xml:space="preserve">
     <value>Книга ще не реалізована</value>
-  <data name="ColorModelTextBlock" xml:space="preserve">
+  </data>
+  <data name="ColorModelTextBlock.Text" xml:space="preserve">
     <value>Колірні моделі</value>
   </data>
   <data name="BookNavButtonTooltip.Content" xml:space="preserve">
@@ -131,10 +134,13 @@
   </data>
   <data name="ColorModelPageNavItem.Content" xml:space="preserve">
     <value>Колірна модель</value>
+  </data>
   <data name="ComputerGraphicsLabel.Text" xml:space="preserve">
     <value>Комп'ютерна графіка</value>
   </data>
-  <data name="FractalsTextBlock" xml:space="preserve">
+  <data name="FractalsTextBlock.Text" xml:space="preserve">
+    <value>Фрактали</value>
+  </data>
   <data name="FractalsPageNavItem.Content" xml:space="preserve">
     <value>Фрактали</value>
   </data>

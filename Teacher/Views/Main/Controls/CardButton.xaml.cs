@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -68,6 +69,17 @@ namespace Teacher.Views.Main.Controls
             get => (Color) GetValue(TextBackgroundProperty);
             set => SetValue(TextBackgroundProperty, value);
         }
+
+        public static readonly DependencyProperty TextColorProperty = DependencyProperty.Register(
+            "TextColor", typeof(Color), typeof(CardButton), new PropertyMetadata(null));
+
+        public Color TextColor
+        {
+            get => (Color) GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
+        }
+
+        public Brush ForegroundBrush => new SolidColorBrush(TextColor);
 
         public CardButton()
         {

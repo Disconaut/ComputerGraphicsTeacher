@@ -15,7 +15,7 @@
                          BackRequested="MainNavigation_OnBackRequested"
                          SelectionChanged="MainNavigation_OnSelectionChanged">
         <muxc:NavigationView.MenuItems>
-            <muxc:NavigationViewItem x:Uid="MainPageNavItem" />
+            <muxc:NavigationViewItem x:Uid="MainPageNavItem" Tag="Main.MainPage"/>
             <muxc:NavigationViewItem x:Uid="FractalsPageNavItem" />
             <muxc:NavigationViewItem x:Uid="ColorModelPageNavItem" />
             <muxc:NavigationViewItem x:Uid="AffinisTransformationPageNavItem" />

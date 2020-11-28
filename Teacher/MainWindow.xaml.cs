@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Teacher.Views.Errors;
 using NavigationView = Microsoft.UI.Xaml.Controls.NavigationView;
+using NavigationViewItem = Microsoft.UI.Xaml.Controls.NavigationViewItem;
 using NavigationViewBackRequestedEventArgs = Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs;
 using NavigationViewSelectionChangedEventArgs = Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs;
 
@@ -49,7 +50,6 @@ namespace Teacher
             const string viewsNamespace = "Teacher.Views";
 
             var selectedTab = args.SelectedItem as NavigationViewItem;
-
             var pageTypeFullName = selectedTab?.Tag as string;
             var pageType = Type.GetType($"{viewsNamespace}.{pageTypeFullName}");
             if (pageType?.IsSubclassOf(typeof(Page)) ?? false)

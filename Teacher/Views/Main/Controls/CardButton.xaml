@@ -13,8 +13,8 @@
         <Grid.Background>
             <ImageBrush ImageSource="{x:Bind ImageSource}" Stretch="UniformToFill"></ImageBrush>
         </Grid.Background>
-        <Grid x:Name="CaptionBackground" HorizontalAlignment="Stretch" VerticalAlignment="{x:Bind TextPositionCast}" Height="Auto" Padding="5">
-            <TextBlock x:Name="Caption" Text="{x:Bind Text}" TextAlignment="{x:Bind TextAlignment}"/>
+        <Grid x:Name="CaptionBackground" HorizontalAlignment="Stretch" VerticalAlignment="{x:Bind TextPositionCast}" Height="Auto" Padding="10">
+            <TextBlock x:Name="Caption" Text="{x:Bind Text}" Foreground="{x:Bind ForegroundBrush}" TextAlignment="{x:Bind TextAlignment}"/>
         </Grid>
     </Grid>
 </UserControl>
