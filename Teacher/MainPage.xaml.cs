@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -63,18 +64,24 @@ namespace Teacher
 
         private void MainNavigation_OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            if (MainFrame.CanGoBack)
-            {
-                var backStackLength = MainFrame.BackStack.Count;
-                var backPage = MainFrame.BackStack.Last();
-                MainFrame.BackStack.RemoveAt(backStackLength - 1);
+            if (!MainFrame.CanGoBack) return;
 
-                var backPageTypeName = backPage.Parameter as string;
+            var backStackLength = MainFrame.BackStack.Count;
+            var backPage = MainFrame.BackStack.Last();
+            MainFrame.BackStack.RemoveAt(backStackLength - 1);
 
-                MainNavigation.SelectedItem = MainNavigation.MenuItems
-                    .OfType<Microsoft.UI.Xaml.Controls.NavigationViewItem>()
-                    .First(x => x.Tag as string == backPageTypeName);
-            }
+            var backPageTypeName = backPage.Parameter as string;
+
+            MainNavigation.SelectedItem = MainNavigation.MenuItems
+                .OfType<Microsoft.UI.Xaml.Controls.NavigationViewItem>()
+                .First(x => x.Tag as string == backPageTypeName);
+        }
+
+        private async void BookButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var resourceLoader = ResourceLoader.GetForCurrentView();
+            var bookDialog = new MessageDialog(resourceLoader.GetString("BookIsNotImplemented"));
+            await bookDialog.ShowAsync();
         }
     }
 }

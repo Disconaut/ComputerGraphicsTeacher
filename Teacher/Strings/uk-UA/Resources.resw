@@ -120,6 +120,12 @@
   <data name="AffinisTransformationPageNavItem.Content" xml:space="preserve">
     <value>Афінні перетворення</value>
   </data>
+  <data name="BookIsNotImplemented" xml:space="preserve">
+    <value>Книга ще не реалізована</value>
+  </data>
+  <data name="BookNavButtonTooltip.Content" xml:space="preserve">
+    <value>Навчальний посібник</value>
+  </data>
   <data name="ColorModelPageNavItem.Content" xml:space="preserve">
     <value>Колірна модель</value>
   </data>

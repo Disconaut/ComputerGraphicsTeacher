@@ -11,6 +11,7 @@
     <muxc:NavigationView x:Name="MainNavigation" 
                          PaneDisplayMode="Top"
                          IsBackEnabled="True"
+                         IsSettingsVisible="False"
                          BackRequested="MainNavigation_OnBackRequested"
                          SelectionChanged="MainNavigation_OnSelectionChanged">
         <muxc:NavigationView.MenuItems>
@@ -19,6 +20,18 @@
             <muxc:NavigationViewItem x:Uid="ColorModelPageNavItem" />
             <muxc:NavigationViewItem x:Uid="AffinisTransformationPageNavItem" />
         </muxc:NavigationView.MenuItems>
+        <muxc:NavigationView.PaneFooter>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton x:Name="BookButton" IsCompact="True" Click="BookButton_OnClick">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE736;"/>
+                    </AppBarButton.Icon>
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:Uid="BookNavButtonTooltip"/>
+                    </ToolTipService.ToolTip>
+                </AppBarButton>
+            </StackPanel>
+        </muxc:NavigationView.PaneFooter>
         <Frame x:Name="MainFrame"/>
     </muxc:NavigationView>
 </Page>
