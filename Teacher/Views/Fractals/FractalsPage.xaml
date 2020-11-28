@@ -19,19 +19,21 @@
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
 
-        <ComboBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"
-                  Header="Colors" PlaceholderText="Pick a color"  Margin="0,25,25,0"></ComboBox>
+        <ComboBox Name="FractalTypeComboBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch"
+                  Header="Фрактал" PlaceholderText="Виберіть фрактал"  Margin="0,25,25,0"></ComboBox>
 
 
-        <Canvas Grid.Row="0" Grid.Column="0" Background="LightGray" Margin="25,25,25,10"></Canvas>
-            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+        <Canvas Name="FractalCanval" Grid.Row="0" Grid.Column="0" Background="LightGray" Margin="25,25,25,10"></Canvas>
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
+                        Margin="0,0,0,10">
             <Button Name="RotateBtn" Click="Ratate_Click" Background="Transparent" Margin="0,0,30,0">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7AD;"  Width="32" Height="32"/>
             </Button>
             <Button Name="ZoomInBtn" Click="ZoomIn_Click" Background="Transparent">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A3;" Width="32" Height="32"/>
             </Button>
-            <Button Name="ZoomOutBtn" Click="ZoomOutBtn_OnClick" Background="Transparent" Margin="0,0,30,0">
+            <Button Name="ZoomOutBtn" Click="ZoomOutBtn_OnClick" Background="Transparent" 
+                    Margin="0,0,30,0">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE71F;" Width="32" Height="32"/>
             </Button>
             <Button Name="MoveLeftBtn" Click="MoveLeftBtn_OnClick" Background="Transparent">
@@ -48,7 +50,8 @@
             </Button>
         </StackPanel>
 
-        <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,25,10" >
+        <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" 
+                Margin="0,0,25,10" Padding="1,0,7,0" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" Width="32" Height="32"/>
                 <TextBlock VerticalAlignment="Center">Зберегти як</TextBlock>
