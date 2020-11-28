@@ -29,9 +29,6 @@ namespace Teacher
             
             
         }
-        private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            this.ParentFrame.Navigate(typeof(FractalsPage));
-        }
+
     }
 }
