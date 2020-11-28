@@ -137,7 +137,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\01-mercedes-amg-gt-owners-friends-event-2018-recap-3400x1440 %282%29.jpg" />
+    <Content Include="Assets\MainPage\Fractal.jpeg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -176,6 +176,9 @@
   <ItemGroup>
     <Folder Include="NewFolder1\" />
     <Folder Include="Views\Fractals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\uk-UA\Resources.resw" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

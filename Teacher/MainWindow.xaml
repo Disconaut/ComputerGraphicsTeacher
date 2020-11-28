@@ -10,6 +10,5 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <controls:CardButton ImageSource="Assets/01-mercedes-amg-gt-owners-friends-event-2018-recap-3400x1440 (2).jpg" Margin="0,0,253,263" Text="Hello"></controls:CardButton>
     </Grid>
 </Page>

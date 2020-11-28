@@ -5,6 +5,7 @@
     xmlns:local="using:Teacher.Views.Main"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Teacher.Views.Main.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -39,9 +40,41 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" FontFamily="Sugeon UI" 
-                   FontSize="125" TextAlignment="Right" Margin="25" VerticalAlignment="Bottom">
-             Комп'ютерна графіка
-        </TextBlock>
+        <TextBlock x:Uid="ComputerGraphicsLabel"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   TextWrapping="Wrap"
+                   FontFamily="Sugeon UI" 
+                   FontSize="125"
+                   TextAlignment="Right"
+                   Margin="25"
+                   VerticalAlignment="Bottom"/>
+
+        <controls:CardButton x:Uid="FractalsTextBlock" 
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Margin="25 225 250 25" 
+                             ImageSource="../../Assets/MainPage/Fractal.jpeg" 
+                             TextAlignment="Left" 
+                             TextPosition="Bottom" 
+                             TextBackground="#CCF3E6"/>
+
+        <controls:CardButton x:Uid="ColorModelTextBlock" 
+                             Grid.Row="1" 
+                             Grid.Column="0" 
+                             Margin="250 25 25 225" 
+                             ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextAlignment="Right"
+                             TextPosition="Top"
+                             TextBackground="#CCF3E6"/>
+
+        <controls:CardButton x:Uid="AffinisTransformationTextBlock"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="25 25 250 225" 
+                             ImageSource="../../Assets/MainPage/Fractal.jpeg"
+                             TextAlignment="Left"
+                             TextPosition="Top"
+                             TextBackground="#CCF3E6"/>
     </Grid>
 </Page>

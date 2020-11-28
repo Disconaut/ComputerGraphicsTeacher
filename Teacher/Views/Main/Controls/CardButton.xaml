@@ -6,19 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="247"
+    d:DesignWidth="477">
 
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="{x:Bind ImageSource}" Stretch="UniformToFill"></ImageBrush>
         </Grid.Background>
-        <Rectangle>
-            <Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0, 0.5">
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <TextBlock Text="{x:Bind Text}" TextAlignment="{x:Bind TextAlignment}" HorizontalAlignment="Stretch"/>
+        <Grid x:Name="CaptionBackground" HorizontalAlignment="Stretch" VerticalAlignment="{x:Bind TextPositionCast}" Height="Auto" Padding="5">
+            <TextBlock x:Name="Caption" Text="{x:Bind Text}" TextAlignment="{x:Bind TextAlignment}"/>
+        </Grid>
     </Grid>
 </UserControl>
