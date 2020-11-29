@@ -11,12 +11,13 @@ namespace CGTeacherShared.Fractals
     {
         public string Name { get; }
         public object Value { get; set; }
-        public Type Type => Value?.GetType();
+        public Type Type{ get; }
 
-        public FractalParameter(string name, object value = null)
+        public FractalParameter(string name, Type type = null, object value = null)
         {
             Name = name;
             Value = value;
+            Type = type;
         }
     }
 }

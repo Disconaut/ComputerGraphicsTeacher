@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CGTeacherShared.Fractals.Abstract;
+using CGTeacherShared.Fractals.Exceptions;
 
 namespace CGTeacherShared.Fractals
 {
-    public class FractalParametersSet: IFractalParametersSet
+    public class FractalParametersSet : IFractalParametersSet
     {
         private readonly ICollection<IFractalParameter> _parameters;
 
@@ -22,20 +23,23 @@ namespace CGTeacherShared.Fractals
             return _parameters.Any(x => x.Name == name);
         }
 
-        public void AddValue(string name, object value)
+        public void AddValue(string name, Type type, object value)
         {
-            var parameter = new FractalParameter(name, value);
+            var parameter = new FractalParameter(name, type, value);
             _parameters.Add(parameter);
         }
 
         public void SetValue(string name, object value)
         {
-            _parameters.First(x => x.Name == name).Value = value;
+            var parameter = _parameters.First(x => x.Name == name);
+            if(value.GetType() != parameter.Type)
+                throw new ArgumentException("Invalid type of argument", nameof(value));
+            parameter.Value = value;
         }
 
         public object GetValue(string name)
         {
-            return _parameters.First(x => x.Name == name).Value;
+            return _parameters.FirstOrDefault(x => x.Name == name)?.Value ?? throw new ParameterNotFoundException(name);
         }
 
         public object GetValue(string name, object defaultValue)
@@ -45,14 +49,21 @@ namespace CGTeacherShared.Fractals
 
         public T GetValue<T>(string name)
         {
-            return (T) GetValue(name);
+            try
+            {
+                return (T)GetValue(name);
+            }
+            catch (InvalidCastException)
+            {
+                throw new ParameterNotFoundException(name);
+            }
         }
 
         public T GetValue<T>(string name, T defaultValue)
         {
             try
             {
-                return (T) GetValue(name);
+                return (T)GetValue(name);
             }
             catch
             {

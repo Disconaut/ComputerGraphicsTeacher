@@ -119,11 +119,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ColorPickerBox.xaml.cs">
+      <DependentUpon>ColorPickerBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Enums\CardButtonTextPosition.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Fractals\FractalParameterViewModel.cs" />
+    <Compile Include="ViewModels\Fractals\FractalsPageViewModel.cs" />
+    <Compile Include="ViewModels\Fractals\FractalViewModel.cs" />
     <Compile Include="Views\Errors\UnderConstruction.xaml.cs">
       <DependentUpon>UnderConstruction.xaml</DependentUpon>
     </Compile>
@@ -158,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ColorPickerBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -193,6 +203,9 @@
       <Project>{f1e2f7b0-0498-4b60-bce1-822109367f36}</Project>
       <Name>CGTeacherShared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
