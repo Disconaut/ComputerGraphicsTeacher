@@ -159,4 +159,7 @@
   <data name="SaveAsButtonLabel.Text" xml:space="preserve">
     <value>Зберегти як...</value>
   </data>
+  <data name="DrawFractalButtonContent" xml:space="preserve">
+    <value>Намалювати фрактал</value>
+  </data>
 </root>

@@ -1,8 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using CGTeacherShared.Fractals;
 using CGTeacherShared.Fractals.Abstract;
+using Microsoft.Graphics.Canvas;
 
 namespace Teacher.ViewModels.Fractals
 {
@@ -23,19 +27,106 @@ namespace Teacher.ViewModels.Fractals
             }
         }
 
+        private CanvasRenderTarget _renderTarget;
+        private float _offsetX;
+        private float _offsetY;
+        private float _widthScale;
+        private float _heightScale;
+
+        public CanvasRenderTarget RenderTarget
+        {
+            get => _renderTarget;
+            set
+            {
+                if(_renderTarget == value) return;
+
+                _renderTarget = value;
+                OnPropertyChanged(nameof(RenderTarget));
+            }
+        }
+
         public FractalsPageViewModel()
         {
             Fractals = new ObservableCollection<FractalViewModel>
             {
                 new FractalViewModel(new HHDragonFractal())
             };
+
+            foreach (var fractal in Fractals)
+            {
+                fractal.RenderComplete += (sender, args) =>
+                {
+                    RenderTarget = args.RenderTarget;
+                };
+            }
         }
+
+        public float OffsetX
+        {
+            get => _offsetX;
+            set
+            {
+                if (Math.Abs(_offsetX - value) < float.Epsilon) return;
+
+                _offsetX = value;
+                OnPropertyChanged(nameof(OffsetX));
+            }
+        }
+
+        public float OffsetY
+        {
+            get => _offsetY;
+            set
+            {
+                if (Math.Abs(_offsetY - value) < float.Epsilon) return;
+
+                _offsetY = value;
+                OnPropertyChanged(nameof(OffsetY));
+            }
+        }
+
+        public float WidthScale
+        {
+            get => _widthScale;
+            set
+            {
+                if (Math.Abs(_widthScale - value) < float.Epsilon) return;
+
+                _widthScale = value;
+                OnPropertyChanged(nameof(WidthScale));
+            }
+        }
+
+        public float HeightScale
+        {
+            get => _heightScale;
+            set
+            {
+                if (Math.Abs(_heightScale - value) < float.Epsilon) return;
+
+                _heightScale = value;
+                OnPropertyChanged(nameof(HeightScale));
+            }
+        }
+
+        public float Dpi => 96;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual async void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            await CoreApplication
+                .MainView
+                .CoreWindow
+                .Dispatcher
+                .RunAsync(
+                    CoreDispatcherPriority.Normal, 
+                    () => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)));
+        }
+
+        public void RenderCurrentFractal(float width, float height)
+        {
+            _currentFractal.StartRendering(OffsetX, OffsetY, WidthScale, HeightScale, width, height, Dpi);
         }
     }
 }

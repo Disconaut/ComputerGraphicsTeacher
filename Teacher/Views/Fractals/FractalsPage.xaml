@@ -25,12 +25,15 @@
         <StackPanel x:Name="FractalSettings"
             Grid.Column="1" 
                     Grid.Row="0" 
-                    Margin="0,25,25,0">
+                    Margin="0,25,25,0"
+            Spacing="15">
             <ComboBox x:Uid="FractalTypeComboBox"  
                   Name="FractalTypeComboBox" 
                   HorizontalAlignment="Stretch" 
                   ItemsSource="{Binding ElementName=FractalsPageName, Path=ViewModel.Fractals}"
-                  SelectedItem="{Binding ElementName=FractalsPageName, Path=ViewModel.CurrentFractal, Mode=TwoWay}"/>
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding ElementName=FractalsPageName, Path=ViewModel.CurrentFractal, Mode=TwoWay}"
+                  Margin="0 0 0 10"/>
         </StackPanel>
 
         <canvas:CanvasControl Name="FractalCanvas" Grid.Row="0" Grid.Column="0" Background="LightGray" Margin="25,25,25,10" Draw="FractalCanvas_OnDraw"/>
