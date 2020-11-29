@@ -77,12 +77,10 @@ namespace Teacher.Views.Fractals
 
         private void Rotate_Click(object sender, RoutedEventArgs e)
         {
-            frac.BeginRenderAsync(0, 0, 0, 0, (float) FractalCanvas.ActualWidth, (float) FractalCanvas.ActualHeight);
         }
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            fract.BeginRenderAsync(0, 0, 0, 0, (float)FractalCanvas.ActualWidth, (float)FractalCanvas.ActualHeight);
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)

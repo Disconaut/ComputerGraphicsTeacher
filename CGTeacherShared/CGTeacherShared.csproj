@@ -130,7 +130,9 @@
     <Compile Include="Fractals\FractalParameter.cs" />
     <Compile Include="Fractals\FractalParametersSet.cs" />
     <Compile Include="Fractals\HHDragonFractal.cs" />
+    <Compile Include="Fractals\KohFractal.cs" />
     <Compile Include="Fractals\LeviFractal.cs" />
+    <Compile Include="Fractals\MinkovskiFractal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\CGTeacherShared.rd.xml" />
   </ItemGroup>
