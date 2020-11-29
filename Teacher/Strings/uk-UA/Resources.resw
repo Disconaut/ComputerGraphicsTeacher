@@ -159,6 +159,33 @@
   <data name="SaveAsButtonLabel.Text" xml:space="preserve">
     <value>Зберегти як...</value>
   </data>
+  <data name="HHDragonFractals" xml:space="preserve">
+    <value>Фрактал дракон Хартера-Хейтуея</value>
+  </data>
+  <data name="KohFractal" xml:space="preserve">
+    <value>Крива Коха</value>
+  </data>
+  <data name="LeviFractal" xml:space="preserve">
+    <value>Крива Леві</value>
+  </data>
+  <data name="LineColor" xml:space="preserve">
+    <value>Колір лінії</value>
+  </data>
+  <data name="MinkovskiFractal" xml:space="preserve">
+    <value>Фрактал Мінковського</value>
+  </data>
+  <data name="StartX1" xml:space="preserve">
+    <value>Стартова точка Х1</value>
+  </data>
+  <data name="StartX2" xml:space="preserve">
+    <value>Стартова точка Х2</value>
+  </data>
+  <data name="StartY1" xml:space="preserve">
+    <value>Стартова точка Y1</value>
+  </data>
+  <data name="StartY2" xml:space="preserve">
+    <value>Стартова точка Y2</value>
+  </data>
   <data name="DrawFractalButtonContent" xml:space="preserve">
     <value>Намалювати фрактал</value>
   </data>
