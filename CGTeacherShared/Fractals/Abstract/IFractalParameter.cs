@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace CGTeacherShared.Fractals.Abstract
 {
-    interface IFractalParameter
+    public interface IFractalParameter
     {
         string Name { get; }
 
         object Value { get; set; }
+
+        Type Type { get; }
     }
 }
