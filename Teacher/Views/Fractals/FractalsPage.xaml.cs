@@ -26,10 +26,18 @@ namespace Teacher.Views.Fractals
     public sealed partial class FractalsPage : Page
     {
         private CanvasAnimatedDrawEventArgs args;
-
+        LeviFractal fract = new LeviFractal();
+        private CanvasRenderTarget canvas;
         public FractalsPage()
         {
             this.InitializeComponent();
+            fract.RenderComplete += Fract_RenderComplete;
+        }
+
+        private async void Fract_RenderComplete(object sender, CGTeacherShared.Fractals.EventArgs.RenderCompleteEventArgs e)
+        {
+            canvas = e.RenderTarget;
+           await FractalCanvas.Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, () => FractalCanvas.Invalidate());
         }
 
         private void Rotate_Click(object sender, RoutedEventArgs e)
@@ -39,7 +47,7 @@ namespace Teacher.Views.Fractals
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            
+            fract.BeginRenderAsync(0, 0, 0, 0, (float)FractalCanvas.ActualWidth, (float)FractalCanvas.ActualHeight);
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)
@@ -64,12 +72,14 @@ namespace Teacher.Views.Fractals
 
         private void MoveDownBtn_OnClick(object sender, RoutedEventArgs e)
         {
+        }
 
-            LeviFractal fract = new LeviFractal();
-            Thread thread = new Thread(new ThreadStart(() => fract.DrawKylymok(FractalCanvas)));
-            thread.Start();
-          
-          
+        private void FractalCanvas_OnDraw(CanvasControl sender, CanvasDrawEventArgs canvasDrawEventArgs)
+        {
+            if (canvas != null)
+            {
+                canvasDrawEventArgs.DrawingSession.DrawImage(canvas);
+            }
         }
     }
 }
