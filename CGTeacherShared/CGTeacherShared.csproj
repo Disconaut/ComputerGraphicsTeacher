@@ -120,10 +120,13 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Fractals\Abstract\BaseFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractalParameter.cs" />
     <Compile Include="Fractals\Abstract\IFractalParametersSet.cs" />
     <Compile Include="Fractals\EventArgs\RenderCompleteEventArgs.cs" />
+    <Compile Include="Fractals\EventArgs\RenderStepEventArgs.cs" />
+    <Compile Include="Fractals\Exceptions\ParameterNotFoundException.cs" />
     <Compile Include="Fractals\FractalParameter.cs" />
     <Compile Include="Fractals\FractalParametersSet.cs" />
     <Compile Include="Fractals\HHDragonFractal.cs" />

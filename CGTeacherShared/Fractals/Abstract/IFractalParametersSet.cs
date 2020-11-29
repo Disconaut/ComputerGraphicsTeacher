@@ -11,7 +11,7 @@ namespace CGTeacherShared.Fractals.Abstract
     {
         bool HasValue(string name);
 
-        void AddValue(string name, object value);
+        void AddValue(string name, Type type, object value = null);
 
         void SetValue(string name, object value);
 

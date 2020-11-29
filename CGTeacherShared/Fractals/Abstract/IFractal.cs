@@ -15,7 +15,9 @@ namespace CGTeacherShared.Fractals.Abstract
 
         event EventHandler<RenderCompleteEventArgs> RenderComplete;
 
+        event EventHandler<RenderStepEventArgs> RenderStep;
+
         Task BeginRenderAsync(float x, float y, float fractalWidth, float fractalHeight, float width,
-            float height);
+            float height, float dpi);
     }
 }
