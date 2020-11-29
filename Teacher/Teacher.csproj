@@ -188,6 +188,12 @@
   <ItemGroup>
     <PRIResource Include="Strings\uk-UA\Resources.resw" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CGTeacherShared\CGTeacherShared.csproj">
+      <Project>{f1e2f7b0-0498-4b60-bce1-822109367f36}</Project>
+      <Name>CGTeacherShared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CGTeacherShared.Fractals.Abstract
 {
-    interface IFractalParametersSet: IEnumerable, IEnumerator
+    public interface IFractalParametersSet: IEnumerable<IFractalParameter>
     {
         bool HasValue(string name);
 

@@ -7,7 +7,7 @@ using CGTeacherShared.Fractals.EventArgs;
 
 namespace CGTeacherShared.Fractals.Abstract
 {
-    interface IFractal
+    public interface IFractal
     {
         string Name { get; }
 
@@ -15,7 +15,7 @@ namespace CGTeacherShared.Fractals.Abstract
 
         event EventHandler<RenderCompleteEventArgs> RenderComplete;
 
-        Task BeginRenderAsync(double x, double y, double fractalWidth, double fractalHeight, double width,
-            double height);
+        Task BeginRenderAsync(float x, float y, float fractalWidth, float fractalHeight, float width,
+            float height);
     }
 }
