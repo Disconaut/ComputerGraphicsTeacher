@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using Windows.UI;
 using CGTeacherShared.Fractals.Abstract;
 using CGTeacherShared.Fractals.EventArgs;
@@ -11,7 +12,7 @@ using Microsoft.Graphics.Canvas;
 
 namespace CGTeacherShared.Fractals
 {
-    class MinkovskiFractal : BaseFractal
+    public class MinkovskiFractal : BaseFractal
     {
         int length = 400;
         int granica = 430;
@@ -23,10 +24,8 @@ namespace CGTeacherShared.Fractals
 
         public MinkovskiFractal() : base()
         {
-            Parameters.AddValue(ParameterNames.StartX1, typeof(float));
-            Parameters.AddValue(ParameterNames.StartX2, typeof(float));
-            Parameters.AddValue(ParameterNames.StartY1, typeof(float));
-            Parameters.AddValue(ParameterNames.StartY2, typeof(float));
+            Parameters.AddValue(ParameterNames.StartX1, typeof(double));
+            Parameters.AddValue(ParameterNames.StartY1, typeof(double));
             Parameters.AddValue(ParameterNames.LinesColor, typeof(Color),Colors.SeaGreen);
         }
 
@@ -37,8 +36,8 @@ namespace CGTeacherShared.Fractals
         {
             PartialRender(
                 canvasDrawingSession,
-                Parameters.GetValue<float>(ParameterNames.StartX1),
-                Parameters.GetValue<float>(ParameterNames.StartX2)
+                (float)Parameters.GetValue<double>(ParameterNames.StartX1),
+                (float)Parameters.GetValue<double>(ParameterNames.StartY1)
                 );
         }
 

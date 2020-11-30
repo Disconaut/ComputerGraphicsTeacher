@@ -85,41 +85,59 @@ namespace Teacher.Views.Fractals
 
         private void DrawFractalButton_Click(object sender, RoutedEventArgs e)
         {
+            UpdateFractal();
+        }
+
+        private void UpdateFractal()
+        {
             ViewModel.RenderCurrentFractal((float)FractalCanvas.ActualWidth, (float)FractalCanvas.ActualHeight);
         }
 
         private void Rotate_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.OffsetX = 0;
+            ViewModel.OffsetY = 0;
+            ViewModel.WidthScale = 1;
+            ViewModel.HeightScale = 1;
+            UpdateFractal();
         }
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.WidthScale += 0.1f;
+            ViewModel.HeightScale += 0.1f;
+            UpdateFractal();
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.WidthScale -= 0.1f;
+            ViewModel.HeightScale -= 0.1f;
+            UpdateFractal();
         }
 
         private void MoveLeftBtn_OnClick(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.OffsetX -= 75;
+            UpdateFractal();
         }
 
         private void MoveUpBtn_OnClick(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.OffsetY -= 75;
+            UpdateFractal();
         }
 
         private void MoveRightBtn_OnClick(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.OffsetX += 75;
+            UpdateFractal();
         }
 
         private void MoveDownBtn_OnClick(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.OffsetY += 75;
+            UpdateFractal();
         }
 
         private void FractalCanvas_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)

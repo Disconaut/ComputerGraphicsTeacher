@@ -11,7 +11,7 @@ using Microsoft.Graphics.Canvas;
 
 namespace CGTeacherShared.Fractals
 {
-    class KohFractal:BaseFractal
+    public class KohFractal:BaseFractal
     {
         public override string Name => "KohFractal";
         public override event EventHandler<RenderStepEventArgs> RenderStep;

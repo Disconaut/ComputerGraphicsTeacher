@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using CGTeacherShared.Fractals.Abstract;
 using Microsoft.UI.Xaml.Controls;
 using Teacher.Controls;
 using Windows.UI;
+using Windows.UI.Xaml.Controls;
 
 namespace Teacher.ViewModels.Fractals
 {
@@ -115,7 +117,6 @@ namespace Teacher.ViewModels.Fractals
                 numberBox.SetBinding(NumberBox.ValueProperty, bind);
                 UiElement = numberBox;
             }
-
         }
     }
 }

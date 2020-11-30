@@ -49,7 +49,10 @@ namespace Teacher.ViewModels.Fractals
         {
             Fractals = new ObservableCollection<FractalViewModel>
             {
-                new FractalViewModel(new HHDragonFractal())
+                new FractalViewModel(new HHDragonFractal()),
+                new FractalViewModel(new LeviFractal()),
+                new FractalViewModel(new KohFractal()),
+                new FractalViewModel(new MinkovskiFractal())
             };
 
             foreach (var fractal in Fractals)
