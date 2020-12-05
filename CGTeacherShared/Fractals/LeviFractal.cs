@@ -33,7 +33,7 @@ namespace CGTeacherShared.Fractals
         public override event EventHandler<RenderStepEventArgs> RenderStep;
 
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height)
+            float fractalHeightScale, float width, float height, float engel)
         {
             PartialRender(canvasDrawingSession,
                 (float)Parameters.GetValue<double>(ParameterNames.StartX1),

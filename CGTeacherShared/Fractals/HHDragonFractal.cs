@@ -30,40 +30,34 @@ namespace CGTeacherShared.Fractals
 
         public override event EventHandler<RenderStepEventArgs> RenderStep;
 
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float f, float f1, float fractalWidthScale, float fractalHeightScale, float width, float height)
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, float f, float f1,
+            float fractalWidthScale, float fractalHeightScale, float width, float height, float engel)
         {
-            var point1 = new Vector2((float)Parameters.GetValue<double>(ParameterNames.StartX1),
-                (float)Parameters.GetValue<double>(ParameterNames.StartY1));
-            var point2 = new Vector2((float) Parameters.GetValue<double>(ParameterNames.StartX2),
-                (float) Parameters.GetValue<double>(ParameterNames.StartY2));
+            var point1 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint);
+            var point2 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint);
+
+            var centerX = width / 2;
+            var centerY = height / 2;
 
             PartialRender(
                 canvasDrawingSession,
-                point1.Move(f, f1),
-                point2.Move(f,f1),
-                (float)Parameters.GetValue<double>(ParameterNames.StartX2),
-                (float)Parameters.GetValue<double>(ParameterNames.StartY2),
-                (float)Parameters.GetValue<double>(ParameterNames.StartX2),
-                (float)Parameters.GetValue<double>(ParameterNames.StartY2),
-
-        private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 startPoint, Vector2 endPoint,
-                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
+                point1.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(f, f1),
+                point2.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(f, f1),
+                (int) Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
-            var x1 = point1.X;
-            var y1 = point1.Y;
+
+        private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 startPoint, Vector2 endPoint, int iteration)
+        {
+            if (iteration > 0)
+            {
                 var middlePoint = new Vector2(
                     (startPoint.X + endPoint.X) / 2 + (endPoint.Y - startPoint.Y) / 2,
                     (startPoint.Y + endPoint.Y) / 2 - (endPoint.X - startPoint.X) / 2);
 
                 PartialRender(canvasDrawingSession, endPoint, middlePoint, iteration - 1);
                 PartialRender(canvasDrawingSession, startPoint, middlePoint, iteration - 1);
-                var yn = (y1 + y2) / 2 - (x2 - x1) / 2;
-
+            }
             canvasDrawingSession.DrawLine(startPoint, endPoint, Parameters.GetValue<Color>(ParameterNames.LinesColor));
-
-            var point1 = new Vector2(x1, y1);
-            var point2 = new Vector2(x2, y2);
-            canvasDrawingSession.DrawLine(point1, point2, Parameters.GetValue<Color>(ParameterNames.LinesColor));
         }
 
         public new static class ParameterNames

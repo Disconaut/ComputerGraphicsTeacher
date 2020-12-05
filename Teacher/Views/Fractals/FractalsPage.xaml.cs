@@ -90,26 +90,28 @@ namespace Teacher.Views.Fractals
             ViewModel.RenderCurrentFractal((float)FractalCanvas.ActualWidth, (float)FractalCanvas.ActualHeight);
         }
 
-        private void Rotate_Click(object sender, RoutedEventArgs e)
+        private void RotatePlus_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetX = 100;
-            ViewModel.OffsetY = 100;
-            ViewModel.WidthScale = 10;
-            ViewModel.HeightScale = 10;
+            ViewModel.RotateAngle += 45;
+            UpdateFractal();
+        }
+        private void RotateMinus_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.RotateAngle -= 45;
             UpdateFractal();
         }
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.WidthScale += 0.1f;
-            ViewModel.HeightScale += 0.1f;
+            ViewModel.WidthScale += 0.5f;
+            ViewModel.HeightScale += 0.5f;
             UpdateFractal();
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.WidthScale -= 0.1f;
-            ViewModel.HeightScale -= 0.1f;
+            ViewModel.WidthScale -= 0.5f;
+            ViewModel.HeightScale -= 0.5f;
             UpdateFractal();
         }
 
