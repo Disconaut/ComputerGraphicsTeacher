@@ -204,4 +204,7 @@
   <data name="SP" xml:space="preserve">
     <value>Початок відрізку</value>
   </data>
+  <data name="SuggestedFractalFileName" xml:space="preserve">
+    <value>Новий Фрактал</value>
+  </data>
 </root>
