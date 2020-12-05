@@ -9,8 +9,13 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:controls="using:Teacher.Controls"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" TrueValue="Visible" FalseValue="Collapsed"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -37,6 +42,24 @@
         </StackPanel>
 
         <canvas:CanvasControl Name="FractalCanvas" Grid.Row="0" Grid.Column="0" Background="LightGray" Margin="25,25,25,10" Draw="FractalCanvas_OnDraw"/>
+
+        <Rectangle 
+            Grid.Row="0" Grid.Column="0"
+            Visibility="{Binding ElementName=FractalsPageName, Path=ViewModel.IsRendering, Converter={StaticResource BoolToVisibility}}"
+            Margin="25,25,25,10">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="Black" Opacity="0.3"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <muxc:ProgressRing 
+            Grid.Row="0" Grid.Column="0"
+            IsActive="{Binding ElementName=FractalsPageName, Path=ViewModel.IsRendering}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Width="130"
+            Height="130"/>
+
 
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
                         Margin="0,0,0,10">

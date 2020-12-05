@@ -30,7 +30,6 @@ namespace CGTeacherShared.Fractals
         }
 
         public override string Name => "LeviFractal";
-        public override event EventHandler<RenderStepEventArgs> RenderStep;
 
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
             float fractalHeightScale, float width, float height)

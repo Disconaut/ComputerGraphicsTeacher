@@ -16,21 +16,18 @@ namespace CGTeacherShared.Fractals
     {
         public HHDragonFractal() : base()
         {
-            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color), Colors.White);
-            Parameters.AddValue(ParameterNames.StartX1, typeof(double));
-            Parameters.AddValue(ParameterNames.StartY1, typeof(double));
-            Parameters.AddValue(ParameterNames.StartX2, typeof(double));
-            Parameters.AddValue(ParameterNames.StartY2, typeof(double));
+            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color), Colors.Black);
+            Parameters.AddValue(ParameterNames.BackgroundColor, typeof(Color), Colors.White);
             Parameters.AddValue(ParameterNames.StartPoint, typeof(ObservableVector2), new ObservableVector2());
             Parameters.AddValue(ParameterNames.EndPoint, typeof(ObservableVector2), new ObservableVector2());
         }
 
         public override string Name => "HHDragonFractal";
 
-        public override event EventHandler<RenderStepEventArgs> RenderStep;
-
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float f, float f1, float fractalWidthScale, float fractalHeightScale, float width, float height)
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height)
         {
+            canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
+
             PartialRender(
                 canvasDrawingSession,
                 (Vector2)Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint),
@@ -60,15 +57,9 @@ namespace CGTeacherShared.Fractals
 
             public const string EndPoint = "EP";
 
-            public const string StartX1 = "SX1";
-
-            public const string StartX2 = "SX2";
-
-            public const string StartY1 = "SY1";
-
-            public const string StartY2 = "SY2";
-
             public const string LinesColor = "LColor";
+
+            public const string BackgroundColor = "BColor";
         } 
     }
 }

@@ -19,7 +19,6 @@ namespace CGTeacherShared.Fractals.Abstract
         public IFractalParametersSet Parameters { get; }
 
         public event EventHandler<RenderCompleteEventArgs> RenderComplete;
-        public abstract event EventHandler<RenderStepEventArgs> RenderStep;
 
         public Task BeginRenderAsync(float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float dpi)
         {
@@ -29,7 +28,6 @@ namespace CGTeacherShared.Fractals.Abstract
                 var offscreen = new CanvasRenderTarget(device, width, height, dpi);
                 using (var ds = offscreen.CreateDrawingSession())
                 {
-                    ds.Clear(Colors.Black);
                     Render(ds, x, y, fractalWidthScale, fractalHeightScale, width, height);
                 }
 

@@ -84,9 +84,7 @@ namespace Teacher.ViewModels.Fractals
                     Value = args.NewColor;
                 };
 
-                bind.Mode = BindingMode.OneWay;
-
-                colorPickerBox.SetBinding(ColorPickerBox.ColorProperty, bind);
+                colorPickerBox.Color = (Color)Value;
                 UiElement = colorPickerBox;
             }
             else if (Type == typeof(double) || Type == typeof(int))

@@ -27,8 +27,6 @@ namespace CGTeacherShared.Fractals
             Parameters.AddValue(ParameterNames.StartY1, typeof(double));
         }
 
-        public override event EventHandler<RenderStepEventArgs> RenderStep;
-
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
             float fractalHeightScale, float width, float height)
         {

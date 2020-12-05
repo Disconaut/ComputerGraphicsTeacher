@@ -28,6 +28,7 @@ namespace Teacher.ViewModels.Fractals
         }
 
         private CanvasRenderTarget _renderTarget;
+        private bool _isRendering;
         private float _offsetX;
         private float _offsetY;
         private float _widthScale;
@@ -42,6 +43,19 @@ namespace Teacher.ViewModels.Fractals
 
                 _renderTarget = value;
                 OnPropertyChanged(nameof(RenderTarget));
+            }
+        }
+
+        public bool IsRendering
+        {
+            get => _isRendering;
+            set
+            {
+                if (_isRendering != value)
+                {
+                    _isRendering = value;
+                    OnPropertyChanged(nameof(IsRendering));
+                }
             }
         }
 
@@ -60,6 +74,7 @@ namespace Teacher.ViewModels.Fractals
                 fractal.RenderComplete += (sender, args) =>
                 {
                     RenderTarget = args.RenderTarget;
+                    IsRendering = false;
                 };
             }
         }
@@ -130,6 +145,7 @@ namespace Teacher.ViewModels.Fractals
         public void RenderCurrentFractal(float width, float height)
         {
             _currentFractal.StartRendering(OffsetX, OffsetY, WidthScale, HeightScale, width, height, Dpi);
+            IsRendering = true;
         }
     }
 }
