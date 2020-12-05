@@ -17,14 +17,15 @@
             <muxc:DropDownButton.Flyout>
                 <Flyout>
                     <muxc:ColorPicker x:Name="ColorPicker"
-                                      Color="{Binding ElementName=ColorPickerBoxName, Path=Color, Mode=TwoWay}"
+                                      Color="{Binding ElementName=ColorPickerBoxName, Path=Color}"
                         IsMoreButtonVisible="False"
                         IsColorSliderVisible="True"
                         IsColorChannelTextInputVisible="True"
                         IsHexInputVisible="True"
                         IsAlphaEnabled="True"
                         IsAlphaSliderVisible="True"
-                        IsAlphaTextInputVisible="True" />
+                        IsAlphaTextInputVisible="True"
+                                      ColorChanged="ColorPicker_OnColorChanged"/>
                 </Flyout>
             </muxc:DropDownButton.Flyout>
             <Rectangle Width="40" Height="25">

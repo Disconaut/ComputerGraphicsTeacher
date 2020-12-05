@@ -189,4 +189,10 @@
   <data name="DrawFractalButtonContent" xml:space="preserve">
     <value>Намалювати фрактал</value>
   </data>
+  <data name="ICount" xml:space="preserve">
+    <value>Кількість ітерацій</value>
+  </data>
+  <data name="LColor" xml:space="preserve">
+    <value>Колір ліній</value>
+  </data>
 </root>

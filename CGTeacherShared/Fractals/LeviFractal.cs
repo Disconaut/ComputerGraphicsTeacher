@@ -22,7 +22,7 @@ namespace CGTeacherShared.Fractals
     {
         public LeviFractal() : base()
         {
-            Parameters.AddValue(ParameterNames.LineColors, typeof(Color), Colors.SeaGreen);
+            Parameters.AddValue(ParameterNames.LineColors, typeof(Color), Colors.White);
             Parameters.AddValue(ParameterNames.StartX1, typeof(double), 0);
             Parameters.AddValue(ParameterNames.StartX2, typeof(double), 0);
             Parameters.AddValue(ParameterNames.StartY1, typeof(double), 0);
@@ -47,7 +47,7 @@ namespace CGTeacherShared.Fractals
         {
             if (i == 0)
             {
-                Canvas1.DrawLine(new Vector2(x1, y1), new Vector2(x2, y2), Colors.SeaGreen);
+                Canvas1.DrawLine(new Vector2(x1, y1), new Vector2(x2, y2), Parameters.GetValue<Color>(ParameterNames.LineColors));
             }
             else
             {
@@ -64,7 +64,7 @@ namespace CGTeacherShared.Fractals
             public const string StartX2 = "SX2";
             public const string StartY1 = "SY1";
             public const string StartY2 = "ІY2";
-            public const string LineColors = "LCoolors";
+            public const string LineColors = "LColor";
         }
     }
 

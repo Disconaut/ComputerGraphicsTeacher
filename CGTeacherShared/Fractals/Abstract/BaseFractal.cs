@@ -11,7 +11,7 @@ namespace CGTeacherShared.Fractals.Abstract
         protected BaseFractal()
         {
             Parameters = new FractalParametersSet();
-            Parameters.AddValue(ParameterNames.IterationCount, typeof(int), 0);
+            Parameters.AddValue(ParameterNames.IterationCount, typeof(int), 15.0);
         }
 
         public abstract string Name { get; }

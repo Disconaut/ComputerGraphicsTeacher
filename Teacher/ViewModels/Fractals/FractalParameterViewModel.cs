@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Controls;
 using Teacher.Controls;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
+using CGTeacherShared.Shared.Vector;
 
 namespace Teacher.ViewModels.Fractals
 {
@@ -67,9 +68,7 @@ namespace Teacher.ViewModels.Fractals
             var bind = new Binding
             {
                 Source = this,
-                Mode = BindingMode.TwoWay,
                 Path = new PropertyPath(nameof(Value)),
-
             };
 
             if (Type == typeof(Color))
@@ -80,12 +79,17 @@ namespace Teacher.ViewModels.Fractals
                     Margin = new Thickness(0, 25, 0, 25)
                 };
 
+                colorPickerBox.ColorChanged += (sender, args) =>
+                {
+                    Value = args.NewColor;
+                };
+
+                bind.Mode = BindingMode.OneWay;
+
                 colorPickerBox.SetBinding(ColorPickerBox.ColorProperty, bind);
                 UiElement = colorPickerBox;
             }
-            else if (Type == typeof(float)
-                     || Type == typeof(double)
-                     || Type == typeof(decimal))
+            else if (Type == typeof(double) || Type == typeof(int))
             {
                 var numberBox = new NumberBox
                 {
@@ -95,27 +99,30 @@ namespace Teacher.ViewModels.Fractals
                     LargeChange = 10,
                     AcceptsExpression = true
                 };
+                if (Type == typeof(int))
+                {
+                    numberBox.NumberFormatter = new DecimalFormatter
+                    {
+                        FractionDigits = 0
+                    };
+                }
+
+                bind.Mode = BindingMode.TwoWay;
 
                 numberBox.SetBinding(NumberBox.ValueProperty, bind);
                 UiElement = numberBox;
             }
-            else if (Type == typeof(int))
+            else if (Type == typeof(ObservableVector2))
             {
-                var numberBox = new NumberBox
+                var vectorBox = new VectorBox
                 {
-                    Header = Name,
-                    SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Compact,
-                    SmallChange = 1,
-                    LargeChange = 10,
-                    AcceptsExpression = true,
-                    NumberFormatter = new DecimalFormatter
-                    {
-                        FractionDigits = 0
-                    }
+                    Header = Name
                 };
 
-                numberBox.SetBinding(NumberBox.ValueProperty, bind);
-                UiElement = numberBox;
+                bind.Mode = BindingMode.TwoWay;
+
+                vectorBox.SetBinding(VectorBox.VectorProperty, bind);
+                UiElement = vectorBox;
             }
         }
     }
