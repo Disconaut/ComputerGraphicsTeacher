@@ -13,14 +13,13 @@ namespace CGTeacherShared.Fractals
 {
     public class HHDragonFractal: BaseFractal
     {
-        public HHDragonFractal(): base()
+        public HHDragonFractal() : base()
         {
-            Parameters.AddValue(ParameterNames.StartX1, typeof(float));
-            Parameters.AddValue(ParameterNames.StartX2, typeof(float));
-            Parameters.AddValue(ParameterNames.StartY1, typeof(float));
-            Parameters.AddValue(ParameterNames.StartY2, typeof(float));
-            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color));
-            Parameters.SetValue(ParameterNames.LinesColor, Colors.White);
+            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color), Colors.White);
+            Parameters.AddValue(ParameterNames.StartX1, typeof(double), 0);
+            Parameters.AddValue(ParameterNames.StartY1, typeof(double), 0);
+            Parameters.AddValue(ParameterNames.StartX2, typeof(double), 0);
+            Parameters.AddValue(ParameterNames.StartY2, typeof(double), 0);
         }
 
         public override string Name => "HHDragonFractal";
@@ -31,11 +30,11 @@ namespace CGTeacherShared.Fractals
         {
             PartialRender(
                 canvasDrawingSession,
-                Parameters.GetValue<float>(ParameterNames.StartX1),
-                Parameters.GetValue<float>(ParameterNames.StartY1),
-                Parameters.GetValue<float>(ParameterNames.StartX2),
-                Parameters.GetValue<float>(ParameterNames.StartY2),
-                Parameters.GetValue<int>(BaseFractal.ParameterNames.IterationCount));
+                (float)Parameters.GetValue<double>(ParameterNames.StartX1),
+                (float)Parameters.GetValue<double>(ParameterNames.StartY1),
+                (float)Parameters.GetValue<double>(ParameterNames.StartX2),
+                (float)Parameters.GetValue<double>(ParameterNames.StartY2),
+                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
 
         private void PartialRender(CanvasDrawingSession canvasDrawingSession, float x1, float y1, float x2, float y2,

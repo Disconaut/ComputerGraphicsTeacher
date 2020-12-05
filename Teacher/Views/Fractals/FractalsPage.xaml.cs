@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
+using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization.NumberFormatting;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -18,6 +20,7 @@ using Windows.UI.Xaml.Navigation;
 using CGTeacherShared.Fractals;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Teacher.Controls;
 using Teacher.ViewModels.Fractals;
@@ -29,90 +32,119 @@ namespace Teacher.Views.Fractals
 {
     public sealed partial class FractalsPage : Page
     {
-        private CanvasAnimatedDrawEventArgs args;
-        LeviFractal fract = new LeviFractal();
-        private CanvasRenderTarget canvas;
         public FractalsPageViewModel ViewModel { get; }
+        private readonly Button _drawFractalButton;
 
         public FractalsPage()
         {
             this.InitializeComponent();
             ViewModel = new FractalsPageViewModel();
             ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+
+            _drawFractalButton = new Button
+            {
+                Content = ResourceLoader.GetForCurrentView().GetString("DrawFractalButtonContent"),
+                Margin = new Thickness(0, 10, 0, 0),
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Style = Resources["AccentButtonStyle"] as Style
+            };
+
+            _drawFractalButton.Click += DrawFractalButton_Click;
         }
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(ViewModel.CurrentFractal))
-                return;
-
-            FillFractalSettings(ViewModel.CurrentFractal.FractalParameters);
+            switch (e.PropertyName)
+            {
+                case nameof(ViewModel.CurrentFractal):
+                    FillFractalSettings(ViewModel.CurrentFractal.FractalParameters);
+                    break;
+                case nameof(ViewModel.RenderTarget):
+                    FractalCanvas.Invalidate();
+                    break;
+            }
         }
 
         private void FillFractalSettings(IEnumerable<FractalParameterViewModel> parameters)
         {
-            foreach (var parameter in parameters)
+            foreach (var fractalSettingsChild in FractalSettings.Children)
             {
-                if (parameter.Type == typeof(Color))
+                if (fractalSettingsChild != FractalTypeComboBox)
                 {
-                    var colorPickerBox = new ColorPickerBox();
-
-                    var bind = new Binding();
-                    bind.Source = parameter;
-                    bind.Mode = BindingMode.TwoWay;
-                    bind.Path = new PropertyPath(nameof(parameter.Value));
-
-                    colorPickerBox.SetBinding(ColorPickerBox.ColorProperty, bind);
-                    FractalSettings.Children.Add(colorPickerBox);
+                    FractalSettings.Children.Remove(fractalSettingsChild);
                 }
             }
-            fract.RenderComplete += Fract_RenderComplete;
+
+            foreach (var parameter in parameters)
+            {
+                FractalSettings.Children.Add(parameter.UiElement);
+            }
+
+            FractalSettings.Children.Add(_drawFractalButton);
         }
 
-        private async void Fract_RenderComplete(object sender, CGTeacherShared.Fractals.EventArgs.RenderCompleteEventArgs e)
+        private void DrawFractalButton_Click(object sender, RoutedEventArgs e)
         {
-            canvas = e.RenderTarget;
-           await FractalCanvas.Dispatcher.TryRunAsync(CoreDispatcherPriority.Normal, () => FractalCanvas.Invalidate());
+            UpdateFractal();
+        }
+
+        private void UpdateFractal()
+        {
+            ViewModel.RenderCurrentFractal((float)FractalCanvas.ActualWidth, (float)FractalCanvas.ActualHeight);
         }
 
         private void Rotate_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.OffsetX = 0;
+            ViewModel.OffsetY = 0;
+            ViewModel.WidthScale = 1;
+            ViewModel.HeightScale = 1;
+            UpdateFractal();
         }
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.WidthScale += 0.1f;
+            ViewModel.HeightScale += 0.1f;
+            UpdateFractal();
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            ViewModel.WidthScale -= 0.1f;
+            ViewModel.HeightScale -= 0.1f;
+            UpdateFractal();
         }
 
         private void MoveLeftBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            ViewModel.OffsetX -= 75;
+            UpdateFractal();
         }
 
         private void MoveUpBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            ViewModel.OffsetY -= 75;
+            UpdateFractal();
         }
 
         private void MoveRightBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            ViewModel.OffsetX += 75;
+            UpdateFractal();
         }
 
         private void MoveDownBtn_OnClick(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.OffsetY += 75;
+            UpdateFractal();
         }
 
-        private void FractalCanvas_OnDraw(CanvasControl sender, CanvasDrawEventArgs canvasDrawEventArgs)
+        private void FractalCanvas_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            if (canvas != null)
+            if (ViewModel.RenderTarget != null)
             {
-                canvasDrawEventArgs.DrawingSession.DrawImage(canvas);
+                args.DrawingSession.DrawImage(ViewModel.RenderTarget);
             }
         }
     }
