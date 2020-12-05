@@ -19,7 +19,7 @@ namespace CGTeacherShared.Fractals
         int k = 120;
         int x1 = 50;
         int y1 = 200;
-        int iter = 8;
+        int iter = 15;
         public override string Name => "MinkovskiFractal";
 
         public MinkovskiFractal() : base()
@@ -72,8 +72,8 @@ namespace CGTeacherShared.Fractals
             }
             else
             {
-                //for (int i = 0; i < iter; i++)
-                // {
+                for (int i = 0; i < iter; i++)
+                 {
                 HorizontalMink(canvasDrawingSession,x, y);
                 VerticalMink(canvasDrawingSession,x + k, y);
                 HorizontalMink(canvasDrawingSession,x + k, y + k);
@@ -82,7 +82,7 @@ namespace CGTeacherShared.Fractals
                 HorizontalMink(canvasDrawingSession,x + 2 * k, y - k);
                 VerticalMink(canvasDrawingSession,x + 3 * k, y - k);
                 HorizontalMink(canvasDrawingSession,x + 3 * k, y);
-                // }
+                 }
             }
         }
 

@@ -50,6 +50,7 @@ namespace Teacher.Views.Fractals
             };
 
             _drawFractalButton.Click += DrawFractalButton_Click;
+
         }
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -95,10 +96,10 @@ namespace Teacher.Views.Fractals
 
         private void Rotate_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetX = 0;
-            ViewModel.OffsetY = 0;
-            ViewModel.WidthScale = 1;
-            ViewModel.HeightScale = 1;
+            ViewModel.OffsetX = 100;
+            ViewModel.OffsetY = 100;
+            ViewModel.WidthScale = 10;
+            ViewModel.HeightScale = 10;
             UpdateFractal();
         }
 
@@ -119,7 +120,7 @@ namespace Teacher.Views.Fractals
         private void MoveLeftBtn_OnClick(object sender, RoutedEventArgs e)
         {
             ViewModel.OffsetX -= 75;
-            UpdateFractal();
+             UpdateFractal();
         }
 
         private void MoveUpBtn_OnClick(object sender, RoutedEventArgs e)

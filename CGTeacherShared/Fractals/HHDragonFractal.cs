@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
+using CGTeacherShared.AfinnisTransformations;
 using CGTeacherShared.Fractals.Abstract;
 using CGTeacherShared.Fractals.EventArgs;
 using Microsoft.Graphics.Canvas;
@@ -28,29 +29,33 @@ namespace CGTeacherShared.Fractals
 
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float f, float f1, float fractalWidthScale, float fractalHeightScale, float width, float height)
         {
+            var point1 = new Vector2((float)Parameters.GetValue<double>(ParameterNames.StartX1),
+                (float)Parameters.GetValue<double>(ParameterNames.StartY1));
+            var point2 = new Vector2((float) Parameters.GetValue<double>(ParameterNames.StartX2),
+                (float) Parameters.GetValue<double>(ParameterNames.StartY2));
+
             PartialRender(
                 canvasDrawingSession,
-                (float)Parameters.GetValue<double>(ParameterNames.StartX1),
-                (float)Parameters.GetValue<double>(ParameterNames.StartY1),
-                (float)Parameters.GetValue<double>(ParameterNames.StartX2),
-                (float)Parameters.GetValue<double>(ParameterNames.StartY2),
+                point1.Move(f, f1),
+                point2.Move(f,f1),
                 (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
-
-        private void PartialRender(CanvasDrawingSession canvasDrawingSession, float x1, float y1, float x2, float y2,
+  
+        private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 point1, Vector2 point2,
             int iteration)
         {
+            var x1 = point1.X;
+            var y1 = point1.Y;
+            var x2 = point2.X;
+            var y2 = point2.Y;
             if (iteration > 0)
             {
                 var xn = (x1 + x2) / 2 + (y2 - y1) / 2;
                 var yn = (y1 + y2) / 2 - (x2 - x1) / 2;
-
-                PartialRender(canvasDrawingSession, x2, y2, xn, yn, iteration - 1);
-                PartialRender(canvasDrawingSession, x1, y1, xn, yn, iteration - 1);
+               
+                PartialRender(canvasDrawingSession, new Vector2(x2, y2), new Vector2(xn, yn), iteration - 1);
+                PartialRender(canvasDrawingSession, new Vector2(x1, y1), new Vector2(xn, yn), iteration - 1);
             }
-
-            var point1 = new Vector2(x1, y1);
-            var point2 = new Vector2(x2, y2);
             canvasDrawingSession.DrawLine(point1, point2, Parameters.GetValue<Color>(ParameterNames.LinesColor));
         }
 

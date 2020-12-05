@@ -38,9 +38,9 @@
 
         <canvas:CanvasControl Name="FractalCanvas" Grid.Row="0" Grid.Column="0" Background="LightGray" Margin="25,25,25,10" Draw="FractalCanvas_OnDraw"/>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
                         Margin="0,0,0,10">
-            <Button Name="RotateBtn" Click="Rotate_Click" Background="Transparent" Margin="0,0,30,0">
+            <Button Name="RotateBtn"  Click="Rotate_Click" Background="Transparent" Margin="0,0,30,0">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7AD;"  Width="32" Height="32"/>
             </Button>
             <Button Name="ZoomInBtn" Click="ZoomIn_Click" Background="Transparent">

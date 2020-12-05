@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
+using CGTeacherShared.AfinnisTransformations;
 using CGTeacherShared.Fractals.Abstract;
 using CGTeacherShared.Fractals.EventArgs;
 using Microsoft.Graphics.Canvas;
@@ -21,9 +22,9 @@ namespace CGTeacherShared.Fractals
         {
             PartialRender(
                 canvasDrawingSession,
-                Parameters.GetValue<Vector2>(ParameterNames.StartX1),
-                Parameters.GetValue<Vector2>(ParameterNames.StartX2),
-                Parameters.GetValue<Vector2>(ParameterNames.StartY1),
+                Parameters.GetValue<Vector2>(ParameterNames.StartX1).Move(x,y),
+                Parameters.GetValue<Vector2>(ParameterNames.StartX2).Move(x, y),
+                Parameters.GetValue<Vector2>(ParameterNames.StartY1).Move(x, y),
                 Parameters.GetValue<int>(BaseFractal.ParameterNames.IterationCount)
                 );
         }

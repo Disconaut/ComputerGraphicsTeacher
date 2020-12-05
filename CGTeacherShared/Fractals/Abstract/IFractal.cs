@@ -19,5 +19,5 @@ namespace CGTeacherShared.Fractals.Abstract
 
         Task BeginRenderAsync(float x, float y, float fractalWidth, float fractalHeight, float width,
             float height, float dpi);
-    }
+    }   
 }
