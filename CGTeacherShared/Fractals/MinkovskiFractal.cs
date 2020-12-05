@@ -14,8 +14,6 @@ namespace CGTeacherShared.Fractals
 {
     public class MinkovskiFractal : BaseFractal
     {
-        int length = 400;
-        int granica = 430;
         int k = 120;
         int x1 = 50;
         int y1 = 200;
@@ -24,9 +22,9 @@ namespace CGTeacherShared.Fractals
 
         public MinkovskiFractal() : base()
         {
+            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color), Colors.White);
             Parameters.AddValue(ParameterNames.StartX1, typeof(double));
             Parameters.AddValue(ParameterNames.StartY1, typeof(double));
-            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color),Colors.SeaGreen);
         }
 
         public override event EventHandler<RenderStepEventArgs> RenderStep;
@@ -78,7 +76,7 @@ namespace CGTeacherShared.Fractals
                 VerticalMink(canvasDrawingSession,x + k, y);
                 HorizontalMink(canvasDrawingSession,x + k, y + k);
                 VerticalMink(canvasDrawingSession,x + 2 * k, y - k);
-                VerticalMink(canvasDrawingSession,x + 2 * k, y1);
+                VerticalMink(canvasDrawingSession,x + 2 * k, y);
                 HorizontalMink(canvasDrawingSession,x + 2 * k, y - k);
                 VerticalMink(canvasDrawingSession,x + 3 * k, y - k);
                 HorizontalMink(canvasDrawingSession,x + 3 * k, y);

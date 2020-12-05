@@ -31,11 +31,11 @@ namespace CGTeacherShared.Fractals
 
         public KohFractal():base()
         {
+            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color), Colors.White);
             Parameters.AddValue(ParameterNames.StartX1, typeof(float),0);
             Parameters.AddValue(ParameterNames.StartX2, typeof(float),0);
             Parameters.AddValue(ParameterNames.StartY1, typeof(float),0);
             Parameters.AddValue(ParameterNames.StartY2, typeof(float),0);
-            Parameters.AddValue(ParameterNames.LinesColor, typeof(Color), Colors.SeaGreen);
         }
         protected void PartialRender(CanvasDrawingSession canvasDrawingSession,Vector2 p1, Vector2 p2, Vector2 p3, int iter)
         {

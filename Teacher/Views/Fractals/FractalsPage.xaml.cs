@@ -68,13 +68,9 @@ namespace Teacher.Views.Fractals
 
         private void FillFractalSettings(IEnumerable<FractalParameterViewModel> parameters)
         {
-            foreach (var fractalSettingsChild in FractalSettings.Children)
-            {
-                if (fractalSettingsChild != FractalTypeComboBox)
-                {
-                    FractalSettings.Children.Remove(fractalSettingsChild);
-                }
-            }
+            FractalSettings.Children.Clear();
+
+            FractalSettings.Children.Add(FractalTypeComboBox);
 
             foreach (var parameter in parameters)
             {
