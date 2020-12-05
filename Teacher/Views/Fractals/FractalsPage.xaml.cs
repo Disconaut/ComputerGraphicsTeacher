@@ -105,6 +105,7 @@ namespace Teacher.Views.Fractals
 
         private void MoveDownBtn_OnClick(object sender, RoutedEventArgs e)
         {
+
         }
 
         private void FractalCanvas_OnDraw(CanvasControl sender, CanvasDrawEventArgs canvasDrawEventArgs)
