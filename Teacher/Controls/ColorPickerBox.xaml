@@ -17,7 +17,6 @@
             <muxc:DropDownButton.Flyout>
                 <Flyout>
                     <muxc:ColorPicker x:Name="ColorPicker"
-                                      Color="{Binding ElementName=ColorPickerBoxName, Path=Color}"
                         IsMoreButtonVisible="False"
                         IsColorSliderVisible="True"
                         IsColorChannelTextInputVisible="True"

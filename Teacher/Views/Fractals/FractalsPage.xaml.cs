@@ -8,6 +8,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Globalization.NumberFormatting;
+using Windows.Storage.Pickers;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -145,6 +146,19 @@ namespace Teacher.Views.Fractals
             {
                 args.DrawingSession.DrawImage(ViewModel.RenderTarget);
             }
+        }
+
+        private void FractalCanvas_OnPointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+            var wheelDelta = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
+            ViewModel.WidthScale += (0.1f * wheelDelta);
+            ViewModel.HeightScale += (0.1f * wheelDelta);
+            UpdateFractal();
+        }
+
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.SaveFractalToImage();
         }
     }
 }

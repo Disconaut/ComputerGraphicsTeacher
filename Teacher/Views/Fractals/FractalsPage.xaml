@@ -9,8 +9,13 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:controls="using:Teacher.Controls"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" TrueValue="Visible" FalseValue="Collapsed"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -36,7 +41,49 @@
                   Margin="0 0 0 10"/>
         </StackPanel>
 
-        <canvas:CanvasControl Name="FractalCanvas" Grid.Row="0" Grid.Column="0" Background="LightGray" Margin="25,25,25,10" Draw="FractalCanvas_OnDraw"/>
+        <Border
+            Grid.Row="0" Grid.Column="0" 
+            Margin="25 25 25 10"
+            BorderThickness="1"
+            BorderBrush="{ThemeResource TextBoxBorderThemeBrush}">
+            <RelativePanel
+                                              x:Name="CanvasPanel">
+
+                <canvas:CanvasControl 
+                                                      Name="FractalCanvas" 
+                                                      PointerWheelChanged="FractalCanvas_OnPointerWheelChanged"
+                                                      Draw="FractalCanvas_OnDraw"
+                                                      HorizontalAlignment="Stretch"
+                                                      VerticalAlignment="Stretch"
+                                                      RelativePanel.AlignBottomWithPanel="True"
+                                                      RelativePanel.AlignTopWithPanel="True"
+                                                      RelativePanel.AlignLeftWithPanel="True"
+                                                      RelativePanel.AlignRightWithPanel="True"/>
+
+                <Rectangle 
+                x:Name="Background"
+                Visibility="{Binding ElementName=FractalsPageName, Path=ViewModel.IsRendering, Converter={StaticResource BoolToVisibility}}"
+                RelativePanel.Above="FractalCanvas"
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignTopWithPanel="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity="0.3"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <muxc:ProgressRing
+            IsActive="{Binding ElementName=FractalsPageName, Path=ViewModel.IsRendering}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Width="130"
+            Height="130"
+            RelativePanel.AlignHorizontalCenterWith="FractalCanvas"
+            RelativePanel.AlignVerticalCenterWith="FractalCanvas"
+            RelativePanel.Above="Background"/>
+            </RelativePanel>
+        </Border>
 
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
                         Margin="0,0,0,10">
@@ -68,7 +115,7 @@
         </StackPanel>
 
         <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" 
-                Margin="0,0,25,10" Padding="15 0">
+                Margin="0,0,25,10" Padding="15 0" Click="ButtonBase_OnClick">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" Width="32" Height="32"/>
                 <TextBlock x:Uid="SaveAsButtonLabel" VerticalAlignment="Center"/>

@@ -31,7 +31,16 @@ namespace Teacher.Controls
         }
 
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
-            "Color", typeof(Color), typeof(ColorPickerBox), new PropertyMetadata(default(Color)));
+            "Color", typeof(Color), typeof(ColorPickerBox), new PropertyMetadata(default(Color), ColorPropertyChangedCallback));
+
+        private static void ColorPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var colorPickerBox = d as ColorPickerBox;
+            if (colorPickerBox != null)
+            {
+                colorPickerBox.ColorPicker.Color = (Color)e.NewValue;
+            }
+        }
 
         public Color Color
         {

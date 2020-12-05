@@ -195,4 +195,16 @@
   <data name="LColor" xml:space="preserve">
     <value>Колір ліній</value>
   </data>
+  <data name="BColor" xml:space="preserve">
+    <value>Колір фону</value>
+  </data>
+  <data name="EP" xml:space="preserve">
+    <value>Кінець відрізку</value>
+  </data>
+  <data name="SP" xml:space="preserve">
+    <value>Початок відрізку</value>
+  </data>
+  <data name="SuggestedFractalFileName" xml:space="preserve">
+    <value>Новий Фрактал</value>
+  </data>
 </root>
