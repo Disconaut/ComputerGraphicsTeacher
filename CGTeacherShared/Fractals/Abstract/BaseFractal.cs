@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI;
 using CGTeacherShared.Fractals.EventArgs;
@@ -20,7 +21,7 @@ namespace CGTeacherShared.Fractals.Abstract
 
         public event EventHandler<RenderCompleteEventArgs> RenderComplete;
 
-        public Task BeginRenderAsync(float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float dpi, float angle)
+        public Task BeginRenderAsync(float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float dpi, float angle, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {
@@ -29,19 +30,19 @@ namespace CGTeacherShared.Fractals.Abstract
                 using (var ds = offscreen.CreateDrawingSession())
                 {
                     ds.Clear(Colors.Black);
-                    Render(ds, x, y, fractalWidthScale, fractalHeightScale, width, height, angle);
+                    Render(ds, x, y, fractalWidthScale, fractalHeightScale, width, height, angle, cancellationToken);
                 }
 
                 RenderComplete?.Invoke(this, new RenderCompleteEventArgs
                 {
                     RenderTarget = offscreen
                 });
-            });
+            }, cancellationToken);
         }
 
-
-
-        protected abstract void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float angle);
+        protected abstract void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
+            float fractalWidthScale, float fractalHeightScale, float width, float height, float angle,
+            CancellationToken cancellationToken);
 
         public static class ParameterNames
         {

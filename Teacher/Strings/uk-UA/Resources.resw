@@ -207,4 +207,7 @@
   <data name="SuggestedFractalFileName" xml:space="preserve">
     <value>Новий Фрактал</value>
   </data>
+  <data name="StopDrawButtonContent" xml:space="preserve">
+    <value>Припинити рендеринг</value>
+  </data>
 </root>

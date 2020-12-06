@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
@@ -28,6 +29,7 @@ using Teacher.Controls;
 using Teacher.ViewModels.Fractals;
 using CGTeacherShared.Fractals;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Microsoft.Toolkit.Uwp.UI.Converters;
 
 
 namespace Teacher.Views.Fractals
@@ -36,6 +38,7 @@ namespace Teacher.Views.Fractals
     {
         public FractalsPageViewModel ViewModel { get; }
         private readonly Button _drawFractalButton;
+        private readonly Button _stopDrawButton;
 
         public FractalsPage()
         {
@@ -53,6 +56,28 @@ namespace Teacher.Views.Fractals
 
             _drawFractalButton.Click += DrawFractalButton_Click;
 
+            _stopDrawButton = new Button
+            {
+                Content = ResourceLoader.GetForCurrentView().GetString("StopDrawButtonContent"),
+                Margin = new Thickness(0, 5, 0, 0),
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+
+            _stopDrawButton.Click += StopDrawButtonOnClick;
+
+            var bind = new Binding
+            {
+                Source = ViewModel,
+                Path = new PropertyPath(nameof(ViewModel.IsRendering)),
+                Converter = Resources["BoolToVisibility"] as BoolToVisibilityConverter
+            };
+
+            _stopDrawButton.SetBinding(VisibilityProperty, bind);
+        }
+
+        private void StopDrawButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.CancelRendering();
         }
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -80,6 +105,7 @@ namespace Teacher.Views.Fractals
             }
 
             FractalSettings.Children.Add(_drawFractalButton);
+            FractalSettings.Children.Add(_stopDrawButton);
         }
 
         private void DrawFractalButton_Click(object sender, RoutedEventArgs e)
@@ -105,15 +131,15 @@ namespace Teacher.Views.Fractals
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.WidthScale += 0.5f;
-            ViewModel.HeightScale += 0.5f;
+            ViewModel.WidthScale += ViewModel.WidthScale * 0.5f;
+            ViewModel.HeightScale += ViewModel.HeightScale * 0.5f;
             UpdateFractal();
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.WidthScale -= 0.5f;
-            ViewModel.HeightScale -= 0.5f;
+            ViewModel.WidthScale -= ViewModel.WidthScale * 0.5f;
+            ViewModel.HeightScale -= ViewModel.HeightScale * 0.5f;
             UpdateFractal();
         }
 
@@ -152,8 +178,8 @@ namespace Teacher.Views.Fractals
         private void FractalCanvas_OnPointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             var wheelDelta = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
-            ViewModel.WidthScale += (0.01f * wheelDelta);
-            ViewModel.HeightScale += (0.01f * wheelDelta);
+            ViewModel.WidthScale += (ViewModel.WidthScale * (float)Math.Pow(0.05, 2) * wheelDelta);
+            ViewModel.HeightScale += (ViewModel.HeightScale * (float)Math.Pow(0.05, 2) * wheelDelta);
             UpdateFractal();
         }
 

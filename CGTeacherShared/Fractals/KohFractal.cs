@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI;
 using CGTeacherShared.AfinnisTransformations;
@@ -23,9 +24,12 @@ namespace CGTeacherShared.Fractals
             Parameters.AddValue(ParameterNames.StartPoint, typeof(ObservableVector2), new ObservableVector2());
             Parameters.AddValue(ParameterNames.EndPoint, typeof(ObservableVector2), new ObservableVector2());
         }
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float angle)
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
+            float fractalWidthScale,
+            float fractalHeightScale, float width, float height, float angle, CancellationToken cancellationToken)
         {
+            canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
+
             var startPoint = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint);
             var endPoint = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint);
 
@@ -38,12 +42,14 @@ namespace CGTeacherShared.Fractals
                 canvasDrawingSession,
                 startPoint.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
                 endPoint.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
-                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount)
-                );
+                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount),
+                cancellationToken);
         }
 
-        protected void PartialRender(CanvasDrawingSession canvasDrawingSession,Vector2 p1, Vector2 p2, int iter)
+        protected void PartialRender(CanvasDrawingSession canvasDrawingSession,Vector2 p1, Vector2 p2, int iter, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (iter > 0)
             {
                 var L = Math.Sqrt(Math.Pow((p1.X - p2.X), 2) + Math.Pow((p1.Y - p2.Y), 2));
@@ -55,13 +61,8 @@ namespace CGTeacherShared.Fractals
 
                 var pm=new Vector2(x,y);
                 
-
-               /** canvasDrawingSession.DrawLine( p1, pm, Parameters.GetValue<Color>(ParameterNames.LinesColor));
-                canvasDrawingSession.DrawLine( pm, p2, Parameters.GetValue<Color>(ParameterNames.LinesColor));
-
-                */
-                PartialRender(canvasDrawingSession, pm, p1, iter - 1);
-                PartialRender(canvasDrawingSession, p2, pm, iter - 1);
+                PartialRender(canvasDrawingSession, pm, p1, iter - 1, cancellationToken);
+                PartialRender(canvasDrawingSession, p2, pm, iter - 1, cancellationToken);
             }
             else
             {

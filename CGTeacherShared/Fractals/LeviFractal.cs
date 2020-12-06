@@ -32,8 +32,9 @@ namespace CGTeacherShared.Fractals
 
         public override string Name => "LeviFractal";
 
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float angle)
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
+            float fractalWidthScale,
+            float fractalHeightScale, float width, float height, float angle, CancellationToken cancellationToken)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
 
@@ -61,11 +62,14 @@ namespace CGTeacherShared.Fractals
                 canvasDrawingSession,
                 startPoint,
                 endPoint,
-                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
+                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount),
+                cancellationToken);
         }
 
-        private void PartialRender(CanvasDrawingSession Canvas1, Vector2 startPoint, Vector2 endPoint, int iteration)
+        private void PartialRender(CanvasDrawingSession Canvas1, Vector2 startPoint, Vector2 endPoint, int iteration, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (iteration == 0)
             {
                 Canvas1.DrawLine(startPoint, endPoint, Parameters.GetValue<Color>(ParameterNames.LineColors));
@@ -80,11 +84,13 @@ namespace CGTeacherShared.Fractals
                     Canvas1,
                     startPoint,
                     middlePoint,
-                    iteration - 1);
+                    iteration - 1,
+                    cancellationToken);
                 PartialRender(Canvas1,
                     middlePoint,
                     endPoint,
-                    iteration - 1);
+                    iteration - 1,
+                    cancellationToken);
             }
         }
 

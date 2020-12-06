@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
@@ -20,7 +21,9 @@ namespace Teacher.ViewModels.Fractals
         public ObservableCollection<FractalViewModel> Fractals { get; }
 
         private FractalViewModel _currentFractal;
-        private ResourceLoader _resourceLoader;
+        private readonly ResourceLoader _resourceLoader;
+        private CancellationTokenSource _cancellationTokenSource;
+
         public FractalViewModel CurrentFractal
         {
             get => _currentFractal;
@@ -69,6 +72,9 @@ namespace Teacher.ViewModels.Fractals
         public FractalsPageViewModel()
         {
             _resourceLoader = ResourceLoader.GetForCurrentView();
+            _cancellationTokenSource = new CancellationTokenSource();
+            _widthScale = 1;
+            _heightScale = 1;
 
             Fractals = new ObservableCollection<FractalViewModel>
             {
@@ -119,7 +125,7 @@ namespace Teacher.ViewModels.Fractals
             {
                 if (Math.Abs(_widthScale - value) < float.Epsilon) return;
 
-                _widthScale = value <= 0 ? 0 : value;
+                _widthScale = value <= 0.01f ? 0.01f : value;
                 OnPropertyChanged(nameof(WidthScale));
             }
         }
@@ -131,7 +137,7 @@ namespace Teacher.ViewModels.Fractals
             {
                 if (Math.Abs(_heightScale - value) < float.Epsilon) return;
 
-                _heightScale = value <= 0 ? 0 : value;
+                _heightScale = value <= 0.01f ? 0.01f : value;
                 OnPropertyChanged(nameof(HeightScale));
             }
         }
@@ -165,7 +171,9 @@ namespace Teacher.ViewModels.Fractals
 
         public void RenderCurrentFractal(float width, float height)
         {
-            _currentFractal.StartRendering(OffsetX, OffsetY, WidthScale, HeightScale, width, height, Dpi, RotateAngle);
+            CancelRendering();
+            _cancellationTokenSource = new CancellationTokenSource();
+            _currentFractal.StartRendering(OffsetX, OffsetY, WidthScale, HeightScale, width, height, Dpi, RotateAngle, _cancellationTokenSource.Token);
             IsRendering = true;
         }
 
@@ -186,6 +194,16 @@ namespace Teacher.ViewModels.Fractals
             {
                 using var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
                 await _renderTarget.SaveAsync(stream, CanvasBitmapFileFormat.Png, 1);
+            }
+        }
+
+        public void CancelRendering()
+        {
+            if (IsRendering)
+            {
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource.Dispose();
+                IsRendering = false;
             }
         }
     }

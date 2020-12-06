@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using CGTeacherShared.Fractals.Abstract;
@@ -40,9 +41,9 @@ namespace Teacher.ViewModels.Fractals
 
         public IList<FractalParameterViewModel> FractalParameters { get; }
 
-        public void StartRendering(float x, float y, float widthScale, float heightScale, float width, float height, float dpi, float angle)
+        public void StartRendering(float x, float y, float widthScale, float heightScale, float width, float height, float dpi, float angle, CancellationToken cancellationToken)
         {
-            _fractal.BeginRenderAsync(x, y, widthScale, heightScale, width, height, dpi,  angle);
+            _fractal.BeginRenderAsync(x, y, widthScale, heightScale, width, height, dpi,  angle, cancellationToken);
         }
     }
 }

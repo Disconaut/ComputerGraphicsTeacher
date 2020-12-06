@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CGTeacherShared.Fractals.EventArgs;
 
@@ -16,6 +17,6 @@ namespace CGTeacherShared.Fractals.Abstract
         event EventHandler<RenderCompleteEventArgs> RenderComplete;
 
         Task BeginRenderAsync(float x, float y, float fractalWidth, float fractalHeight, float width,
-            float height, float dpi, float angle);
+            float height, float dpi, float angle, CancellationToken cancellationToken);
     }   
 }

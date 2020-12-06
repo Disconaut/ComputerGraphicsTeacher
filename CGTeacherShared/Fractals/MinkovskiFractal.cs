@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using Windows.UI;
@@ -26,8 +27,9 @@ namespace CGTeacherShared.Fractals
             Parameters.AddValue(ParameterNames.EndPoint, typeof(ObservableVector2), new ObservableVector2());
         }
 
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float angle)
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
+            float fractalWidthScale,
+            float fractalHeightScale, float width, float height, float angle, CancellationToken cancellationToken)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
 
@@ -55,12 +57,15 @@ namespace CGTeacherShared.Fractals
                 canvasDrawingSession,
                 startPoint,
                 endPoint,
-                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
+                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount),
+                cancellationToken);
         }
 
         private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 startPoint, Vector2 endPoint,
-            int iteration)
+            int iteration, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (iteration <= 0)
             {
                 canvasDrawingSession.DrawLine(startPoint, endPoint, Parameters.GetValue<Color>(ParameterNames.LinesColor));
@@ -69,66 +74,94 @@ namespace CGTeacherShared.Fractals
 
             var vector = endPoint - startPoint;
             var vectorPart = vector / 4;
+            
 
-            PartialRender(
-                canvasDrawingSession,
-                startPoint, 
-                startPoint.Move(vectorPart), 
-                iteration - 1);
+            for (int i = 0; i < 4; ++i)
+            {
+                var firstMiddlePoint = startPoint.Move(vectorPart)
+                    .Rotate(90 * (float) Math.Sin(i * Math.PI / 2), startPoint);
+                var secondMiddlePoint = endPoint.Move(-vectorPart)
+                    .Rotate(90 * (float) Math.Sin(i * Math.PI / 2), endPoint);
+                PartialRender(
+                    canvasDrawingSession,
+                    startPoint,
+                    firstMiddlePoint,
+                    iteration - 1,
+                    cancellationToken);
+                PartialRender(
+                    canvasDrawingSession,
+                    secondMiddlePoint,
+                    endPoint,
+                    iteration - 1,
+                    cancellationToken);
 
-            startPoint = startPoint.Move(vectorPart);
+                startPoint = firstMiddlePoint;
+                endPoint = secondMiddlePoint;
+            }
 
-            PartialRender(
-                canvasDrawingSession, 
-                startPoint,
-                startPoint.Move(vectorPart).Rotate(-90, startPoint),
-                iteration - 1);
+           
 
-            startPoint = startPoint.Move(vectorPart).Rotate(-90, startPoint);
+            //startPoint = firstMiddlePoint;
+            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(-90, startPoint);
 
-            PartialRender(
-                canvasDrawingSession,
-                startPoint,
-                startPoint.Move(vectorPart),
-                iteration - 1);
+            //PartialRender(
+            //    canvasDrawingSession, 
+            //    startPoint,
+            //    firstMiddlePoint,
+            //    iteration - 1,
+            //    cancellationToken);
 
-            startPoint = startPoint.Move(vectorPart);
+            //startPoint = firstMiddlePoint;
+            //firstMiddlePoint = startPoint.Move(vectorPart);
 
-            PartialRender(
-                canvasDrawingSession,
-                startPoint,
-                startPoint.Move(vectorPart).Rotate(90, startPoint),
-                iteration - 1);
+            //PartialRender(
+            //    canvasDrawingSession,
+            //    startPoint,
+            //    firstMiddlePoint,
+            //    iteration - 1,
+            //    cancellationToken);
 
-            startPoint = startPoint.Move(vectorPart).Rotate(90, startPoint);
+            //startPoint = firstMiddlePoint;
+            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(90, startPoint);
 
-            PartialRender(
-                canvasDrawingSession,
-                startPoint,
-                startPoint.Move(vectorPart).Rotate(90, startPoint),
-                iteration - 1);
+            //PartialRender(
+            //    canvasDrawingSession,
+            //    startPoint,
+            //    firstMiddlePoint,
+            //    iteration - 1,
+            //    cancellationToken);
 
-            startPoint = startPoint.Move(vectorPart).Rotate(90, startPoint);
+            //startPoint = firstMiddlePoint;
+            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(90, startPoint);
 
-            PartialRender(
-                canvasDrawingSession,
-                startPoint,
-                startPoint.Move(vectorPart),
-                iteration - 1);
+            //PartialRender(
+            //    canvasDrawingSession,
+            //    startPoint,
+            //    firstMiddlePoint,
+            //    iteration - 1,
+            //    cancellationToken);
 
-            startPoint = startPoint.Move(vectorPart);
+            //startPoint = firstMiddlePoint;
+            //firstMiddlePoint = startPoint.Move(vectorPart);
 
-            PartialRender(
-                canvasDrawingSession,
-                startPoint,
-                startPoint.Move(vectorPart).Rotate(-90, startPoint),
-                iteration - 1);
+            //PartialRender(
+            //    canvasDrawingSession,
+            //    startPoint,
+            //    firstMiddlePoint,
+            //    iteration - 1,
+            //    cancellationToken);
 
-            PartialRender(
-                canvasDrawingSession, 
-                endPoint.Move(-vectorPart),
-                endPoint, 
-                iteration - 1);
+            //startPoint = firstMiddlePoint;
+            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(-90, startPoint);
+
+            //PartialRender(
+            //    canvasDrawingSession,
+            //    startPoint,
+            //    firstMiddlePoint,
+            //    iteration - 1,
+            //    cancellationToken);
+
+            
         }
 
         public new static class ParameterNames

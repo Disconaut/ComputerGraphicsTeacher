@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI;
 using CGTeacherShared.AfinnisTransformations;
@@ -27,7 +28,8 @@ namespace CGTeacherShared.Fractals
 
        
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
-            float fractalWidthScale, float fractalHeightScale, float width, float height, float angle)
+            float fractalWidthScale, float fractalHeightScale, float width, float height, float angle,
+            CancellationToken cancellationToken)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
 
@@ -43,19 +45,22 @@ namespace CGTeacherShared.Fractals
                 canvasDrawingSession,
                 point1.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
                 point2.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
-                (int) Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
+                (int) Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount),
+                cancellationToken);
         }
 
-        private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 startPoint, Vector2 endPoint, int iteration)
+        private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 startPoint, Vector2 endPoint, int iteration, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (iteration > 0)
             {
                 var middlePoint = new Vector2(
                     (startPoint.X + endPoint.X) / 2 + (endPoint.Y - startPoint.Y) / 2,
                     (startPoint.Y + endPoint.Y) / 2 - (endPoint.X - startPoint.X) / 2);
 
-                PartialRender(canvasDrawingSession, endPoint, middlePoint, iteration - 1);
-                PartialRender(canvasDrawingSession, startPoint, middlePoint, iteration - 1);
+                PartialRender(canvasDrawingSession, endPoint, middlePoint, iteration - 1, cancellationToken);
+                PartialRender(canvasDrawingSession, startPoint, middlePoint, iteration - 1, cancellationToken);
             }
             canvasDrawingSession.DrawLine(startPoint, endPoint, Parameters.GetValue<Color>(ParameterNames.LinesColor));
         }
