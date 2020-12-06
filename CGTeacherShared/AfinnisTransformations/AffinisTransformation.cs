@@ -12,9 +12,10 @@ namespace CGTeacherShared.AfinnisTransformations
       
         public static Vector2 Rotate(this Vector2 point, float angle, Vector2 center)
         {
+            var rads = Math.PI * angle / 180;
             var vector = point - center;
-            point.X = vector.X * (float) Math.Cos(angle) - vector.Y * (float) Math.Sin(angle) + center.X;
-            point.Y = vector.X * (float) Math.Sin(angle) + vector.Y * (float) Math.Cos(angle) + center.Y;
+            point.X = vector.X * (float) Math.Cos(rads) - vector.Y * (float) Math.Sin(rads) + center.X;
+            point.Y = vector.X * (float) Math.Sin(rads) + vector.Y * (float) Math.Cos(rads) + center.Y;
             return point;
         }
 
