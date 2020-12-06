@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 using CGTeacherShared.Fractals;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
@@ -153,7 +154,7 @@ namespace Teacher.Views.Fractals
             UpdateFractal();
         }
 
-        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void SaveAs_OnClick(object sender, RoutedEventArgs e)
         {
             await ViewModel.SaveFractalToImage();
         }
