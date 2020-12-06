@@ -119,7 +119,7 @@ namespace Teacher.ViewModels.Fractals
             {
                 if (Math.Abs(_widthScale - value) < float.Epsilon) return;
 
-                _widthScale = value;
+                _widthScale = value <= 0 ? 0 : value;
                 OnPropertyChanged(nameof(WidthScale));
             }
         }
@@ -131,7 +131,7 @@ namespace Teacher.ViewModels.Fractals
             {
                 if (Math.Abs(_heightScale - value) < float.Epsilon) return;
 
-                _heightScale = value;
+                _heightScale = value <= 0 ? 0 : value;
                 OnPropertyChanged(nameof(HeightScale));
             }
         }
@@ -147,7 +147,6 @@ namespace Teacher.ViewModels.Fractals
                 OnPropertyChanged(nameof(RotateAngle));
             }
         }
-
 
         public float Dpi => 96;
 

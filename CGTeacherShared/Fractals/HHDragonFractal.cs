@@ -27,7 +27,7 @@ namespace CGTeacherShared.Fractals
 
        
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
-            float fractalWidthScale, float fractalHeightScale, float width, float height, float engel)
+            float fractalWidthScale, float fractalHeightScale, float width, float height, float angle)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
 
@@ -37,10 +37,12 @@ namespace CGTeacherShared.Fractals
             var centerX = width / 2;
             var centerY = height / 2;
 
+            var lineCenter = (point1 + point2) / 2;
+
             PartialRender(
                 canvasDrawingSession,
-                point1.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
-                point2.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
+                point1.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
+                point2.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
                 (int) Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
 

@@ -24,18 +24,20 @@ namespace CGTeacherShared.Fractals
             Parameters.AddValue(ParameterNames.EndPoint, typeof(ObservableVector2), new ObservableVector2());
         }
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float engel)
+            float fractalHeightScale, float width, float height, float angle)
         {
-            var point1 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint);
-            var point2 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint);
+            var startPoint = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint);
+            var endPoint = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint);
 
             var centerX = width / 2;
             var centerY = height / 2;
+          
+            var lineCenter = (startPoint + endPoint) / 2;
 
             PartialRender(
                 canvasDrawingSession,
-                point1.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
-                point2.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
+                startPoint.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
+                endPoint.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
                 (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount)
                 );
         }

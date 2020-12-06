@@ -5,11 +5,16 @@ namespace CGTeacherShared.AfinnisTransformations
 {
     public static class AffinisTransformation
     {
-      
-        public static Vector2 Rotate(this Vector2 point, float engel)
+        public static Vector2 Rotate(this Vector2 point, float angle, float centerX, float centerY)
         {
-            point.X = point.X * (float) Math.Cos(engel) - point.Y * (float) Math.Sin(engel);
-            point.Y = point.X * (float) Math.Sin(engel) + point.Y * (float) Math.Cos(engel);
+            return point.Rotate(angle, new Vector2(centerX, centerY));
+        }
+      
+        public static Vector2 Rotate(this Vector2 point, float angle, Vector2 center)
+        {
+            var vector = point - center;
+            point.X = vector.X * (float) Math.Cos(angle) - vector.Y * (float) Math.Sin(angle) + center.X;
+            point.Y = vector.X * (float) Math.Sin(angle) + vector.Y * (float) Math.Cos(angle) + center.Y;
             return point;
         }
 

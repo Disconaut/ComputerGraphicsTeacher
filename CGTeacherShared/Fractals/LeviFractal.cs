@@ -12,8 +12,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
+using CGTeacherShared.AfinnisTransformations;
 using CGTeacherShared.Fractals.Abstract;
 using CGTeacherShared.Fractals.EventArgs;
+using CGTeacherShared.Shared.Vector;
 
 namespace CGTeacherShared.Fractals
 {
@@ -22,52 +24,76 @@ namespace CGTeacherShared.Fractals
     {
         public LeviFractal() : base()
         {
-            Parameters.AddValue(ParameterNames.LineColors, typeof(Color), Colors.White);
-            Parameters.AddValue(ParameterNames.StartX1, typeof(double), 0);
-            Parameters.AddValue(ParameterNames.StartX2, typeof(double), 0);
-            Parameters.AddValue(ParameterNames.StartY1, typeof(double), 0);
-            Parameters.AddValue(ParameterNames.StartY2, typeof(double), 0);
+            Parameters.AddValue(ParameterNames.LineColors, typeof(Color), Colors.Black);
+            Parameters.AddValue(ParameterNames.BackgroundColor, typeof(Color), Colors.White);
+            Parameters.AddValue(ParameterNames.StartPoint, typeof(ObservableVector2), new ObservableVector2());
+            Parameters.AddValue(ParameterNames.EndPoint, typeof(ObservableVector2), new ObservableVector2());
         }
 
         public override string Name => "LeviFractal";
 
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float engel)
+            float fractalHeightScale, float width, float height, float angle)
         {
-            PartialRender(canvasDrawingSession,
-                (float)Parameters.GetValue<double>(ParameterNames.StartX1),
-                (float)Parameters.GetValue<double>(ParameterNames.StartX2),
-                (float)Parameters.GetValue<double>(ParameterNames.StartY1),
-                (float)Parameters.GetValue<double>(ParameterNames.StartY2),
+            canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
+
+            var centerX = width / 2;
+            var centerY = height / 2;
+
+            var startPoint = ((Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint));
+            var endPoint = ((Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint));
+
+            var lineCenter = (startPoint + endPoint) / 2;
+
+            startPoint = startPoint
+                .Rotate(angle, lineCenter)
+                .Move(centerX, centerY)
+                .Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY)
+                .Move(x, y);
+
+            endPoint = endPoint
+                .Rotate(angle, lineCenter)
+                .Move(centerX, centerY)
+                .Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY)
+                .Move(x, y);
+
+            PartialRender(
+                canvasDrawingSession,
+                startPoint,
+                endPoint,
                 (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
 
-        private void PartialRender(CanvasDrawingSession Canvas1, float x1, float x2, float y1, float y2, int i)
+        private void PartialRender(CanvasDrawingSession Canvas1, Vector2 startPoint, Vector2 endPoint, int iteration)
         {
-            if (i == 0)
+            if (iteration == 0)
             {
-                Canvas1.DrawLine(new Vector2(x1, y1), new Vector2(x2, y2), Parameters.GetValue<Color>(ParameterNames.LineColors));
+                Canvas1.DrawLine(startPoint, endPoint, Parameters.GetValue<Color>(ParameterNames.LineColors));
             }
             else
             {
-                float x3 = (x1 + x2) / 2 + (y2 - y1) / 2;
-                float y3 = (y1 + y2) / 2 - (x2 - x1) / 2;
-                PartialRender(Canvas1, x1, x3, y1, y3, i - 1);
-                PartialRender(Canvas1, x3, x2, y3, y2, i - 1);
+                var middlePoint = new Vector2(
+                    (startPoint.X + endPoint.X) / 2 + (endPoint.Y - startPoint.Y) / 2,
+                    (startPoint.Y + endPoint.Y) / 2 - (endPoint.X - startPoint.X) / 2);
+
+                PartialRender(
+                    Canvas1,
+                    startPoint,
+                    middlePoint,
+                    iteration - 1);
+                PartialRender(Canvas1,
+                    middlePoint,
+                    endPoint,
+                    iteration - 1);
             }
         }
 
         public new static class ParameterNames
         {
-            public const string StartX1 = "SX1";
-
-            public const string StartX2 = "SX2";
-
-            public const string StartY1 = "SY1";
-
-            public const string StartY2 = "ІY2";
-
+            public const string StartPoint = "SP";
+            public const string EndPoint = "EP";
             public const string LineColors = "LColor";
+            public const string BackgroundColor = "BColor";
         }
     }
 
