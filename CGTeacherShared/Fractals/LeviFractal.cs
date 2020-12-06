@@ -12,6 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
+using CGTeacherShared.AfinnisTransformations;
 using CGTeacherShared.Fractals.Abstract;
 using CGTeacherShared.Fractals.EventArgs;
 using CGTeacherShared.Shared.Vector;
@@ -32,13 +33,34 @@ namespace CGTeacherShared.Fractals
         public override string Name => "LeviFractal";
 
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float engel)
+            float fractalHeightScale, float width, float height, float angle)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
+
+            var centerX = width / 2;
+            var centerY = height / 2;
+
+            var startPoint = ((Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint));
+            var endPoint = ((Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint));
+
+            var lineCenter = (startPoint + endPoint) / 2;
+
+            startPoint = startPoint
+                .Rotate(angle, lineCenter)
+                .Move(centerX, centerY)
+                .Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY)
+                .Move(x, y);
+
+            endPoint = endPoint
+                .Rotate(angle, lineCenter)
+                .Move(centerX, centerY)
+                .Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY)
+                .Move(x, y);
+
             PartialRender(
                 canvasDrawingSession,
-                (Vector2)Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint),
-                (Vector2)Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint),
+                startPoint,
+                endPoint,
                 (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
 

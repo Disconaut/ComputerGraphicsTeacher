@@ -84,14 +84,17 @@
             </RelativePanel>
         </Border>
 
-            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
                         Margin="0,0,0,10">
-            <Button Name="RotateMinusBtn"  Click="RotateMinus_Click" Background="Transparent" Margin="0,0,30,0">
+            <Button Name="RestoreBtn" Click="RestoreBtn_OnClick" Background="Transparent" Margin="0,0,30,0">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE777;" Width="32" Height="32"/>
+            </Button>
+            <Button Name="RotateMinusBtn"  Click="RotateMinus_Click" Background="Transparent">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE80C;"  Width="32" Height="32"/>
             </Button>
-                <Button Name="RotatePlusBtn"  Click="RotatePlus_Click" Background="Transparent" Margin="0,0,30,0">
+            <Button Name="RotatePlusBtn"  Click="RotatePlus_Click" Background="Transparent" Margin="0,0,30,0">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE80D;"  Width="32" Height="32"/>
-                </Button>
+            </Button>
             <Button Name="ZoomInBtn" Click="ZoomIn_Click" Background="Transparent">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A3;" Width="32" Height="32"/>
             </Button>

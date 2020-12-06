@@ -17,7 +17,7 @@ namespace CGTeacherShared.Fractals
         public override string Name => "KohFractal";
 
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float engel)
+            float fractalHeightScale, float width, float height, float angle)
         {
             PartialRender(
                 canvasDrawingSession,

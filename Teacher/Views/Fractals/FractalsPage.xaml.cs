@@ -119,25 +119,25 @@ namespace Teacher.Views.Fractals
 
         private void MoveLeftBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetX -= 75;
+            ViewModel.OffsetX += 75;
              UpdateFractal();
         }
 
         private void MoveUpBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetY -= 75;
+            ViewModel.OffsetY += 75;
             UpdateFractal();
         }
 
         private void MoveRightBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetX += 75;
+            ViewModel.OffsetX -= 75;
             UpdateFractal();
         }
 
         private void MoveDownBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetY += 75;
+            ViewModel.OffsetY -= 75;
             UpdateFractal();
         }
 
@@ -152,14 +152,24 @@ namespace Teacher.Views.Fractals
         private void FractalCanvas_OnPointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             var wheelDelta = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
-            ViewModel.WidthScale += (0.1f * wheelDelta);
-            ViewModel.HeightScale += (0.1f * wheelDelta);
+            ViewModel.WidthScale += (0.01f * wheelDelta);
+            ViewModel.HeightScale += (0.01f * wheelDelta);
             UpdateFractal();
         }
 
         private async void SaveAs_OnClick(object sender, RoutedEventArgs e)
         {
             await ViewModel.SaveFractalToImage();
+        }
+
+        private void RestoreBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OffsetX = 0;
+            ViewModel.OffsetY = 0;
+            ViewModel.WidthScale = 1;
+            ViewModel.HeightScale = 1;
+            ViewModel.RotateAngle = 0;
+            UpdateFractal();
         }
     }
 }
