@@ -40,9 +40,9 @@ namespace Teacher.ViewModels.Fractals
 
         public IList<FractalParameterViewModel> FractalParameters { get; }
 
-        public void StartRendering(float x, float y, float widthScale, float heightScale, float width, float height, float dpi)
+        public void StartRendering(float x, float y, float widthScale, float heightScale, float width, float height, float dpi, float engel)
         {
-            _fractal.BeginRenderAsync(x, y, widthScale, heightScale, width, height, dpi);
+            _fractal.BeginRenderAsync(x, y, widthScale, heightScale, width, height, dpi,  engel);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace CGTeacherShared.Fractals
         public override string Name => "LeviFractal";
 
         protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale,
-            float fractalHeightScale, float width, float height)
+            float fractalHeightScale, float width, float height, float engel)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
             PartialRender(

@@ -39,6 +39,7 @@ namespace Teacher.ViewModels.Fractals
         private float _offsetY;
         private float _widthScale;
         private float _heightScale;
+        private float _rotateAngle;
 
         public CanvasRenderTarget RenderTarget
         {
@@ -134,6 +135,19 @@ namespace Teacher.ViewModels.Fractals
                 OnPropertyChanged(nameof(HeightScale));
             }
         }
+
+        public float RotateAngle
+        {
+            get => _rotateAngle;
+            set
+            {
+                if (Math.Abs(_rotateAngle - value) < float.Epsilon) return;
+
+                _rotateAngle = value;
+                OnPropertyChanged(nameof(RotateAngle));
+            }
+        }
+
 
         public float Dpi => 96;
 

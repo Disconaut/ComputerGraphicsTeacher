@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
+using CGTeacherShared.AfinnisTransformations;
 using CGTeacherShared.Fractals.Abstract;
 using CGTeacherShared.Fractals.EventArgs;
 using CGTeacherShared.Shared.Vector;
@@ -28,15 +29,23 @@ namespace CGTeacherShared.Fractals
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
 
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, float f, float f1,
+            float fractalWidthScale, float fractalHeightScale, float width, float height, float engel)
+        {
+            var point1 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint);
+            var point2 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint);
+
+            var centerX = width / 2;
+            var centerY = height / 2;
+
             PartialRender(
                 canvasDrawingSession,
-                (Vector2)Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint),
-                (Vector2)Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint),
-                (int)Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
+                point1.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(f, f1),
+                point2.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(f, f1),
+                (int) Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
 
-        private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 startPoint, Vector2 endPoint,
-            int iteration)
+        private void PartialRender(CanvasDrawingSession canvasDrawingSession, Vector2 startPoint, Vector2 endPoint, int iteration)
         {
             if (iteration > 0)
             {
@@ -47,7 +56,6 @@ namespace CGTeacherShared.Fractals
                 PartialRender(canvasDrawingSession, endPoint, middlePoint, iteration - 1);
                 PartialRender(canvasDrawingSession, startPoint, middlePoint, iteration - 1);
             }
-
             canvasDrawingSession.DrawLine(startPoint, endPoint, Parameters.GetValue<Color>(ParameterNames.LinesColor));
         }
 

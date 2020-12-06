@@ -120,6 +120,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AfinnisTransformations\AffinisTransformation.cs" />
     <Compile Include="Fractals\Abstract\BaseFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractalParameter.cs" />
@@ -153,7 +154,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AfinnisTransformations\" />
     <Folder Include="ColorModels\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

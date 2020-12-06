@@ -20,7 +20,7 @@ namespace CGTeacherShared.Fractals.Abstract
 
         public event EventHandler<RenderCompleteEventArgs> RenderComplete;
 
-        public Task BeginRenderAsync(float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float dpi)
+        public Task BeginRenderAsync(float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float dpi, float engel)
         {
             return Task.Run(() =>
             {
@@ -28,7 +28,8 @@ namespace CGTeacherShared.Fractals.Abstract
                 var offscreen = new CanvasRenderTarget(device, width, height, dpi);
                 using (var ds = offscreen.CreateDrawingSession())
                 {
-                    Render(ds, x, y, fractalWidthScale, fractalHeightScale, width, height);
+                    ds.Clear(Colors.Black);
+                    Render(ds, x, y, fractalWidthScale, fractalHeightScale, width, height, engel);
                 }
 
                 RenderComplete?.Invoke(this, new RenderCompleteEventArgs
@@ -38,7 +39,9 @@ namespace CGTeacherShared.Fractals.Abstract
             });
         }
 
-        protected abstract void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height);
+
+
+        protected abstract void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float engel);
 
         public static class ParameterNames
         {
