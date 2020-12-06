@@ -25,13 +25,12 @@ namespace CGTeacherShared.Fractals
 
         public override string Name => "HHDragonFractal";
 
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height)
+       
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
+            float fractalWidthScale, float fractalHeightScale, float width, float height, float engel)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
 
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float f, float f1,
-            float fractalWidthScale, float fractalHeightScale, float width, float height, float engel)
-        {
             var point1 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.StartPoint);
             var point2 = (Vector2) Parameters.GetValue<ObservableVector2>(ParameterNames.EndPoint);
 
@@ -40,8 +39,8 @@ namespace CGTeacherShared.Fractals
 
             PartialRender(
                 canvasDrawingSession,
-                point1.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(f, f1),
-                point2.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(f, f1),
+                point1.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
+                point2.Rotate(engel).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
                 (int) Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount));
         }
 

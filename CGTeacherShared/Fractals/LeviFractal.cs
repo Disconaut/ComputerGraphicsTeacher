@@ -60,9 +60,13 @@ namespace CGTeacherShared.Fractals
         public new static class ParameterNames
         {
             public const string StartX1 = "SX1";
+
             public const string StartX2 = "SX2";
+
             public const string StartY1 = "SY1";
+
             public const string StartY2 = "ІY2";
+
             public const string LineColors = "LColor";
         }
     }

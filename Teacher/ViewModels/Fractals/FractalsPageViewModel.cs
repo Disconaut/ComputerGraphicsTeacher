@@ -166,7 +166,7 @@ namespace Teacher.ViewModels.Fractals
 
         public void RenderCurrentFractal(float width, float height)
         {
-            _currentFractal.StartRendering(OffsetX, OffsetY, WidthScale, HeightScale, width, height, Dpi);
+            _currentFractal.StartRendering(OffsetX, OffsetY, WidthScale, HeightScale, width, height, Dpi, RotateAngle);
             IsRendering = true;
         }
 
