@@ -27,8 +27,7 @@ namespace CGTeacherShared.Fractals
         public override string Name => "HHDragonFractal";
 
        
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
-            float fractalWidthScale, float fractalHeightScale, float width, float height, float angle,
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, Transformation transformation, float width, float height,
             CancellationToken cancellationToken)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
@@ -41,10 +40,22 @@ namespace CGTeacherShared.Fractals
 
             var lineCenter = (point1 + point2) / 2;
 
+            point1 = point1
+                .Rotate(transformation.RotateAngle, lineCenter)
+                .Move(centerX, centerY)
+                .Zoom(transformation.WidthScale, transformation.HeightScale, centerX, centerY)
+                .Move(transformation.OffsetX, transformation.OffsetY);
+
+            point2 = point2
+                .Rotate(transformation.RotateAngle, lineCenter)
+                .Move(centerX, centerY)
+                .Zoom(transformation.WidthScale, transformation.HeightScale, centerX, centerY)
+                .Move(transformation.OffsetX, transformation.OffsetY);
+
             PartialRender(
                 canvasDrawingSession,
-                point1.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
-                point2.Rotate(angle, lineCenter).Move(centerX, centerY).Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY).Move(x, y),
+                point1,
+                point2,
                 (int) Parameters.GetValue<double>(BaseFractal.ParameterNames.IterationCount),
                 cancellationToken);
         }

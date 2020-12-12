@@ -121,6 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AfinnisTransformations\AffinisTransformation.cs" />
+    <Compile Include="AfinnisTransformations\Transformation.cs" />
     <Compile Include="Fractals\Abstract\BaseFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractalParameter.cs" />
