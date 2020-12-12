@@ -159,4 +159,55 @@
   <data name="SaveAsButtonLabel.Text" xml:space="preserve">
     <value>Зберегти як...</value>
   </data>
+  <data name="HHDragonFractal" xml:space="preserve">
+    <value>Дракон Хартера-Хейтуея</value>
+  </data>
+  <data name="KohFractal" xml:space="preserve">
+    <value>Крива Коха</value>
+  </data>
+  <data name="LeviFractal" xml:space="preserve">
+    <value>Крива Леві</value>
+  </data>
+  <data name="LineColor" xml:space="preserve">
+    <value>Колір лінії</value>
+  </data>
+  <data name="MinkovskiFractal" xml:space="preserve">
+    <value>Фрактал Мінковського</value>
+  </data>
+  <data name="SX1" xml:space="preserve">
+    <value>Стартова точка Х1</value>
+  </data>
+  <data name="SX2" xml:space="preserve">
+    <value>Стартова точка Х2</value>
+  </data>
+  <data name="SY1" xml:space="preserve">
+    <value>Стартова точка Y1</value>
+  </data>
+  <data name="SY2" xml:space="preserve">
+    <value>Стартова точка Y2</value>
+  </data>
+  <data name="DrawFractalButtonContent" xml:space="preserve">
+    <value>Намалювати фрактал</value>
+  </data>
+  <data name="ICount" xml:space="preserve">
+    <value>Кількість ітерацій</value>
+  </data>
+  <data name="LColor" xml:space="preserve">
+    <value>Колір ліній</value>
+  </data>
+  <data name="BColor" xml:space="preserve">
+    <value>Колір фону</value>
+  </data>
+  <data name="EP" xml:space="preserve">
+    <value>Кінець відрізку</value>
+  </data>
+  <data name="SP" xml:space="preserve">
+    <value>Початок відрізку</value>
+  </data>
+  <data name="SuggestedFractalFileName" xml:space="preserve">
+    <value>Новий Фрактал</value>
+  </data>
+  <data name="StopDrawButtonContent" xml:space="preserve">
+    <value>Припинити рендеринг</value>
+  </data>
 </root>

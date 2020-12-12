@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Name="VectorBoxName"
+    x:Class="Teacher.Controls.VectorBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Teacher.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="2" Text="{Binding ElementName=VectorBoxName, Path=Header}" Margin="0 0 0 5"></TextBlock>
+
+        <muxc:NumberBox 
+            x:Name="XBox"
+            Grid.Row="1" 
+            Grid.Column="0" 
+            PlaceholderText="X"
+            Margin="0 0 5 0"
+            Value="{Binding ElementName=VectorBoxName, Path=Vector.X, Mode=TwoWay}"/>
+
+        <muxc:NumberBox 
+            x:Name="YBox"
+            Grid.Row="1" 
+            Grid.Column="1"
+            PlaceholderText="Y"
+            Margin="5 0 0 0"
+            Value="{Binding ElementName=VectorBoxName, Path=Vector.Y, Mode=TwoWay}"/>
+    </Grid>
+</UserControl>
