@@ -84,43 +84,123 @@
             </RelativePanel>
         </Border>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" 
-                        Margin="0,0,0,10">
-            <Button Name="RestoreBtn" Click="RestoreBtn_OnClick" Background="Transparent" Margin="0,0,30,0">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE777;" Width="32" Height="32"/>
+        <StackPanel 
+            Grid.Column="0" 
+            Grid.Row="1" 
+            Orientation="Horizontal" 
+            HorizontalAlignment="Center" 
+            Margin="0,0,0,10">
+            <Button 
+                Name="RestoreBtn" 
+                Click="RestoreBtn_OnClick" 
+                Background="Transparent" 
+                Margin="0,0,30,0">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE777;" Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="RotateMinusBtn"  Click="RotateMinus_Click" Background="Transparent">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE80C;"  Width="32" Height="32"/>
+            <Button 
+                Name="RotateMinusBtn"  
+                Click="RotateMinus_Click" 
+                Background="Transparent">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE80C;"  
+                    Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="RotatePlusBtn"  Click="RotatePlus_Click" Background="Transparent" Margin="0,0,30,0">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE80D;"  Width="32" Height="32"/>
+            <Button 
+                Name="RotatePlusBtn"  
+                Click="RotatePlus_Click" 
+                Background="Transparent" 
+                Margin="0,0,30,0">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE80D;"  
+                    Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="ZoomInBtn" Click="ZoomIn_Click" Background="Transparent">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A3;" Width="32" Height="32"/>
+            <Button 
+                Name="ZoomInBtn" 
+                Click="ZoomIn_Click" 
+                Background="Transparent">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE8A3;" 
+                    Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="ZoomOutBtn" Click="ZoomOutBtn_OnClick" Background="Transparent" 
-                    Margin="0,0,30,0">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE71F;" Width="32" Height="32"/>
+            <Button 
+                Name="ZoomOutBtn" 
+                Click="ZoomOutBtn_OnClick" 
+                Background="Transparent" 
+                Margin="0,0,30,0">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE71F;" Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="MoveLeftBtn" Click="MoveLeftBtn_OnClick" Background="Transparent">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76B;" Width="32" Height="32"/>
+            <Button 
+                Name="MoveLeftBtn" 
+                Click="MoveLeftBtn_OnClick"
+                Background="Transparent">
+                <FontIcon
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE76B;" 
+                    Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="MoveUpBtn" Click="MoveUpBtn_OnClick" Background="Transparent">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70E;" Width="32" Height="32"/>
+            <Button 
+                Name="MoveUpBtn" 
+                Click="MoveUpBtn_OnClick" 
+                Background="Transparent">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE70E;" 
+                    Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="MoveRightBtn" Click="MoveRightBtn_OnClick" Background="Transparent">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE76C;" Width="32" Height="32"/>
+            <Button 
+                Name="MoveRightBtn" 
+                Click="MoveRightBtn_OnClick" 
+                Background="Transparent">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE76C;" 
+                    Width="32" 
+                    Height="32"/>
             </Button>
-            <Button Name="MoveDownBtn" Click="MoveDownBtn_OnClick" Background="Transparent">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70D;" Width="32" Height="32"/>
+            <Button 
+                Name="MoveDownBtn" 
+                Click="MoveDownBtn_OnClick" 
+                Background="Transparent">
+                <FontIcon
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE70D;" 
+                    Width="32" 
+                    Height="32"/>
             </Button>
         </StackPanel>
 
-        <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" 
-                Margin="0,0,25,10" Padding="15 0" Click="SaveAs_OnClick">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" Width="32" Height="32"/>
-                <TextBlock x:Uid="SaveAsButtonLabel" VerticalAlignment="Center"/>
+        <Button 
+            Grid.Column="0" 
+            Grid.Row="1" 
+            HorizontalAlignment="Right" 
+            Margin="0,0,25,10" 
+            Padding="15 0" 
+            Click="SaveAs_OnClick">
+            <StackPanel 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Center">
+                <FontIcon 
+                    FontFamily="Segoe MDL2 Assets" 
+                    Glyph="&#xE792;" 
+                    Width="32"
+                    Height="32"/>
+                <TextBlock 
+                    x:Uid="SaveAsButtonLabel" 
+                    VerticalAlignment="Center"/>
             </StackPanel>
         </Button>
     </Grid>

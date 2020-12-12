@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CGTeacherShared.Fractals.Exceptions
+namespace CGTeacherShared.ColorModels.Exceptions
 {
-    public class ParameterNotFoundException: Exception
+    public class ParameterNotFoundException : Exception
     {
-        public ParameterNotFoundException(string parameterName) : 
+        public ParameterNotFoundException(string parameterName) :
             base($"Parameter {parameterName} is invalid")
         {
         }
