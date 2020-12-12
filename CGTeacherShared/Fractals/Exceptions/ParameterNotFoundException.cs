@@ -8,7 +8,8 @@ namespace CGTeacherShared.Fractals.Exceptions
 {
     public class ParameterNotFoundException: Exception
     {
-        public ParameterNotFoundException(string parameterName) : base($"Parameter {parameterName} is invalid")
+        public ParameterNotFoundException(string parameterName) : 
+            base($"Parameter {parameterName} is invalid")
         {
         }
     }

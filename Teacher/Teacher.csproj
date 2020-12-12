@@ -141,9 +141,13 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AffinisTransformations\TransformationViewModel.cs" />
+    <Compile Include="ViewModels\ColorModels\ColorModelPageViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalParameterViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalsPageViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalViewModel.cs" />
+    <Compile Include="Views\ColorModels\ColorModelsPage.xaml.cs">
+      <DependentUpon>ColorModelsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Errors\UnderConstruction.xaml.cs">
       <DependentUpon>UnderConstruction.xaml</DependentUpon>
     </Compile>
@@ -189,6 +193,10 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ColorModels\ColorModelsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\Controls\CardButton.xaml">
       <SubType>Designer</SubType>
