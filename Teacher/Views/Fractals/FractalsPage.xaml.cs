@@ -90,6 +90,9 @@ namespace Teacher.Views.Fractals
                 case nameof(ViewModel.RenderTarget):
                     FractalCanvas.Invalidate();
                     break;
+                case nameof(ViewModel.Transformation):
+                    UpdateFractal();
+                    break;
             }
         }
 
@@ -120,51 +123,43 @@ namespace Teacher.Views.Fractals
 
         private void RotatePlus_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.RotateAngle += 45;
-            UpdateFractal();
+            ViewModel.Transformation.RotateAngle += 45;
         }
         private void RotateMinus_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.RotateAngle -= 45;
-            UpdateFractal();
+            ViewModel.Transformation.RotateAngle -= 45;
         }
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.WidthScale += ViewModel.WidthScale * 0.5f;
-            ViewModel.HeightScale += ViewModel.HeightScale * 0.5f;
-            UpdateFractal();
+            ViewModel.Transformation.WidthScale += ViewModel.Transformation.WidthScale * 0.5f;
+            ViewModel.Transformation.HeightScale += ViewModel.Transformation.HeightScale * 0.5f;
         }
 
         private void ZoomOutBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.WidthScale -= ViewModel.WidthScale * 0.5f;
-            ViewModel.HeightScale -= ViewModel.HeightScale * 0.5f;
-            UpdateFractal();
+            ViewModel.Transformation.WidthScale -= ViewModel.Transformation.WidthScale * 0.5f;
+            ViewModel.Transformation.HeightScale -= ViewModel.Transformation.HeightScale * 0.5f;
         }
 
         private void MoveLeftBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetX += 75;
-             UpdateFractal();
+            ViewModel.Transformation.OffsetX += 75;
         }
 
         private void MoveUpBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetY += 75;
-            UpdateFractal();
+            ViewModel.Transformation.OffsetY += 75;
         }
 
         private void MoveRightBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetX -= 75;
-            UpdateFractal();
+            ViewModel.Transformation.OffsetX -= 75;
         }
 
         private void MoveDownBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetY -= 75;
-            UpdateFractal();
+            ViewModel.Transformation.OffsetY -= 75;
         }
 
         private void FractalCanvas_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -178,9 +173,8 @@ namespace Teacher.Views.Fractals
         private void FractalCanvas_OnPointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             var wheelDelta = e.GetCurrentPoint(sender as UIElement).Properties.MouseWheelDelta;
-            ViewModel.WidthScale += (ViewModel.WidthScale * (float)Math.Pow(0.05, 2) * wheelDelta);
-            ViewModel.HeightScale += (ViewModel.HeightScale * (float)Math.Pow(0.05, 2) * wheelDelta);
-            UpdateFractal();
+            ViewModel.Transformation.WidthScale += (ViewModel.Transformation.WidthScale * (float)Math.Pow(0.05, 2) * wheelDelta);
+            ViewModel.Transformation.HeightScale += (ViewModel.Transformation.HeightScale * (float)Math.Pow(0.05, 2) * wheelDelta);
         }
 
         private async void SaveAs_OnClick(object sender, RoutedEventArgs e)
@@ -190,12 +184,11 @@ namespace Teacher.Views.Fractals
 
         private void RestoreBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.OffsetX = 0;
-            ViewModel.OffsetY = 0;
-            ViewModel.WidthScale = 1;
-            ViewModel.HeightScale = 1;
-            ViewModel.RotateAngle = 0;
-            UpdateFractal();
+            ViewModel.Transformation.OffsetX = 0;
+            ViewModel.Transformation.OffsetY = 0;
+            ViewModel.Transformation.WidthScale = 1;
+            ViewModel.Transformation.HeightScale = 1;
+            ViewModel.Transformation.RotateAngle = 0;
         }
     }
 }

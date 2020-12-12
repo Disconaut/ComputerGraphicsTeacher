@@ -10,9 +10,11 @@ using Windows.ApplicationModel.Resources;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Core;
+using CGTeacherShared.AfinnisTransformations;
 using CGTeacherShared.Fractals;
 using CGTeacherShared.Fractals.Abstract;
 using Microsoft.Graphics.Canvas;
+using Teacher.ViewModels.AffinisTransformations;
 
 namespace Teacher.ViewModels.Fractals
 {
@@ -38,11 +40,6 @@ namespace Teacher.ViewModels.Fractals
 
         private CanvasRenderTarget _renderTarget;
         private bool _isRendering;
-        private float _offsetX;
-        private float _offsetY;
-        private float _widthScale;
-        private float _heightScale;
-        private float _rotateAngle;
 
         public CanvasRenderTarget RenderTarget
         {
@@ -73,8 +70,7 @@ namespace Teacher.ViewModels.Fractals
         {
             _resourceLoader = ResourceLoader.GetForCurrentView();
             _cancellationTokenSource = new CancellationTokenSource();
-            _widthScale = 1;
-            _heightScale = 1;
+            Transformation = new TransformationViewModel(new Transformation());
 
             Fractals = new ObservableCollection<FractalViewModel>
             {
@@ -92,67 +88,14 @@ namespace Teacher.ViewModels.Fractals
                     IsRendering = false;
                 };
             }
-        }
 
-        public float OffsetX
-        {
-            get => _offsetX;
-            set
+            Transformation.PropertyChanged += (sender, args) =>
             {
-                if (Math.Abs(_offsetX - value) < float.Epsilon) return;
-
-                _offsetX = value;
-                OnPropertyChanged(nameof(OffsetX));
-            }
+                OnPropertyChanged(nameof(Transformation));
+            };
         }
 
-        public float OffsetY
-        {
-            get => _offsetY;
-            set
-            {
-                if (Math.Abs(_offsetY - value) < float.Epsilon) return;
-
-                _offsetY = value;
-                OnPropertyChanged(nameof(OffsetY));
-            }
-        }
-
-        public float WidthScale
-        {
-            get => _widthScale;
-            set
-            {
-                if (Math.Abs(_widthScale - value) < float.Epsilon) return;
-
-                _widthScale = value <= 0.01f ? 0.01f : value;
-                OnPropertyChanged(nameof(WidthScale));
-            }
-        }
-
-        public float HeightScale
-        {
-            get => _heightScale;
-            set
-            {
-                if (Math.Abs(_heightScale - value) < float.Epsilon) return;
-
-                _heightScale = value <= 0.01f ? 0.01f : value;
-                OnPropertyChanged(nameof(HeightScale));
-            }
-        }
-
-        public float RotateAngle
-        {
-            get => _rotateAngle;
-            set
-            {
-                if (Math.Abs(_rotateAngle - value) < float.Epsilon) return;
-
-                _rotateAngle = value;
-                OnPropertyChanged(nameof(RotateAngle));
-            }
-        }
+        public TransformationViewModel Transformation { get; }
 
         public float Dpi => 96;
 
@@ -173,7 +116,7 @@ namespace Teacher.ViewModels.Fractals
         {
             CancelRendering();
             _cancellationTokenSource = new CancellationTokenSource();
-            _currentFractal.StartRendering(OffsetX, OffsetY, WidthScale, HeightScale, width, height, Dpi, RotateAngle, _cancellationTokenSource.Token);
+            _currentFractal.StartRendering(Transformation, width, height, Dpi, _cancellationTokenSource.Token);
             IsRendering = true;
         }
 

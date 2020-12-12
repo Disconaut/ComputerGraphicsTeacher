@@ -27,9 +27,7 @@ namespace CGTeacherShared.Fractals
             Parameters.AddValue(ParameterNames.EndPoint, typeof(ObservableVector2), new ObservableVector2());
         }
 
-        protected override void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
-            float fractalWidthScale,
-            float fractalHeightScale, float width, float height, float angle, CancellationToken cancellationToken)
+        protected override void Render(CanvasDrawingSession canvasDrawingSession, Transformation transformation, float width, float height, CancellationToken cancellationToken)
         {
             canvasDrawingSession.Clear(Parameters.GetValue<Color>(ParameterNames.BackgroundColor));
 
@@ -42,16 +40,16 @@ namespace CGTeacherShared.Fractals
             var lineCenter = (startPoint + endPoint) / 2;
 
             startPoint = startPoint
-                .Rotate(angle, lineCenter)
+                .Rotate(transformation.RotateAngle, lineCenter)
                 .Move(centerX, centerY)
-                .Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY)
-                .Move(x, y);
+                .Zoom(transformation.WidthScale, transformation.HeightScale, centerX, centerY)
+                .Move(transformation.OffsetX, transformation.OffsetY);
 
             endPoint = endPoint
-                .Rotate(angle, lineCenter)
+                .Rotate(transformation.RotateAngle, lineCenter)
                 .Move(centerX, centerY)
-                .Zoom(fractalWidthScale, fractalHeightScale, centerX, centerY)
-                .Move(x, y);
+                .Zoom(transformation.WidthScale, transformation.HeightScale, centerX, centerY)
+                .Move(transformation.OffsetX, transformation.OffsetY);
 
             PartialRender(
                 canvasDrawingSession,
@@ -98,70 +96,6 @@ namespace CGTeacherShared.Fractals
                 startPoint = firstMiddlePoint;
                 endPoint = secondMiddlePoint;
             }
-
-           
-
-            //startPoint = firstMiddlePoint;
-            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(-90, startPoint);
-
-            //PartialRender(
-            //    canvasDrawingSession, 
-            //    startPoint,
-            //    firstMiddlePoint,
-            //    iteration - 1,
-            //    cancellationToken);
-
-            //startPoint = firstMiddlePoint;
-            //firstMiddlePoint = startPoint.Move(vectorPart);
-
-            //PartialRender(
-            //    canvasDrawingSession,
-            //    startPoint,
-            //    firstMiddlePoint,
-            //    iteration - 1,
-            //    cancellationToken);
-
-            //startPoint = firstMiddlePoint;
-            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(90, startPoint);
-
-            //PartialRender(
-            //    canvasDrawingSession,
-            //    startPoint,
-            //    firstMiddlePoint,
-            //    iteration - 1,
-            //    cancellationToken);
-
-            //startPoint = firstMiddlePoint;
-            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(90, startPoint);
-
-            //PartialRender(
-            //    canvasDrawingSession,
-            //    startPoint,
-            //    firstMiddlePoint,
-            //    iteration - 1,
-            //    cancellationToken);
-
-            //startPoint = firstMiddlePoint;
-            //firstMiddlePoint = startPoint.Move(vectorPart);
-
-            //PartialRender(
-            //    canvasDrawingSession,
-            //    startPoint,
-            //    firstMiddlePoint,
-            //    iteration - 1,
-            //    cancellationToken);
-
-            //startPoint = firstMiddlePoint;
-            //firstMiddlePoint = startPoint.Move(vectorPart).Rotate(-90, startPoint);
-
-            //PartialRender(
-            //    canvasDrawingSession,
-            //    startPoint,
-            //    firstMiddlePoint,
-            //    iteration - 1,
-            //    cancellationToken);
-
-            
         }
 
         public new static class ParameterNames
