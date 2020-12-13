@@ -28,17 +28,12 @@ namespace Teacher.Views.ColorModels
 
         public ColorModelsPage()
         {
-            Mod = new ObservableCollection<ColorModelViewModelBase>
-            {
-                new ColorModelViewModelBaseImpl(),
-                new ColorModelViewModelBaseImpl()
-            };
+           
             this.InitializeComponent();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Mod.Add(new ColorModelViewModelBaseImpl());
         }
     }
 }
