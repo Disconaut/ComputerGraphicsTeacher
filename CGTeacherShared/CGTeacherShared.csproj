@@ -121,7 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AfinnisTransformations\AffinisTransformation.cs" />
-    <Compile Include="ColorModels\Exceptions\ParametrNotFoundException.cs" />
+    <Compile Include="AfinnisTransformations\Transformation.cs" />
     <Compile Include="ColorModels\XYZStruct.cs" />
     <Compile Include="Fractals\Abstract\BaseFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractal.cs" />
@@ -155,7 +155,9 @@
       <Version>1.19.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ColorModels\Exceptions\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
