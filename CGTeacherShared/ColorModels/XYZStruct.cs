@@ -7,7 +7,7 @@ using Windows.UI;
 
 namespace CGTeacherShared.ColorModels
 {
-    struct XYZ
+    public struct XYZ
     {
         public byte _X;
         public byte _Y;
@@ -61,5 +61,21 @@ namespace CGTeacherShared.ColorModels
             );
 
         }
+        public static bool operator ==(XYZ xyz, XYZ rgb)
+        {
+            if (xyz == rgb)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool operator != (XYZ xyz, XYZ rgb)
+            {
+            if(xyz!=rgb)
+            {
+                return false;
+            }
+            return true;
+            }
     }
 }
