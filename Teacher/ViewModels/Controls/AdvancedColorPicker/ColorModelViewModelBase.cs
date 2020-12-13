@@ -1,18 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources;
+using Windows.UI;
+using Windows.UI.Xaml;
+using CGTeacherShared.Annotations;
 
 namespace Teacher.ViewModels.Controls.AdvancedColorPicker
 {
-    public abstract class ColorModelViewModelBase
+    public abstract class ColorModelViewModelBase: INotifyPropertyChanged
     {
-        public abstract string Name { get; }
-    }
+        protected ResourceLoader ResourceLoader;
 
-    class ColorModelViewModelBaseImpl : ColorModelViewModelBase
-    {
-        public override string Name => "Hello";
+        protected ColorModelViewModelBase()
+        {
+            ResourceLoader = ResourceLoader.GetForCurrentView();
+        }
+
+        public abstract string Name { get; }
+
+        public abstract Color RgbColor { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public abstract UIElement SettingsPanel { get; }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
