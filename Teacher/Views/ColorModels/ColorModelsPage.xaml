@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:controls="using:Teacher.Controls"
+    xmlns:lc="using:Teacher.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -20,14 +21,21 @@
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
         
-        <Canvas 
-            Name="FractalCanvas"
+        <controls:ImageCropper 
+            x:Name="Image"
             Grid.Row="0" 
-            Grid.Column="0" 
-            Background="LightGray" 
+            Grid.Column="0"
+            Source="{x:Bind ViewModel.Image, Mode=TwoWay}"
             Margin="25,25,25,10"/>
 
-        <controls:AdvancedColorPicker Grid.Column="1" Grid.Row="0" ColorModels="{x:Bind Mod}"></controls:AdvancedColorPicker>
+        <controls:EyedropperToolButton
+            x:Name="Eyedropper"
+            Grid.Column="1"
+            Grid.Row="0"
+            TargetElement="{x:Bind Image}"
+            PickCompleted="EyedropperToolButton_OnPickCompleted"/>
+
+        <lc:AdvancedColorPicker Grid.Column="1" Grid.Row="0" ColorModels="{x:Bind Mod}" Margin="0,25,25,0" ColorChanged="AdvancedColorPicker_OnColorChanged"></lc:AdvancedColorPicker>
 
         <StackPanel 
             Grid.Column="0" 
@@ -36,9 +44,10 @@
             HorizontalAlignment="Right" 
             Margin="0,0,0,10">
             <Button
+                x:Name="UploadButton"
                 Margin="0,0,25,10" 
                 Padding="15 0"
-                Click="ButtonBase_OnClick">
+                Click="UploadButton_OnClick">
                 <StackPanel 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center">

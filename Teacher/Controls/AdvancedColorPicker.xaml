@@ -19,14 +19,16 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ColorPicker x:Name="ColorPicker"
             IsAlphaEnabled="True"
             Color="{x:Bind ColorModelComboBox.SelectedItem.(vm:ColorModelViewModelBase.RgbColor), Mode=TwoWay}"
             IsColorChannelTextInputVisible="False"
             IsHexInputVisible="False"
-            IsAlphaTextInputVisible="False"/>
+            IsAlphaTextInputVisible="False"
+            HorizontalAlignment="Stretch"
+            ColorChanged="ColorPicker_OnColorChanged"/>
         <ComboBox x:Name="ColorModelComboBox"
                   Grid.Row="1" 
                   Width="120" 

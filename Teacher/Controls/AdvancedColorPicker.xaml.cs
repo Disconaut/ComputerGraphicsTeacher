@@ -36,39 +36,14 @@ namespace Teacher.Controls
         private readonly ResourceLoader _resourceLoader;
 
         public static readonly DependencyProperty ColorModelsProperty = DependencyProperty.Register(
-            "ColorModels", typeof(IEnumerable<ColorModelViewModelBase>), 
-            typeof(AdvancedColorPicker), new PropertyMetadata(default(IEnumerable<ColorModelViewModelBase>)));
+            "ColorModels", typeof(IEnumerable<ColorModelViewModelBase>),
+            typeof(AdvancedColorPicker), new PropertyMetadata(default(IEnumerable<ColorModelViewModelBase>), ColorModelsPropertyChangedCallback));
 
-        public IEnumerable<ColorModelViewModelBase> ColorModels
+        private static void ColorModelsPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            get => (IEnumerable<ColorModelViewModelBase>) GetValue(ColorModelsProperty);
-            set => SetValue(ColorModelsProperty, value);
-        }
-
-        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
-            "Color", typeof(Color), typeof(AdvancedColorPicker), new PropertyMetadata(Colors.White));
-
-        public Color Color
-        {
-            get => (Color) GetValue(ColorProperty);
-            set => SetValue(ColorProperty, value);
-        }
-
-        public static readonly DependencyProperty IsHexadecimalVisibleProperty = DependencyProperty.Register(
-            "IsHexadecimalVisible", typeof(bool), typeof(AdvancedColorPicker), new PropertyMetadata(true));
-
-        public bool IsHexadecimalVisible
-        {
-            get => (bool) GetValue(IsHexadecimalVisibleProperty);
-            set => SetValue(IsHexadecimalVisibleProperty, value);
-        }
-
-        public AdvancedColorPicker()
-        {
-            this.InitializeComponent();
-            _resourceLoader = ResourceLoader.GetForCurrentView();
-
-            foreach (var colorModel in ColorModels)
+            if (!(d is AdvancedColorPicker advancedColorPicker)) return;
+            if (!(e.NewValue is IEnumerable<ColorModelViewModelBase> colorModels)) return;
+            foreach (var colorModel in colorModels)
             {
                 var bind = new Binding
                 {
@@ -77,9 +52,41 @@ namespace Teacher.Controls
                     Mode = BindingMode.TwoWay
                 };
 
-                SetBinding(ColorProperty, bind);
+                advancedColorPicker.SetBinding(ColorProperty, bind);
             }
         }
+
+        public IEnumerable<ColorModelViewModelBase> ColorModels
+        {
+            get => (IEnumerable<ColorModelViewModelBase>)GetValue(ColorModelsProperty);
+            set => SetValue(ColorModelsProperty, value);
+        }
+
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
+            "Color", typeof(Color), typeof(AdvancedColorPicker), new PropertyMetadata(Colors.White));
+
+        public Color Color
+        {
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
+        }
+
+        public static readonly DependencyProperty IsHexadecimalVisibleProperty = DependencyProperty.Register(
+            "IsHexadecimalVisible", typeof(bool), typeof(AdvancedColorPicker), new PropertyMetadata(true));
+
+        public bool IsHexadecimalVisible
+        {
+            get => (bool)GetValue(IsHexadecimalVisibleProperty);
+            set => SetValue(IsHexadecimalVisibleProperty, value);
+        }
+
+        public AdvancedColorPicker()
+        {
+            this.InitializeComponent();
+            _resourceLoader = ResourceLoader.GetForCurrentView();
+        }
+
+        public event EventHandler<ColorChangedEventArgs> ColorChanged; 
 
         private void ColorModelComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -130,8 +137,8 @@ namespace Teacher.Controls
                     var rangeAttribute = enumerable.OfType<RangeAttribute>().FirstOrDefault();
                     if (rangeAttribute != null)
                     {
-                        numBox.Minimum = (double) rangeAttribute.Minimum;
-                        numBox.Maximum = (double) rangeAttribute.Maximum;
+                        numBox.Minimum = (double)rangeAttribute.Minimum;
+                        numBox.Maximum = (double)rangeAttribute.Maximum;
                     }
 
                     if (!(element.PropertyType == typeof(float)
@@ -160,6 +167,11 @@ namespace Teacher.Controls
 
                 SettingsPanel.Children.Add(stackPanel);
             }
+        }
+
+        private void ColorPicker_OnColorChanged(ColorPicker sender, ColorChangedEventArgs args)
+        {
+            ColorChanged?.Invoke(this, args);
         }
     }
 }
