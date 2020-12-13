@@ -145,6 +145,7 @@
     <Compile Include="ViewModels\AffinisTransformations\TransformationViewModel.cs" />
     <Compile Include="ViewModels\ColorModels\ColorModelPageViewModel.cs" />
     <Compile Include="ViewModels\Controls\AdvancedColorPicker\ColorModelViewModelBase.cs" />
+    <Compile Include="ViewModels\Controls\AdvancedColorPicker\RgbViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalParameterViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalsPageViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalViewModel.cs" />
