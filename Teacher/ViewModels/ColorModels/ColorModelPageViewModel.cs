@@ -8,5 +8,6 @@ namespace Teacher.ViewModels.ColorModels
 {
     class ColorModelPageViewModel
     {
+
     }
 }
