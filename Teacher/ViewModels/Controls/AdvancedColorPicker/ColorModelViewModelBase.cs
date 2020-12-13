@@ -9,6 +9,7 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI;
 using Windows.UI.Xaml;
 using CGTeacherShared.Annotations;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace Teacher.ViewModels.Controls.AdvancedColorPicker
 {
@@ -25,9 +26,27 @@ namespace Teacher.ViewModels.Controls.AdvancedColorPicker
 
         public abstract Color RgbColor { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string HexColor
+        {
+            get => RgbColor.ToHex();
+            set
+            {
+                try
+                {
+                    RgbColor = value.ToColor();
+                }
+                catch
+                {
+                    // ignored
+                }
+                finally
+                {
+                    OnPropertyChanged(nameof(HexColor));
+                }
+            }
+        }
 
-        public abstract UIElement SettingsPanel { get; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

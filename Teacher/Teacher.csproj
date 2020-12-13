@@ -127,6 +127,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Attributes\UIElementAttribute.cs" />
     <Compile Include="Controls\AdvancedColorPicker.xaml.cs">
       <DependentUpon>AdvancedColorPicker.xaml</DependentUpon>
     </Compile>
@@ -146,6 +147,7 @@
     <Compile Include="ViewModels\ColorModels\ColorModelPageViewModel.cs" />
     <Compile Include="ViewModels\Controls\AdvancedColorPicker\ColorModelViewModelBase.cs" />
     <Compile Include="ViewModels\Controls\AdvancedColorPicker\RgbViewModel.cs" />
+    <Compile Include="ViewModels\ColorModels\ColorModelParameterViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalParameterViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalsPageViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalViewModel.cs" />
@@ -244,9 +246,7 @@
       <Name>CGTeacherShared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

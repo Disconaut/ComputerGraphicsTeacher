@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,15 +31,13 @@ namespace Teacher.Views.ColorModels
         {
             Mod = new ObservableCollection<ColorModelViewModelBase>
             {
-                new ColorModelViewModelBaseImpl(),
-                new ColorModelViewModelBaseImpl()
+                new RgbViewModel(Colors.White)
             };
             this.InitializeComponent();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Mod.Add(new ColorModelViewModelBaseImpl());
         }
     }
 }
