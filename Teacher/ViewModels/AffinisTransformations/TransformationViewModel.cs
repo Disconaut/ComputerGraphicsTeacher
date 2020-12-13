@@ -11,7 +11,7 @@ using static System.Single;
 
 namespace Teacher.ViewModels.AffinisTransformations
 {
-    public class TransformationViewModel: INotifyPropertyChanged
+    public class TransformationViewModel : INotifyPropertyChanged
     {
         public TransformationViewModel(Transformation transformation)
         {

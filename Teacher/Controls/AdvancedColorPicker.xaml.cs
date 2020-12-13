@@ -36,7 +36,8 @@ namespace Teacher.Controls
         private readonly ResourceLoader _resourceLoader;
 
         public static readonly DependencyProperty ColorModelsProperty = DependencyProperty.Register(
-            "ColorModels", typeof(IEnumerable<ColorModelViewModelBase>), typeof(AdvancedColorPicker), new PropertyMetadata(default(IEnumerable<ColorModelViewModelBase>)));
+            "ColorModels", typeof(IEnumerable<ColorModelViewModelBase>), 
+            typeof(AdvancedColorPicker), new PropertyMetadata(default(IEnumerable<ColorModelViewModelBase>)));
 
         public IEnumerable<ColorModelViewModelBase> ColorModels
         {

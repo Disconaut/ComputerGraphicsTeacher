@@ -56,7 +56,8 @@ namespace CGTeacherShared.Fractals
                 cancellationToken);
         }
 
-        protected void PartialRender(CanvasDrawingSession canvasDrawingSession,Vector2 p1, Vector2 p2, int iter, CancellationToken cancellationToken)
+        protected void PartialRender(CanvasDrawingSession canvasDrawingSession,Vector2 p1, 
+            Vector2 p2, int iter, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
