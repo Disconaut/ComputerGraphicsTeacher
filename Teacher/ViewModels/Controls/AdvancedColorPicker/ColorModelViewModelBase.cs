@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using CGTeacherShared.Annotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,7 +15,7 @@ using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace Teacher.ViewModels.Controls.AdvancedColorPicker
 {
-    public abstract class ColorModelViewModelBase: INotifyPropertyChanged
+    public abstract class ColorModelViewModelBase : INotifyPropertyChanged
     {
         protected ResourceLoader ResourceLoader;
 
@@ -45,6 +47,8 @@ namespace Teacher.ViewModels.Controls.AdvancedColorPicker
                 }
             }
         }
+
+        public abstract void SetRgbColorWithoutNotification(Color color);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

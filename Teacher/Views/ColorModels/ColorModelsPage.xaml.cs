@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Teacher.ViewModels.ColorModels;
@@ -29,31 +30,43 @@ namespace Teacher.Views.ColorModels
     {
         public ColorModelPageViewModel ViewModel { get; private set; }
 
-        public ObservableCollection<ColorModelViewModelBase> Mod { get; set; }
-
         public ColorModelsPage()
         {
-            Mod = new ObservableCollection<ColorModelViewModelBase>
-            {
-                new RgbViewModel(Colors.White)
-            };
             this.InitializeComponent();
             ViewModel = new ColorModelPageViewModel();
         }
 
         private async void UploadButton_OnClick(object sender, RoutedEventArgs e)
         {
+            ViewModel.ClearAll();
             await ViewModel.OpenImage();
         }
 
         private void EyedropperToolButton_OnPickCompleted(EyedropperToolButton sender, EventArgs args)
         {
+            ViewModel.ClearChose();
+            ColorPicker.Color = sender.Color;
             ViewModel.ChoosePixelWithColor(sender.Color, Image.CroppedRegion);
         }
 
         private void AdvancedColorPicker_OnColorChanged(object sender, ColorChangedEventArgs e)
         {
             ViewModel.ChangeColorOfChosePixels(e.NewColor);
+        }
+
+        private void SaveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SaveImage();
+        }
+
+        private void RevertButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.RevertChanges();
+        }
+
+        private void BrightnessRange_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            ViewModel.AdjustBrightness((int)e.NewValue, Image.CroppedRegion);
         }
     }
 }

@@ -27,6 +27,7 @@
             IsColorChannelTextInputVisible="False"
             IsHexInputVisible="False"
             IsAlphaTextInputVisible="False"
+            IsAlphaSliderVisible="True"
             HorizontalAlignment="Stretch"
             ColorChanged="ColorPicker_OnColorChanged"/>
         <ComboBox x:Name="ColorModelComboBox"

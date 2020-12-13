@@ -20,7 +20,16 @@ namespace Teacher.ViewModels.Controls.AdvancedColorPicker
             set => Color = value;
         }
 
+        public override void SetRgbColorWithoutNotification(Color color)
+        {
+            _color = color;
+        }
+
         private Color _color;
+
+        public RgbViewModel()
+        {
+        }
 
         public RgbViewModel(Color color)
         {
@@ -36,21 +45,6 @@ namespace Teacher.ViewModels.Controls.AdvancedColorPicker
                 {
                     _color = value;
                     OnPropertyChanged(string.Empty);
-                }
-            }
-        }
-
-        [UIElement(typeof(byte), Name = "Alpha")]
-        [Range(0.0, 255.0)]
-        public double A
-        {
-            get => _color.A;
-            set
-            {
-                if (_color.A != (byte)value)
-                {
-                    _color.A = (byte)value;
-                    OnPropertyChanged(nameof(RgbColor));
                 }
             }
         }

@@ -43,16 +43,18 @@ namespace Teacher.Controls
         {
             if (!(d is AdvancedColorPicker advancedColorPicker)) return;
             if (!(e.NewValue is IEnumerable<ColorModelViewModelBase> colorModels)) return;
-            foreach (var colorModel in colorModels)
+            var colorModelViewModelBases = colorModels as ColorModelViewModelBase[] ?? colorModels.ToArray();
+            foreach (var colorModel in colorModelViewModelBases)
             {
-                var bind = new Binding
+                colorModel.PropertyChanged += (sender, args) =>
                 {
-                    Source = colorModel,
-                    Path = new PropertyPath(nameof(colorModel.RgbColor)),
-                    Mode = BindingMode.TwoWay
-                };
+                    foreach (var model in colorModelViewModelBases)
+                    {
+                        if (model == sender) continue;
 
-                advancedColorPicker.SetBinding(ColorProperty, bind);
+                        model.SetRgbColorWithoutNotification(((ColorModelViewModelBase) sender).RgbColor);
+                    }
+                };
             }
         }
 
@@ -62,13 +64,16 @@ namespace Teacher.Controls
             set => SetValue(ColorModelsProperty, value);
         }
 
-        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
-            "Color", typeof(Color), typeof(AdvancedColorPicker), new PropertyMetadata(Colors.White));
-
         public Color Color
         {
-            get => (Color)GetValue(ColorProperty);
-            set => SetValue(ColorProperty, value);
+            get => (ColorModelComboBox.SelectedItem as ColorModelViewModelBase)?.RgbColor ?? Colors.White;
+            set
+            {
+                if (ColorModelComboBox.SelectedItem is ColorModelViewModelBase colorModel)
+                {
+                    colorModel.RgbColor = value;
+                }
+            }
         }
 
         public static readonly DependencyProperty IsHexadecimalVisibleProperty = DependencyProperty.Register(
@@ -141,9 +146,9 @@ namespace Teacher.Controls
                         numBox.Maximum = (double)rangeAttribute.Maximum;
                     }
 
-                    if (!(element.PropertyType == typeof(float)
-                          || element.PropertyType == typeof(double)
-                          || element.PropertyType == typeof(decimal)))
+                    if (!(uiElementAttribute.ElementType == typeof(float)
+                          || uiElementAttribute.ElementType == typeof(double)
+                          || uiElementAttribute.ElementType == typeof(decimal)))
                     {
                         numBox.NumberFormatter = new DecimalFormatter
                         {

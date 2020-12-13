@@ -32,10 +32,27 @@
             x:Name="Eyedropper"
             Grid.Column="1"
             Grid.Row="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0 25 25 0"
             TargetElement="{x:Bind Image}"
             PickCompleted="EyedropperToolButton_OnPickCompleted"/>
 
-        <lc:AdvancedColorPicker Grid.Column="1" Grid.Row="0" ColorModels="{x:Bind Mod}" Margin="0,25,25,0" ColorChanged="AdvancedColorPicker_OnColorChanged"></lc:AdvancedColorPicker>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="0"
+                    Margin="0,25,25,0">
+        <lc:AdvancedColorPicker 
+            x:Name="ColorPicker"
+            ColorModels="{x:Bind ViewModel.ColorModels}" 
+            ColorChanged="AdvancedColorPicker_OnColorChanged"/>
+        <Slider x:Uid="BrightnessSlider" 
+                Maximum="255" 
+                Minimum="-255" 
+                Margin="0 25 0 0"
+                ValueChanged="BrightnessRange_OnValueChanged"/>
+        <Button x:Uid="RevertButton" x:Name="RevertButton" Margin="0 25 0 0" HorizontalAlignment="Stretch"
+                 Click="RevertButton_OnClick"></Button>
+        </StackPanel>
 
         <StackPanel 
             Grid.Column="0" 
@@ -61,8 +78,10 @@
                 </StackPanel>
             </Button>
             <Button
+                x:Name="SaveButton"
                 Margin="0,0,25,10" 
-                Padding="15 0">
+                Padding="15 0"
+                Click="SaveButton_OnClick">
                 <StackPanel 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center">

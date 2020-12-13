@@ -228,4 +228,10 @@
   <data name="Red" xml:space="preserve">
     <value>Червоний</value>
   </data>
+  <data name="BrightnessSlider.Header" xml:space="preserve">
+    <value>Яскравість</value>
+  </data>
+  <data name="RevertButton.Content" xml:space="preserve">
+    <value>Відмінити зміни</value>
+  </data>
 </root>
