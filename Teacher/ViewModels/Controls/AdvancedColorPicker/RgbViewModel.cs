@@ -1,15 +1,18 @@
-﻿using Windows.Globalization.NumberFormatting;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Windows.Globalization.NumberFormatting;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Controls;
+using Teacher.Attributes;
 
 namespace Teacher.ViewModels.Controls.AdvancedColorPicker
 {
     class RgbViewModel : ColorModelViewModelBase
     {
-        public override string Name => "Hello";
+        public override string Name => "RGB";
 
         public override Color RgbColor
         {
@@ -17,7 +20,16 @@ namespace Teacher.ViewModels.Controls.AdvancedColorPicker
             set => Color = value;
         }
 
+        public override void SetRgbColorWithoutNotification(Color color)
+        {
+            _color = color;
+        }
+
         private Color _color;
+
+        public RgbViewModel()
+        {
+        }
 
         public RgbViewModel(Color color)
         {
@@ -32,63 +44,54 @@ namespace Teacher.ViewModels.Controls.AdvancedColorPicker
                 if (_color != value)
                 {
                     _color = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(string.Empty);
                 }
             }
         }
 
-        public byte A
-        {
-            get => _color.A;
-            set
-            {
-                if (_color.A != value)
-                {
-                    _color.A = value;
-                    OnPropertyChanged(nameof(A));
-                }
-            }
-        }
-        
-        public byte R
+        [UIElement(typeof(byte), Name = "Red")]
+        [Range(0.0, 255.0)]
+        public double R
         {
             get => _color.R;
             set
             {
-                if (_color.R != value)
+                if (_color.R != (byte)value)
                 {
-                    _color.R = value;
-                    OnPropertyChanged(nameof(R));
-                }
-            }
-        }
-        
-        public byte G
-        {
-            get => _color.G;
-            set
-            {
-                if (_color.G != value)
-                {
-                    _color.G = value;
-                    OnPropertyChanged(nameof(G));
-                }
-            }
-        }
-        
-        public byte B
-        {
-            get => _color.B;
-            set
-            {
-                if (_color.B != value)
-                {
-                    _color.B = value;
-                    OnPropertyChanged(nameof(B));
+                    _color.R = (byte)value;
+                    OnPropertyChanged(nameof(RgbColor));
                 }
             }
         }
 
-        
+        [UIElement(typeof(byte), Name = "Green")]
+        [Range(0.0, 255.0)]
+        public double G
+        {
+            get => _color.G;
+            set
+            {
+                if (_color.G != (byte)value)
+                {
+                    _color.G = (byte)value;
+                    OnPropertyChanged(nameof(RgbColor));
+                }
+            }
+        }
+
+        [UIElement(typeof(byte), Name = "Blue")]
+        [Range(0.0, 255.0)]
+        public double B
+        {
+            get => _color.B;
+            set
+            {
+                if (_color.B != (byte)value)
+                {
+                    _color.B = (byte)value;
+                    OnPropertyChanged(nameof(RgbColor));
+                }
+            }
+        }
     }
 }

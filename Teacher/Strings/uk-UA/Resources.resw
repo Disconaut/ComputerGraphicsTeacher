@@ -211,9 +211,27 @@
     <value>Припинити рендеринг</value>
   </data>
   <data name="SuggestedImageFileName" xml:space="preserve">
-    <value>Нове зоюраження</value>
+    <value>Нове зображення</value>
   </data>
   <data name="UploadButtonLabel.Text" xml:space="preserve">
     <value>Відкрити зображення</value>
+  </data>
+  <data name="Alpha" xml:space="preserve">
+    <value>Прозорість</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Синій</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Зелений</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Червоний</value>
+  </data>
+  <data name="BrightnessSlider.Header" xml:space="preserve">
+    <value>Яскравість</value>
+  </data>
+  <data name="RevertButton.Content" xml:space="preserve">
+    <value>Відмінити зміни</value>
   </data>
 </root>
