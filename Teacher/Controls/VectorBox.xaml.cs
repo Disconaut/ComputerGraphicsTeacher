@@ -18,7 +18,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CGTeacherShared.Shared.Vector;
 using Teacher.Annotations;
-using Teacher.Controls.ViewModels;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -38,30 +37,11 @@ namespace Teacher.Controls
         public static readonly DependencyProperty VectorProperty = DependencyProperty.Register(
             "Vector", typeof(ObservableVector2), typeof(VectorBox), new PropertyMetadata(default));
 
-        //private static void VectorChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    if (d is VectorBox vectorBox)
-        //    {
-        //        vectorBox.VectorViewModel = new Vector2ViewModel((Vector2) e.NewValue);
-        //        vectorBox.VectorViewModel.PropertyChanged += vectorBox.VectorViewModelOnPropertyChanged;
-        //    }
-        //}
-
-        //private void VectorViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    if (e.PropertyName == nameof(VectorViewModel.X) || e.PropertyName == nameof(VectorViewModel.Y))
-        //    {
-        //        Vector = new Vector2(VectorViewModel.X, VectorViewModel.Y);
-        //    }
-        //}
-
         public ObservableVector2 Vector
         {
             get => (ObservableVector2) GetValue(VectorProperty);
             set => SetValue(VectorProperty, value);
         }
-
-        public Vector2ViewModel VectorViewModel { get; private set; }
 
         public VectorBox()
         {
