@@ -121,7 +121,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AfinnisTransformations\AffinisTransformation.cs" />
-    <Compile Include="AfinnisTransformations\Transformation.cs" />
+    <Compile Include="ColorModels\Exceptions\ParametrNotFoundException.cs" />
+    <Compile Include="ColorModels\XYZStruct.cs" />
     <Compile Include="Fractals\Abstract\BaseFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractalParameter.cs" />
