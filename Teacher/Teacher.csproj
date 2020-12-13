@@ -127,6 +127,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdvancedColorPicker.xaml.cs">
+      <DependentUpon>AdvancedColorPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ColorPickerBox.xaml.cs">
       <DependentUpon>ColorPickerBox.xaml</DependentUpon>
     </Compile>
@@ -134,12 +137,12 @@
     <Compile Include="Controls\VectorBox.xaml.cs">
       <DependentUpon>VectorBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ViewModels\Vector2ViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AffinisTransformations\TransformationViewModel.cs" />
     <Compile Include="ViewModels\ColorModels\ColorModelPageViewModel.cs" />
     <Compile Include="ViewModels\ColorModels\ColorModelParameterViewModel.cs" />
     <Compile Include="ViewModels\ColorModels\ColorModelViewModel.cs" />
@@ -183,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AdvancedColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ColorPickerBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

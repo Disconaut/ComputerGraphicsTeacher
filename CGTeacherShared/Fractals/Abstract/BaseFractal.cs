@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI;
+using CGTeacherShared.AfinnisTransformations;
 using CGTeacherShared.Fractals.EventArgs;
 using Microsoft.Graphics.Canvas;
 
@@ -21,7 +22,7 @@ namespace CGTeacherShared.Fractals.Abstract
 
         public event EventHandler<RenderCompleteEventArgs> RenderComplete;
 
-        public Task BeginRenderAsync(float x, float y, float fractalWidthScale, float fractalHeightScale, float width, float height, float dpi, float angle, CancellationToken cancellationToken)
+        public Task BeginRenderAsync(Transformation transformation, float width, float height, float dpi, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {
@@ -30,7 +31,7 @@ namespace CGTeacherShared.Fractals.Abstract
                 using (var ds = offscreen.CreateDrawingSession())
                 {
                     ds.Clear(Colors.Black);
-                    Render(ds, x, y, fractalWidthScale, fractalHeightScale, width, height, angle, cancellationToken);
+                    Render(ds, transformation, width, height, cancellationToken);
                 }
 
                 RenderComplete?.Invoke(this, new RenderCompleteEventArgs
@@ -40,8 +41,8 @@ namespace CGTeacherShared.Fractals.Abstract
             }, cancellationToken);
         }
 
-        protected abstract void Render(CanvasDrawingSession canvasDrawingSession, float x, float y,
-            float fractalWidthScale, float fractalHeightScale, float width, float height, float angle,
+        protected abstract void Render(CanvasDrawingSession canvasDrawingSession, Transformation transformation,
+            float width, float height,
             CancellationToken cancellationToken);
 
         public static class ParameterNames

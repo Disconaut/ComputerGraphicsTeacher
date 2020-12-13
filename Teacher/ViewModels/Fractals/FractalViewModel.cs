@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using CGTeacherShared.Fractals.Abstract;
 using CGTeacherShared.Fractals.EventArgs;
+using Teacher.ViewModels.AffinisTransformations;
 
 namespace Teacher.ViewModels.Fractals
 {
@@ -41,9 +42,9 @@ namespace Teacher.ViewModels.Fractals
 
         public IList<FractalParameterViewModel> FractalParameters { get; }
 
-        public void StartRendering(float x, float y, float widthScale, float heightScale, float width, float height, float dpi, float angle, CancellationToken cancellationToken)
+        public void StartRendering(TransformationViewModel transformation, float width, float height, float dpi, CancellationToken cancellationToken)
         {
-            _fractal.BeginRenderAsync(x, y, widthScale, heightScale, width, height, dpi,  angle, cancellationToken);
+            _fractal.BeginRenderAsync(transformation.Transformation, width, height, dpi, cancellationToken);
         }
     }
 }
