@@ -152,7 +152,9 @@
     <Compile Include="ViewModels\Fractals\FractalsPageViewModel.cs" />
     <Compile Include="ViewModels\Fractals\FractalViewModel.cs" />
     <Compile Include="ViewModels\Shared\Pixel.cs" />
-    <Compile Include="ViewModels\Trapeze\TrapezeViewModel.cs" />
+    <Compile Include="Views\AffinisTransformations\AffinisTransformationsPage.xaml.cs">
+      <DependentUpon>AffinisTransformationsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ColorModels\ColorModelsPage.xaml.cs">
       <DependentUpon>ColorModelsPage.xaml</DependentUpon>
     </Compile>
@@ -167,9 +169,6 @@
     </Compile>
     <Compile Include="Views\Fractals\FractalsPage.xaml.cs">
       <DependentUpon>FractalsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Trapeze\TrapezePage.xaml.cs">
-      <DependentUpon>TrapezePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +212,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AffinisTransformations\AffinisTransformationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ColorModels\ColorModelsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -228,10 +231,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Fractals\FractalsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Trapeze\TrapezePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

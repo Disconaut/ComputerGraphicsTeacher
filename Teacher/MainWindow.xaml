@@ -18,7 +18,7 @@
             <muxc:NavigationViewItem x:Uid="MainPageNavItem" Tag="Main.MainPage"/>
             <muxc:NavigationViewItem x:Uid="FractalsPageNavItem" Tag="Fractals.FractalsPage"/>
             <muxc:NavigationViewItem x:Uid="ColorModelPageNavItem" Tag="ColorModels.ColorModelsPage"/>
-            <muxc:NavigationViewItem x:Uid="AffinisTransformationPageNavItem" />
+            <muxc:NavigationViewItem x:Uid="AffinisTransformationPageNavItem" Tag="AffinisTransformations.AffinisTransformationsPage"/>
         </muxc:NavigationView.MenuItems>
         <muxc:NavigationView.PaneFooter>
             <StackPanel Orientation="Horizontal">

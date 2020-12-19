@@ -121,6 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AfinnisTransformations\AffinisTransformation.cs" />
+    <Compile Include="AfinnisTransformations\IShape.cs" />
     <Compile Include="AfinnisTransformations\Transformation.cs" />
     <Compile Include="ColorModels\XyzColor.cs" />
     <Compile Include="Fractals\Abstract\BaseFractal.cs" />
@@ -139,8 +140,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\Vector\ObservableVector2.cs" />
-    <Compile Include="Trapeze\Parameters.cs" />
-    <Compile Include="Trapeze\Trapeze.cs" />
+    <Compile Include="AfinnisTransformations\Trapeze.cs" />
     <EmbeddedResource Include="Properties\CGTeacherShared.rd.xml" />
   </ItemGroup>
   <ItemGroup>

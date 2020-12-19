@@ -159,4 +159,5 @@
             <SolidColorBrush x:Key="RegionBrush" Color="{StaticResource RegionColor}" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
-</ResourceDictionary>
+</ResourceDictionary>
+
