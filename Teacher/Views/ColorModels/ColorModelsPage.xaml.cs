@@ -66,7 +66,7 @@ namespace Teacher.Views.ColorModels
 
         private void BrightnessRange_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            Mod.Add(new ColorModelViewModelBaseImpl());
+            ViewModel.AdjustBrightness((int)e.NewValue, Image.CroppedRegion);
         }
     }
 }
