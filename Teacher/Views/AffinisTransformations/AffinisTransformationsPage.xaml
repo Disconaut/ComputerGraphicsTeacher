@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -31,6 +32,19 @@
             <TextBlock x:Uid="PointsTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
             <StackPanel x:Name="Points" Orientation="Vertical" Spacing="15" Margin="0 0 0 15" />
             <TextBlock x:Uid="TransformationsTitle" Margin="5 0 0 0" FontSize="20" FontWeight="SemiBold"/>
+            <TextBlock x:Uid="RotationCenterTitle"/>
+            <DropDownButton x:Uid="ChosePointDropdown"/>
+            <TextBlock x:Uid="RotationSliderTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
+            <StackPanel x:Name="RotationPanel" Orientation="Horizontal">
+                <Slider x:Name="DegreeSlider" Minimum="0" Maximum="359" Margin="0,0,15,0" Width="445"/>
+                <controls:NumberBox x:Name="Degree"/>
+            </StackPanel>
+            <TextBlock x:Uid="ScaleSliderTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
+            <StackPanel x:Name="ScalePanel" Orientation="Horizontal">
+                <Slider x:Name="ScaleSlider" Minimum="0.5" Maximum="5" Margin="0,0,15,0" Width="445"/>
+                <controls:NumberBox x:Name="Scale"/>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </Page>
