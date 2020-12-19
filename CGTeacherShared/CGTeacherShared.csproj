@@ -121,6 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AfinnisTransformations\AffinisTransformation.cs" />
+    <Compile Include="AfinnisTransformations\IPolygon.cs" />
     <Compile Include="AfinnisTransformations\IShape.cs" />
     <Compile Include="AfinnisTransformations\Transformation.cs" />
     <Compile Include="ColorModels\XyzColor.cs" />

@@ -234,4 +234,13 @@
   <data name="RevertButton.Content" xml:space="preserve">
     <value>Відмінити зміни</value>
   </data>
+  <data name="Point" xml:space="preserve">
+    <value>Вершина</value>
+  </data>
+  <data name="PointsTitle.Text" xml:space="preserve">
+    <value>Вершини</value>
+  </data>
+  <data name="TransformationsTitle.Text" xml:space="preserve">
+    <value>Перетворення</value>
+  </data>
 </root>
