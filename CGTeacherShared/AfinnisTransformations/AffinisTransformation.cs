@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using CGTeacherShared.Shared.Vector;
 
 namespace CGTeacherShared.AfinnisTransformations
 {
@@ -9,7 +10,7 @@ namespace CGTeacherShared.AfinnisTransformations
         {
             return point.Rotate(angle, new Vector2(centerX, centerY));
         }
-      
+
         public static Vector2 Rotate(this Vector2 point, float angle, Vector2 center)
         {
             var rads = Math.PI * angle / 180;
@@ -25,6 +26,7 @@ namespace CGTeacherShared.AfinnisTransformations
             point.Y += offsetVector.Y;
             return point;
         }
+
         public static Vector2 Move(this Vector2 point, float offsetX, float offsetY)
         {
             return point.Move(new Vector2(offsetX,offsetY));
@@ -37,8 +39,8 @@ namespace CGTeacherShared.AfinnisTransformations
         }
         public static Vector2 Zoom(this Vector2 point, Vector2 scaleVector, Vector2 scaleCenter)
         {
-            point.X += (point.X - scaleCenter.X) * scaleVector.X;
-            point.Y += (point.Y - scaleCenter.Y) * scaleVector.Y;
+            point.X = (point.X - scaleCenter.X) * scaleVector.X + scaleCenter.X;
+            point.Y = (point.Y - scaleCenter.Y) * scaleVector.Y + scaleCenter.Y;
             return point;
         }
     }

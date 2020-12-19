@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using CGTeacherShared.AfinnisTransformations;
+using CGTeacherShared.Shared.Vector;
 using Teacher.Annotations;
 using static System.Single;
 
@@ -81,6 +82,97 @@ namespace Teacher.ViewModels.AffinisTransformations
                 {
                     Transformation.RotateAngle = value;
                     OnPropertyChanged(nameof(RotateAngle));
+                }
+            }
+        }
+
+        public ObservableVector2 CenterOfRotation
+        {
+            get => Transformation.CenterOfRotation;
+            set
+            {
+                if (CenterOfRotation != value)
+                {
+                    Transformation.CenterOfRotation = value;
+                    OnPropertyChanged(nameof(CenterOfRotation));
+                }
+            }
+        }
+
+        public ObservableVector2 CenterOfZoom
+        {
+            get => Transformation.CenterOfZoom;
+            set
+            {
+                if (CenterOfZoom != value)
+                {
+                    Transformation.CenterOfZoom = value;
+                    OnPropertyChanged(nameof(CenterOfZoom));
+                }
+            }
+        }
+
+        public float XCenterOfRotation
+        {
+            get => Transformation.XCenterOfRotation;
+            set
+            {
+                if (Math.Abs(Transformation.XCenterOfRotation - value) > Epsilon)
+                {
+                    Transformation.XCenterOfRotation = value;
+                    OnPropertyChanged(nameof(XCenterOfRotation));
+                }
+            }
+        }
+
+        public float YCenterOfRotation
+        {
+            get => Transformation.YCenterOfRotation;
+            set
+            {
+                if (Math.Abs(Transformation.YCenterOfRotation - value) > Epsilon)
+                {
+                    Transformation.YCenterOfRotation = value;
+                    OnPropertyChanged(nameof(YCenterOfRotation));
+                }
+            }
+        }
+
+        public float XCenterOfZoom
+        {
+            get => Transformation.XCenterOfZoom;
+            set
+            {
+                if (Math.Abs(Transformation.XCenterOfZoom - value) > Epsilon)
+                {
+                    Transformation.XCenterOfZoom = value;
+                    OnPropertyChanged(nameof(XCenterOfZoom));
+                }
+            }
+        }
+
+        public float YCenterOfZoom
+        {
+            get => Transformation.YCenterOfZoom;
+            set
+            {
+                if (Math.Abs(Transformation.YCenterOfZoom - value) > Epsilon)
+                {
+                    Transformation.YCenterOfZoom = value;
+                    OnPropertyChanged(nameof(YCenterOfZoom));
+                }
+            }
+        }
+
+        public float Scale
+        {
+            get => Transformation.Scale;
+            set
+            {
+                if (Math.Abs(Transformation.Scale - value) > Epsilon)
+                {
+                    Transformation.Scale = value;
+                    OnPropertyChanged(nameof(Scale));
                 }
             }
         }

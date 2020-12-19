@@ -7,7 +7,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization.NumberFormatting;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using CGTeacherShared.Shared.Vector;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Teacher.Controls;
 using Teacher.ViewModels.AffinisTransformations;
@@ -28,23 +31,32 @@ namespace Teacher.Views.AffinisTransformations
     /// </summary>
     public sealed partial class AffinisTransformationsPage : Page
     {
-        private const string PointResourceString = "Point";
         private const float CanvasGeometryStrokeWidth = 2;
+
+        private readonly string _pointString;
+        private double _canvasActualWidth;
+        private double _canvasActualHeight;
 
         public AffinisTransformationsPageViewModel ViewModel { get; }
 
         public AffinisTransformationsPage()
         {
+            _pointString = ResourceLoader.GetForCurrentView().GetString("Point");
+            _pointString = string.IsNullOrEmpty(_pointString) ? "Point" : _pointString;
             ViewModel = new AffinisTransformationsPageViewModel();
             this.InitializeComponent();
+            Scale.NumberFormatter = new DecimalFormatter
+            {
+                FractionDigits = 3
+            };
+
             InitPoints();
+            RotatePoints.SelectedIndex = 0;
+            ShapeCanvas.RenderTransformOrigin = new Point(ShapeCanvas.ActualWidth / 2, ShapeCanvas.ActualHeight / 2);
         }
 
         private void InitPoints()
         {
-            var pointString = ResourceLoader.GetForCurrentView().GetString(PointResourceString);
-            pointString = string.IsNullOrEmpty(pointString) ? PointResourceString : pointString;
-
             var i = 1;
             foreach (var point in ViewModel.Polygon.Points)
             {
@@ -54,13 +66,22 @@ namespace Teacher.Views.AffinisTransformations
                     Mode = BindingMode.TwoWay
                 };
 
+                var header = $"{_pointString} {i}";
+
                 var vectorBox = new VectorBox
                 {
-                    Header = $"{pointString} {i}"
+                    Header = header
                 };
 
                 vectorBox.SetBinding(VectorBox.VectorProperty, bind);
                 Points.Children.Add(vectorBox);
+                var radioButton = new RadioButton
+                {
+                    Content = header,
+                    Tag = point
+                };
+
+                RotatePoints.Items.Add(radioButton);
 
                 ++i;
             }
@@ -68,9 +89,25 @@ namespace Teacher.Views.AffinisTransformations
 
         private void CanvasAnimatedControl_OnDraw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
+            var s = sender as CanvasAnimatedControl;
+            if(s == null) return;
+
             args.DrawingSession.Clear(Colors.White);
             var canvasGeometry = ViewModel.DrawShape(args.DrawingSession);
-            args.DrawingSession.DrawGeometry(canvasGeometry, Colors.Black, CanvasGeometryStrokeWidth);
+            args.DrawingSession.DrawGeometry(canvasGeometry, (float)_canvasActualWidth / 2, (float)_canvasActualHeight / 2, Colors.Black, CanvasGeometryStrokeWidth);
+        }
+
+        private void RotatePoints_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           if (!((RotatePoints.SelectedItem as RadioButton)?.Tag is ObservableVector2 selectedPoint)) return;
+
+           ViewModel.Transformation.CenterOfRotation = selectedPoint;
+        }
+
+        private void AffinisTransformationsPage_OnLayoutUpdated(object sender, object e)
+        {
+            _canvasActualWidth = ShapeCanvas.ActualWidth;
+            _canvasActualHeight = ShapeCanvas.ActualHeight;
         }
     }
 }

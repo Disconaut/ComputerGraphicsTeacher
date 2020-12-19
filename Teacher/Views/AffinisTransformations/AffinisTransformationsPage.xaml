@@ -8,7 +8,8 @@
     xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    LayoutUpdated="AffinisTransformationsPage_OnLayoutUpdated">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,25 +26,30 @@
             Margin="25"
             BorderThickness="1"
             BorderBrush="{ThemeResource TextBoxBorderThemeBrush}">
-            <xaml:CanvasAnimatedControl Draw="CanvasAnimatedControl_OnDraw"></xaml:CanvasAnimatedControl>
+            <xaml:CanvasAnimatedControl x:Name="ShapeCanvas" Draw="CanvasAnimatedControl_OnDraw"/>
         </Border>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Spacing="15" Orientation="Vertical" Margin="0,25,25,0">
             <TextBlock x:Uid="PointsTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
             <StackPanel x:Name="Points" Orientation="Vertical" Spacing="15" Margin="0 0 0 15" />
             <TextBlock x:Uid="TransformationsTitle" Margin="5 0 0 0" FontSize="20" FontWeight="SemiBold"/>
-            <TextBlock x:Uid="RotationCenterTitle"/>
-            <DropDownButton x:Uid="ChosePointDropdown"/>
-            <TextBlock x:Uid="RotationSliderTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
-            <StackPanel x:Name="RotationPanel" Orientation="Horizontal">
-                <Slider x:Name="DegreeSlider" Minimum="0" Maximum="359" Margin="0,0,15,0" Width="445"/>
-                <controls:NumberBox x:Name="Degree"/>
-            </StackPanel>
-            <TextBlock x:Uid="ScaleSliderTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
-            <StackPanel x:Name="ScalePanel" Orientation="Horizontal">
-                <Slider x:Name="ScaleSlider" Minimum="0.5" Maximum="5" Margin="0,0,15,0" Width="445"/>
-                <controls:NumberBox x:Name="Scale"/>
-            </StackPanel>
+            <controls:RadioButtons x:Uid="RotatePointButtons" x:Name="RotatePoints" SelectionChanged="RotatePoints_OnSelectionChanged"/>
+            <Grid x:Name="RotationPanel">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Slider x:Uid="RotationSlider" x:Name="DegreeSlider" Minimum="0" Maximum="359" Margin="0,0,15,0" Value="{x:Bind ViewModel.Transformation.RotateAngle, Mode=TwoWay}" />
+                <controls:NumberBox Grid.Column="1" x:Name="Degree" PlaceholderText="0°" Value="{x:Bind ViewModel.Transformation.RotateAngle, Mode=TwoWay}" VerticalAlignment="Bottom"/>
+            </Grid>
+            <Grid x:Name="ScalePanel">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Slider x:Uid="ScaleSlider" x:Name="ScaleSlider" Minimum="0.1" StepFrequency="0.1" Maximum="5" Margin="0,0,15,0" Value="{x:Bind ViewModel.Transformation.Scale, Mode=TwoWay}"/>
+                <controls:NumberBox Grid.Column="1" x:Name="Scale" Minimum="0.1" VerticalAlignment="Bottom" Value="{x:Bind ViewModel.Transformation.Scale, Mode=TwoWay}"/>
+            </Grid>
 
         </StackPanel>
     </Grid>

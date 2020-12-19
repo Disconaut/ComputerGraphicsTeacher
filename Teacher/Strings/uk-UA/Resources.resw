@@ -243,10 +243,13 @@
   <data name="TransformationsTitle.Text" xml:space="preserve">
     <value>Перетворення</value>
   </data>
-  <data name="RotationSliderTitle.Text" xml:space="preserve">
+  <data name="RotationSlider.Header" xml:space="preserve">
     <value>Кут обертання</value>
   </data>
-  <data name="ScaleSliderTitle.Text" xml:space="preserve">
+  <data name="ScaleSlider.Header" xml:space="preserve">
     <value>Масштаб</value>
+  </data>
+  <data name="RotatePointButtons.Header" xml:space="preserve">
+    <value>Центр обертання</value>
   </data>
 </root>

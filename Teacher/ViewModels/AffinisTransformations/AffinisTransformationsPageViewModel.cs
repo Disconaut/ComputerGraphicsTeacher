@@ -18,6 +18,14 @@ namespace Teacher.ViewModels.AffinisTransformations
         {
             Polygon = new PolygonViewModel(new Trapeze());
             Transformation = new TransformationViewModel(new Transformation());
+            foreach (var point in Polygon.Points)
+            {
+                point.PropertyChanged += (sender, args) =>
+                {
+                    Polygon.Transform(Transformation);
+                };
+            }
+
             Transformation.PropertyChanged += (sender, args) =>
             {
                 Polygon.Transform(Transformation);
