@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="Teacher.Book.BookWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Teacher.Book"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:navigation="using:Teacher.Book.Views.Navigation"
+    xmlns:fractals="using:Teacher.Views.Fractals"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <controls:TabView
+            TabItemsSource="{x:Bind ViewModel.Pages}"
+            TabCloseRequested="TabView_OnTabCloseRequested"
+            AddTabButtonClick="TabView_OnAddTabButtonClick"
+            CanDragTabs="False"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <controls:TabView.TabItemTemplate>
+                <DataTemplate x:DataType="Frame">
+                    <controls:TabViewItem
+                        VerticalContentAlignment="Stretch"
+                        Header="{x:Bind Content.(navigation:NavigationPage.ViewModel).SelectedPage}"
+                        Content="{x:Bind}"/>
+                </DataTemplate>
+            </controls:TabView.TabItemTemplate>
+
+            <controls:TabView.TabStripHeader>
+                <Grid x:Name="ShellTitlebarInset" Background="Transparent" />
+            </controls:TabView.TabStripHeader>
+            <controls:TabView.TabStripFooter>
+                <Grid x:Name="CustomDragRegion" Background="Transparent" />
+            </controls:TabView.TabStripFooter>
+        </controls:TabView>
+    </Grid>
+</Page>

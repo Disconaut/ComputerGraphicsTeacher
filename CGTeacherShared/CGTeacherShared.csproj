@@ -124,6 +124,7 @@
     <Compile Include="AfinnisTransformations\IPolygon.cs" />
     <Compile Include="AfinnisTransformations\IShape.cs" />
     <Compile Include="AfinnisTransformations\Transformation.cs" />
+    <Compile Include="Book\BookLoader.cs" />
     <Compile Include="ColorModels\XyzColor.cs" />
     <Compile Include="Fractals\Abstract\BaseFractal.cs" />
     <Compile Include="Fractals\Abstract\IFractal.cs" />
@@ -151,6 +152,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Parsers">
+      <Version>6.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Win2D.uwp">
       <Version>1.25.0</Version>
     </PackageReference>
@@ -162,6 +166,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Book\Test.txt" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

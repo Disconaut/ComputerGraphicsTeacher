@@ -48,7 +48,7 @@
                     <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
                 <Slider x:Uid="ScaleSlider" x:Name="ScaleSlider" Minimum="0.1" StepFrequency="0.1" Maximum="5" Margin="0,0,15,0" Value="{x:Bind ViewModel.Transformation.Scale, Mode=TwoWay}"/>
-                <controls:NumberBox Grid.Column="1" x:Name="Scale" Minimum="0.1" VerticalAlignment="Bottom" Value="{x:Bind ViewModel.Transformation.Scale, Mode=TwoWay}"/>
+                <controls:NumberBox Grid.Column="1" x:Name="ScaleBox" Minimum="0.1" VerticalAlignment="Bottom" Value="{x:Bind ViewModel.Transformation.Scale, Mode=TwoWay}"/>
             </Grid>
 
         </StackPanel>

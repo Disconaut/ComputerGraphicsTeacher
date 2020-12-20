@@ -6,18 +6,19 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Composition;
 using Windows.UI.Popups;
+using Windows.UI.WindowManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Teacher.Book;
 using Teacher.Views.Errors;
-using NavigationView = Microsoft.UI.Xaml.Controls.NavigationView;
-using NavigationViewItem = Microsoft.UI.Xaml.Controls.NavigationViewItem;
-using NavigationViewBackRequestedEventArgs = Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs;
 using NavigationViewSelectionChangedEventArgs = Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -44,25 +45,26 @@ namespace Teacher
             MainNavigation.UpdateLayout();
         }
 
-        private void MainNavigation_OnSelectionChanged(NavigationView sender,
-            NavigationViewSelectionChangedEventArgs args)
+        private async void BookButton_OnClick(object sender, RoutedEventArgs e)
         {
-            const string viewsNamespace = "Teacher.Views";
+            var appWindow = await AppWindow.TryCreateAsync();
+            appWindow.Title = "Book";
 
-            var selectedTab = args.SelectedItem as NavigationViewItem;
-            var pageTypeFullName = selectedTab?.Tag as string;
-            var pageType = Type.GetType($"{viewsNamespace}.{pageTypeFullName}");
-            if (pageType?.IsSubclassOf(typeof(Page)) ?? false)
+            var appWindowContentFrame = new Frame();
+            appWindowContentFrame.Navigate(typeof(BookWindow));
+
+            ElementCompositionPreview.SetAppWindowContent(appWindow, appWindowContentFrame);
+
+            await appWindow.TryShowAsync();
+
+            appWindow.Closed += delegate
             {
-                MainFrame.Navigate(pageType, pageTypeFullName);
-            }
-            else
-            {
-                MainFrame.Navigate(_underConstructionPageType, pageTypeFullName);
-            }
+                appWindowContentFrame.Content = null;
+                appWindow = null;
+            };
         }
 
-        private void MainNavigation_OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        private void MainNavigation_OnBackRequested(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs args)
         {
             if (!MainFrame.CanGoBack) return;
 
@@ -77,11 +79,21 @@ namespace Teacher
                 .First(x => x.Tag as string == backPageTypeName);
         }
 
-        private async void BookButton_OnClick(object sender, RoutedEventArgs e)
+        private void MainNavigation_OnSelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            var resourceLoader = ResourceLoader.GetForCurrentView();
-            var bookDialog = new MessageDialog(resourceLoader.GetString("BookIsNotImplemented"));
-            await bookDialog.ShowAsync();
+            const string viewsNamespace = "Teacher.Views";
+
+            var selectedTab = args.SelectedItem as Microsoft.UI.Xaml.Controls.NavigationViewItem;
+            var pageTypeFullName = selectedTab?.Tag as string;
+            var pageType = Type.GetType($"{viewsNamespace}.{pageTypeFullName}");
+            if (pageType?.IsSubclassOf(typeof(Page)) ?? false)
+            {
+                MainFrame.Navigate(pageType, pageTypeFullName);
+            }
+            else
+            {
+                MainFrame.Navigate(_underConstructionPageType, pageTypeFullName);
+            }
         }
     }
 }

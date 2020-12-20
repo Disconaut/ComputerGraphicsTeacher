@@ -128,6 +128,18 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Attributes\UIElementAttribute.cs" />
+    <Compile Include="Book\BookWindow.xaml.cs">
+      <DependentUpon>BookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Book\ViewModels\BookPage\BookPageViewModel.cs" />
+    <Compile Include="Book\ViewModels\MainWindow\MainWindowViewModel.cs" />
+    <Compile Include="Book\ViewModels\Navigation\NavigationViewModel.cs" />
+    <Compile Include="Book\Views\BookPage\BookPage.xaml.cs">
+      <DependentUpon>BookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Book\Views\Navigation\NavigationPage.xaml.cs">
+      <DependentUpon>NavigationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AdvancedColorPicker.xaml.cs">
       <DependentUpon>AdvancedColorPicker.xaml</DependentUpon>
     </Compile>
@@ -195,6 +207,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Book\BookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Book\Views\BookPage\BookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Book\Views\Navigation\NavigationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AdvancedColorPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

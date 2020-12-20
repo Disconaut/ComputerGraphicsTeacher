@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using CGTeacherShared.Book;
 
 namespace Teacher
 {
@@ -28,6 +29,7 @@ namespace Teacher
         /// </summary>
         public App()
         {
+            BookLoader.GetInstance();
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }

@@ -45,7 +45,7 @@ namespace Teacher.Views.AffinisTransformations
             _pointString = string.IsNullOrEmpty(_pointString) ? "Point" : _pointString;
             ViewModel = new AffinisTransformationsPageViewModel();
             this.InitializeComponent();
-            Scale.NumberFormatter = new DecimalFormatter
+            ScaleBox.NumberFormatter = new DecimalFormatter
             {
                 FractionDigits = 3
             };
