@@ -17,7 +17,7 @@
                              IsBackButtonVisible="Collapsed"
                              MenuItemsSource="{x:Bind ViewModel.BookPages}"
                              SelectionChanged="NavigationView_OnSelectionChanged"
-            SelectedItem="{x:Bind ViewModel.SelectedPage}">
+            SelectedItem="{x:Bind ViewModel.SelectedPage, Mode=TwoWay}">
             <Frame x:Name="ContentFrame"/>
         </muxc:NavigationView>
     </Grid>

@@ -165,9 +165,11 @@
       <Version>1.19.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Book\Test.txt" />
+    <EmbeddedResource Include="Book\Lecture1.md" />
+    <EmbeddedResource Include="Book\Lecture2.md" />
+    <EmbeddedResource Include="Book\Lecture3.md" />
+    <EmbeddedResource Include="Book\Lecture4.md" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

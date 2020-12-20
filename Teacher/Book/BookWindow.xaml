@@ -22,7 +22,7 @@
                 <DataTemplate x:DataType="Frame">
                     <controls:TabViewItem
                         VerticalContentAlignment="Stretch"
-                        Header="{x:Bind Content.(navigation:NavigationPage.ViewModel).SelectedPage}"
+                        Header="{x:Bind Content.(navigation:NavigationPage.ViewModel).SelectedPage, Mode=OneWay}"
                         Content="{x:Bind}"/>
                 </DataTemplate>
             </controls:TabView.TabItemTemplate>
