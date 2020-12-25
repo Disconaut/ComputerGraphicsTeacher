@@ -85,9 +85,7 @@ namespace Teacher.Views.AffinisTransformations
                     Content = header,
                     Tag = point
                 };
-
                 RotatePoints.Items.Add(radioButton);
-
                 ++i;
             }
         }
@@ -95,18 +93,18 @@ namespace Teacher.Views.AffinisTransformations
         private void CanvasAnimatedControl_OnDraw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             var s = sender as CanvasAnimatedControl;
-            if(s == null) return;
+            if (s == null) return;
 
             args.DrawingSession.Clear(Colors.White);
 
             var labelWidth = 10;
             var oxEnd = (new Vector2((float)_canvasActualWidth, 0)).Move(0, (float)_canvasActualHeight / 2);
-            var oyEnd = (new Vector2(0, (float)_canvasActualHeight)).Move((float) _canvasActualWidth / 2, 0);
+            var oyEnd = (new Vector2(0, (float)_canvasActualHeight)).Move((float)_canvasActualWidth / 2, 0);
 
             args.DrawingSession.DrawLine(
-                (new Vector2(0, 0)).Move((float)_canvasActualWidth / 2, 0), 
-                oyEnd, 
-                Colors.Gray, 
+                (new Vector2(0, 0)).Move((float)_canvasActualWidth / 2, 0),
+                oyEnd,
+                Colors.Gray,
                 2);
             var pathBuilder = new CanvasPathBuilder(args.DrawingSession);
             pathBuilder.BeginFigure(0, 0);
@@ -149,7 +147,7 @@ namespace Teacher.Views.AffinisTransformations
                 HorizontalAlignment = CanvasHorizontalAlignment.Right
             };
             var xLayout = new CanvasTextLayout(args.DrawingSession, "x", xFormat, 50, 20);
-            args.DrawingSession.DrawTextLayout(xLayout, (float)(_canvasActualWidth - 50), (float)_canvasActualHeight/ 2 - (float)rightArrowRect.Height/ 2 - 20 - 2, Colors.Gray);
+            args.DrawingSession.DrawTextLayout(xLayout, (float)(_canvasActualWidth - 50), (float)_canvasActualHeight / 2 - (float)rightArrowRect.Height / 2 - 20 - 2, Colors.Gray);
 
 
             var center = (new Vector2(0, 0)).Move((float)_canvasActualWidth / 2, (float)_canvasActualHeight / 2);
@@ -159,7 +157,7 @@ namespace Teacher.Views.AffinisTransformations
 
             for (var i = -((int)Math.Ceiling(countOfXLabels / 2) - 1); i <= (int)Math.Ceiling(countOfXLabels / 2) - 1; ++i)
             {
-                if(i == 0) continue;
+                if (i == 0) continue;
                 var moveVector = new Vector2(100, 0) * i;
                 var labelPoint = center.Move(moveVector);
                 args.DrawingSession.DrawLine(labelPoint.Move(0, (float)labelWidth / 2), labelPoint.Move(0, -(float)labelWidth / 2), Colors.Gray, 1);
@@ -188,14 +186,24 @@ namespace Teacher.Views.AffinisTransformations
             }
 
             var canvasGeometry = ViewModel.DrawShape(args.DrawingSession);
-            args.DrawingSession.DrawGeometry(canvasGeometry, (float)_canvasActualWidth / 2, (float)_canvasActualHeight / 2, Colors.Black, CanvasGeometryStrokeWidth);
+            args.DrawingSession.DrawGeometry(canvasGeometry, center, Colors.Black, CanvasGeometryStrokeWidth);
+            var j = 1;
+            foreach (var point in ViewModel.Polygon.TransformedPoints)
+            {
+                var format = new CanvasTextFormat
+                { FontSize = 20.0f, WordWrapping = CanvasWordWrapping.NoWrap };
+
+                var textLayout = new CanvasTextLayout(args.DrawingSession, j.ToString(), format, 0.0f, 0.0f);
+                args.DrawingSession.DrawTextLayout(textLayout, ((Vector2)point).Move(center), Color.FromArgb(255, 255, 92, 0));
+                ++j;
+            }
         }
 
         private void RotatePoints_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           if (!((RotatePoints.SelectedItem as RadioButton)?.Tag is ObservableVector2 selectedPoint)) return;
+            if (!((RotatePoints.SelectedItem as RadioButton)?.Tag is ObservableVector2 selectedPoint)) return;
 
-           ViewModel.Transformation.CenterOfRotation = selectedPoint;
+            ViewModel.Transformation.CenterOfRotation = selectedPoint;
         }
 
         private void AffinisTransformationsPage_OnLayoutUpdated(object sender, object e)
