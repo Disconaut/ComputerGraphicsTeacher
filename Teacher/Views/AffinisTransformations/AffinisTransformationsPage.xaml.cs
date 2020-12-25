@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CGTeacherShared.Shared.Vector;
+using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Teacher.Controls;
 using Teacher.ViewModels.AffinisTransformations;
@@ -80,9 +81,7 @@ namespace Teacher.Views.AffinisTransformations
                     Content = header,
                     Tag = point
                 };
-
                 RotatePoints.Items.Add(radioButton);
-
                 ++i;
             }
         }
@@ -90,11 +89,53 @@ namespace Teacher.Views.AffinisTransformations
         private void CanvasAnimatedControl_OnDraw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
         {
             var s = sender as CanvasAnimatedControl;
-            if(s == null) return;
+            if (s == null) return;
 
             args.DrawingSession.Clear(Colors.White);
             var canvasGeometry = ViewModel.DrawShape(args.DrawingSession);
-            args.DrawingSession.DrawGeometry(canvasGeometry, (float)_canvasActualWidth / 2, (float)_canvasActualHeight / 2, Colors.Black, CanvasGeometryStrokeWidth);
+            args.DrawingSession.DrawGeometry(canvasGeometry, (float) _canvasActualWidth / 2,
+                (float) _canvasActualHeight / 2, Colors.Black, CanvasGeometryStrokeWidth);
+            int i = 1;
+            foreach (var point in ViewModel.Polygon.TransformedPoints)
+            {
+                CanvasTextLayout textLayout;
+                if (point.X != null && point.Y != null)
+                {
+                    CanvasTextFormat format = new CanvasTextFormat
+                        {FontSize = 20.0f, WordWrapping = CanvasWordWrapping.NoWrap};
+                    if (i == 1)
+                    {
+                        textLayout=
+                            new CanvasTextLayout(args.DrawingSession, "1", format, 0.0f, 0.0f);
+                        args.DrawingSession.DrawTextLayout(textLayout, (float) point.X, (float) point.Y,
+                            Colors.BlueViolet);
+
+                    }
+                    else if (i == 2)
+                    {
+                        textLayout =
+                            new CanvasTextLayout(args.DrawingSession, "2", format, 0.0f, 0.0f);
+                        args.DrawingSession.DrawTextLayout(textLayout, (float) point.X, (float) point.Y,
+                            Colors.BlueViolet);
+                    }
+                    else if (i == 3)
+                    {
+                        textLayout =
+                            new CanvasTextLayout(args.DrawingSession, "3", format, 0.0f, 0.0f);
+                        args.DrawingSession.DrawTextLayout(textLayout, (float) point.X, (float) point.Y,
+                            Colors.BlueViolet);
+                    }
+                    else
+                    {
+                        textLayout =
+                            new CanvasTextLayout(args.DrawingSession, "4", format, 0.0f, 0.0f);
+                        args.DrawingSession.DrawTextLayout(textLayout, (float) point.X, (float) point.Y,
+                            Colors.BlueViolet);
+                        i = 1;
+                    }
+                    ++i;
+                }
+            }
         }
 
         private void RotatePoints_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

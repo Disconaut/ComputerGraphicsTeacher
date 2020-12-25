@@ -10,5 +10,7 @@ namespace Teacher.ViewModels.AffinisTransformations
         }
 
         public ObservableVector2[] Points => (Shape as IPolygon)?.Points;
+        public ObservableVector2[] TransformedPoints => (TransformedShape as IPolygon)?.Points;
+
     }
 }
