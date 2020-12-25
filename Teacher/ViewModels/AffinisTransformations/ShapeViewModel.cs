@@ -12,18 +12,18 @@ namespace Teacher.ViewModels.AffinisTransformations
     public abstract class ShapeViewModel
     {
         protected readonly IShape Shape;
-        private IShape _transformedShape;
+        protected IShape TransformedShape;
 
         protected ShapeViewModel(IShape shape)
         {
             Shape = shape;
-            _transformedShape = shape;
+            TransformedShape = shape;
         }
 
         public CanvasGeometry DrawShape(ICanvasResourceCreator canvasResourceCreator) =>
-            _transformedShape.DrawShape(canvasResourceCreator);
+            TransformedShape.DrawShape(canvasResourceCreator);
 
         public void Transform(TransformationViewModel transformation) =>
-            _transformedShape = Shape.Transform(transformation.Transformation);
+            TransformedShape = Shape.Transform(transformation.Transformation);
     }
 }

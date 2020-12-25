@@ -2,10 +2,13 @@
 using System.Linq;
 using System.Numerics;
 using Windows.Foundation;
+using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using CGTeacherShared.Shared.Vector;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Geometry;
+using Microsoft.Graphics.Canvas.Text;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 
 namespace CGTeacherShared.AfinnisTransformations
 {
@@ -50,7 +53,6 @@ namespace CGTeacherShared.AfinnisTransformations
                         (float)avgY);
                 newTrapeze.Points[i] = new ObservableVector2(transformedPoint.X, transformedPoint.Y);
             }
-
             return newTrapeze;
         }
 
