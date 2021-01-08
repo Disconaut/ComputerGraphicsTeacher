@@ -30,8 +30,15 @@
         </Border>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Spacing="15" Orientation="Vertical" Margin="0,25,25,0">
-            <TextBlock x:Uid="PointsTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
-            <StackPanel x:Name="Points" Orientation="Vertical" Spacing="15" Margin="0 0 0 15" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Uid="PointsTitle" Margin="5 0 0 0" FontWeight="SemiBold" FontSize="20"/>
+                <ComboBox Grid.Column="1" x:Name="Trapezes" x:Uid="PreselectTrapeze" DisplayMemberPath="Key" SelectedValuePath="Value" Margin="20 0 0 0" HorizontalAlignment="Stretch" ItemsSource="{x:Bind ViewModel.Trapezes}" PlaceholderForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}" SelectionChanged="TrapezesSelector_OnSelectionChanged"/>
+            </Grid>
+                <StackPanel x:Name="Points" Orientation="Vertical" Spacing="15" Margin="0 0 0 15" />
             <TextBlock x:Uid="TransformationsTitle" Margin="5 0 0 0" FontSize="20" FontWeight="SemiBold"/>
             <controls:RadioButtons x:Uid="RotatePointButtons" x:Name="RotatePoints" SelectionChanged="RotatePoints_OnSelectionChanged"/>
             <Grid x:Name="RotationPanel">

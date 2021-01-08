@@ -211,5 +211,12 @@ namespace Teacher.Views.AffinisTransformations
             _canvasActualWidth = ShapeCanvas.ActualWidth;
             _canvasActualHeight = ShapeCanvas.ActualHeight;
         }
+
+        private void TrapezesSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Trapezes.SelectedItem == null) return;
+            ViewModel.SelectTrapeze(Trapezes.SelectedValue as IPolygon);
+            Trapezes.SelectedItem = null;
+        }
     }
 }

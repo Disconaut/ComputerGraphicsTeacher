@@ -252,4 +252,7 @@
   <data name="RotatePointButtons.Header" xml:space="preserve">
     <value>Центр обертання</value>
   </data>
+  <data name="PreselectTrapeze.PlaceholderText" xml:space="preserve">
+    <value>Виберіть трапецію</value>
+  </data>
 </root>

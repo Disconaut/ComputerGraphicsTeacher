@@ -47,6 +47,20 @@ namespace CGTeacherShared.Shared.Vector
             Y = y;
         }
 
+        public void CopyPoint(ObservableVector2 point)
+        {
+            _x = point._x;
+            _y = point._y;
+            OnPropertyChanged(string.Empty);
+        }
+
+        public void CopyPoint(Vector2 point)
+        {
+            _x = point.X;
+            _y = point.Y;
+            OnPropertyChanged(string.Empty);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
